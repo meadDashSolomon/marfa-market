@@ -2,7 +2,7 @@
 import React from 'react';
 import Overview from './components/overview/Overview';
 import Questions from './components/questions/Questions';
-import Ratings from './components/ratings/Ratings';
+import Ratings from './components/ratings/RatingsAndReviews';
 import Related from './components/related/Related';
 
 const App = () => {
