@@ -1,9 +1,14 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-
-const ReviewsList = () => {
+import { useState } from "react";
+const ReviewsList = ({ displayedReviews }) => {
+  // Display 2 reviews initially
   return (
     <div>
       ReviewsList
+      {/* {reviews.map((review, index) => {
+        <Review key={index} review={review}/>
+      })} */}
     </div>
   )
 }

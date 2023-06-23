@@ -1,9 +1,13 @@
 // @ts-nocheck
 
-const AddMoreReviewsButton = () => {
+const AddMoreReviewsButton = ({ setIsWriting }) => {
+
+  const handleClick = () => {
+    setIsWriting(true);
+  }
   return (
     <div>
-      AddMoreReviewsButton
+      <button onClick={handleClick}>Add A Review</button>
     </div>
   )
 }

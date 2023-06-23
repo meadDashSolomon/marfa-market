@@ -1,11 +1,17 @@
 // @ts-nocheck
 
-const MoreReviewsButton = () => {
+const MoreReviewsButton = ({ displayMore }) => {
+
+  const handleClick = () => {
+    displayMore();
+    //something
+  };
+
   return (
     <div>
-      MoreReviewsButton
+      <button onClick={handleClick}>More Reviews</button>
     </div>
   )
 }
 
-default export MoreReviewsButton;
+export default MoreReviewsButton;
