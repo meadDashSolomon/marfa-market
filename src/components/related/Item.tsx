@@ -3,7 +3,10 @@ import { Card, Box, Typography } from "@mui/material";
 function Item() {
   return (
     <Card>
-      <Typography> Hello World </Typography>
+      <img/>
+      <Typography> Category </Typography>
+      <Typography> Summary </Typography>
+      <Typography> Price </Typography>
     </Card>
   );
 }

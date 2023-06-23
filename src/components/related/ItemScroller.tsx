@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Stack, Grid } from '@mui/material';
 import Item from "./Item.tsx";
 import { useState } from 'react';
 
@@ -7,13 +7,13 @@ function ItemScroller() {
 
   return (
     <div style={{height: 'justify-content'}}>
-      <Grid container spacing={2}>
+      <Stack direction={'row'} spacing={2}>
         {
           data.map(() => {
             return <Item/>
           })
         }
-      </Grid>
+      </Stack>
     </div>
   )
 }
