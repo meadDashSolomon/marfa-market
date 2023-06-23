@@ -1,8 +1,11 @@
-// @ts-ignore
-import React from 'react';
+// @ts-nocheck
 
-export default function Ratings() {
+const Ratings = () => {
   return (
-    <div> Ratings </div>
-  );
+    <div>
+      Ratings
+    </div>
+  )
 }
+
+export default Ratings;
