@@ -1,8 +1,18 @@
 // @ts-ignore
 import React from 'react';
+import ProductInfo from './subcomponents/ProductInfo';
+import ProductOverview from './subcomponents/ProductOverview';
 
-export default function Overview() {
+ const Overview = () => {
   return (
-    <div> Overview </div>
+    <div className='container'>
+      <ProductInfo />
+      {/* <StyleSelector />
+      <AddToCart />
+      <ImgGallery /> */}
+      <ProductOverview />
+    </div>
   );
 }
+
+export default Overview;

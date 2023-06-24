@@ -8,7 +8,7 @@ import Related from './components/related/Related';
 const App = () => {
   return (
     <div>
-      <Overview/>
+      <Overview  />
       <Related/>
       <Questions/>
       <Ratings/>
