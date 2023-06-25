@@ -30,9 +30,12 @@ const Review = ({ review }) => {
             <Typography variant="body2">{review.body}</Typography>
             {review.recommend ?
               <Typography variant="body2"><CheckIcon fontSize="small"/>  I recommend this product</Typography>: null}
-            {review.response ? <Box>
-              <Typography>Hello</Typography>
+            {!review.response === null ? <Box>
+              <Typography sx={{
+                backgroundColor: "text.secondary"
+              }}>Hello</Typography>
             </Box> : null}
+            <Typography>Helpful? Yes ({review.helpfulness}) | Report</Typography>
           </Box>
         </CardContent>
       </Card>
