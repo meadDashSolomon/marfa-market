@@ -1,31 +1,59 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import { Box, Card, CardContent, Typography, Rating} from "@mui/material"
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { format } from "date-fns";
 
 const Review = ({ review }) => {
+  console.log("what is this: ", review)
   return (
-    <div>
-      <div>
-        <span id='stars-rating'>Will be the stars component</span>
+    // Remove border and add border bottom
+    <Box sx={{display: "flex"}}>
+      <Card variant="outlined">
+        <CardContent sx={{
+          display: "flex",
+          flexDirection: "column"
+      }}>
+          <Box sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            gap: "5px"
+          }}>
+            <Rating value={review.rating} readOnly="true" size="small"></Rating>
+            <CheckCircleIcon fontSize="small"/>
+            <Typography variant="caption">{review.reviewer_name}</Typography>
+            <Typography variant="caption">{format(new Date(review.date), "PPP")}</Typography>
+          </Box>
+          <Box>
+            <Typography variant="body1">{review.summary}</Typography>
+            <Typography variant="body2">{review.body}</Typography>
+            {!review.response === null ? <Box>
+              <Typography>Hello</Typography>
+            </Box> : null}
+          </Box>
+        </CardContent>
+      </Card>
+      {/* <Box>
+        <span id="stars-rating">Will be the stars component</span>
         <span>Verified Purchaser</span>
         <span>Username</span>
         <span>Date or review</span>
-      </div>
-      <h3 id='review-summary'>
-        Review summary title
+      </Box>
+      <h3 id="review-summary">
+      {review.summary}
       </h3>
-      <p id='review-body'>
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+      <p id="review-body">
+        {review.body}
       </p>
-      <div>
-        Recommends Product
-      </div>
-      <div>
+      {review.recommend ? (<Box>Yesrecommends</Box>) :
+      (<Box>No recommend</Box>)}
+      <Box>
         Response
-      </div>
-      <div>
-        Helpful
-      </div>
-    </div>
+      </Box>
+      <Box>
+        {`Helpful? Yes ${review.helpfulness}`}
+      </Box> */}
+    </Box>
   )
 }
 

@@ -1,16 +1,17 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import { Box, Button } from "@mui/material";
 
-const MoreReviewsButton = ({ displayMore }) => {
+const MoreReviewsButton = ({ setNumReviews, numReviews}) => {
 
   const handleClick = () => {
-    displayMore();
-    //something
+    setNumReviews(num => num + 2);
   };
 
   return (
-    <div>
-      <button onClick={handleClick}>More Reviews</button>
-    </div>
+    <Box>
+      <Button onClick={handleClick}>More Reviews +</Button>
+    </Box>
   )
 }
 
