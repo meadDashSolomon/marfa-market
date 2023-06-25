@@ -2,6 +2,7 @@
 // @ts-nocheck
 import { Box, Card, CardContent, Typography, Rating} from "@mui/material"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CheckIcon from '@mui/icons-material/Check';
 import { format } from "date-fns";
 
 const Review = ({ review }) => {
@@ -27,7 +28,9 @@ const Review = ({ review }) => {
           <Box>
             <Typography variant="body1">{review.summary}</Typography>
             <Typography variant="body2">{review.body}</Typography>
-            {!review.response === null ? <Box>
+            {review.recommend ?
+              <Typography variant="body2"><CheckIcon fontSize="small"/>  I recommend this product</Typography>: null}
+            {review.response ? <Box>
               <Typography>Hello</Typography>
             </Box> : null}
           </Box>
