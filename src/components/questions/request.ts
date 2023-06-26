@@ -1,5 +1,3 @@
-import config from '../../config';
-
 
 export default function getRequest(productNum = '37314', page = 1, count = 5) {
     return {
@@ -11,8 +9,7 @@ export default function getRequest(productNum = '37314', page = 1, count = 5) {
             count: count
         },
         headers: {
-            Authorization: `${config.GH_Key}`
+            Authorization: `${import.meta.env.VITE_AUTH_TOKEN}`
         }
     };
-    
 }

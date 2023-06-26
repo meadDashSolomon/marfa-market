@@ -1,4 +1,9 @@
-export default function SearchBar() {
+type SearchBarProps = {
+  questions: object
+}
+
+export default function SearchBar(props:SearchBarProps) {
+  console.log(props);
     return (
         <div>
       {/* inputbox and search button */}

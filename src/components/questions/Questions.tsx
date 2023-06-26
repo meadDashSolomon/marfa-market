@@ -11,7 +11,7 @@ export default function Questions() {
   const getQuestions = () => {
     axios.request(getRequest())
     .then((response) => {  
-      console.log('response from server: ', response.data.results);
+      console.log('Got Data');
       setQuestions(response.data.results)
     })
     .catch((error) => {
@@ -22,7 +22,6 @@ export default function Questions() {
   useEffect(() => {
     getQuestions();
   }, []);
-
   return (
     <div>
       <button onClick={(e)=> {console.log(e)}}>SCREAMMMINGGGGGGGGG</button>

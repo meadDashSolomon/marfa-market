@@ -16,7 +16,6 @@ export default function QuestionList(props:QuestionListProps) {
     const mappingQuestions = () => {
         props.questions.map((question) => {
             console.log(question)
-            // eslint-disable-next-line no-constant-condition
             if(!question.reported){
                 return (<QuestionListEntry
                     key = {props.questions.indexOf(question)}
