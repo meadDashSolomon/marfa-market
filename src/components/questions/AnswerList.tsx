@@ -1,10 +1,24 @@
 import AnswerListEntry from "./AnswerListEntry";
 
-export default function AnswerList() {
+type AnswerListProps = {
+    answers:object
+}
+
+export default function AnswerList(props:AnswerListProps) {
+    const listOfAnswers = Object.keys(props.answers);
+    const mappingAnswers = () => {
+        listOfAnswers.map(answer => {
+            return (
+            <AnswerListEntry
+                key = {Number(answer)}
+                answer = {props.answers[answer]}
+            />)
+        })
+    }
     return (
         <div>
             {/* to map */}
-            <AnswerListEntry/>
+            <div>{mappingAnswers()}</div>
             <a>LOAD MORE ANSWERS</a>
         </div>
     )

@@ -1,35 +1,33 @@
 import { useState, useEffect } from "react";
-// import { Button } from '@mui/material';
-
 import QuestionList from "./QuestionList";
 import SearchBar from "./SearchBar";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
 import axios from "axios";
 import getRequest from './request';
 
 
 export default function Questions() {
-  const[questions,setQuestions] = useState();
+  const[questions,setQuestions] = useState([]);
 
-  const getQuestions =()=>{
-    return axios.request(getRequest())
-    .then((response) => {
-      console.log(response);
-      setQuestions(response.data);
+  const getQuestions = () => {
+    axios.request(getRequest())
+    .then((response) => {  
+      console.log('response from server: ', response.data.results);
+      setQuestions(response.data.results)
     })
     .catch((error) => {
-      console.log(error);
-    });
+      console.log(`ERROR IN GET REQUEST ${error}`)
+    })
   };//end of getQuestions
 
   useEffect(() => {
     getQuestions();
-  },[]);
+  }, []);
+
   return (
     <div>
+      <button onClick={(e)=> {console.log(e)}}>SCREAMMMINGGGGGGGGG</button>
       <h3>QUESTIONS & ANSWERS</h3>
-      <SearchBar/>
+      <SearchBar questions = {questions}/>
       <QuestionList questions = {questions}/>
 
     </div>
