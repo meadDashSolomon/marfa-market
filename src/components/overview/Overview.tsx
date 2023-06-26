@@ -1,7 +1,8 @@
-// @ts-ignore
+
 import React from 'react';
 import ProductInfo from './subcomponents/ProductInfo';
 import ProductOverview from './subcomponents/ProductOverview';
+
 
  const Overview = () => {
   return (

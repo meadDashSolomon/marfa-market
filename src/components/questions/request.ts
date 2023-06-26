@@ -13,3 +13,4 @@ export default function getRequest (productNum = '37314', page = 1, count = 5) {
       }
     }
   }
+

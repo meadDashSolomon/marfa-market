@@ -12,6 +12,7 @@ export default function Questions(props: QuestionsProps) {
   const[questions,setQuestions] = useState([]);
 
   const getQuestions = () => {
+
     axios.request(getRequest(props.itemId))
     .then((response) => {
       console.log('response from server: ', response.data.results);
@@ -25,7 +26,6 @@ export default function Questions(props: QuestionsProps) {
   useEffect(() => {
     getQuestions();
   }, []);
-
   return (
     <div>
       <button onClick={(e)=> {console.log(e)}}>SCREAMMMINGGGGGGGGG</button>
