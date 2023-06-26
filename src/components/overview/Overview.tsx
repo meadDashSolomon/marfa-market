@@ -15,4 +15,21 @@ import ProductOverview from './subcomponents/ProductOverview';
   );
 }
 
+// const testComponent = ({ data }) => { // data: []
+
+//   if (data.length < 1) {
+//     return (
+//       <div>
+//         Loading...
+//       </div>
+//     )
+//   }
+
+//   return (
+//     <div>
+//       Hello
+//     </div>
+//   )
+// }
+
 export default Overview;

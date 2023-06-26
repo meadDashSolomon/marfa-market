@@ -8,16 +8,24 @@ import axios from 'axios';
 const App = () => {
   const [currentItem, setCurrentItem] = useState({});
 
+  const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
+  const config = {
+    headers: {
+      Authorization: import.meta.env.VITE_AUTH_TOKEN
+    }
+  }
+
   useEffect(() => {
-    // axios.get()
-    console.log(typeof import.meta.env.VITE_AUTH_TOKEN);
+    axios.get(endpoint + 'products', config)
+    .then((results) => setCurrentItem(results.data[0]))
+    .catch((err) => console.log(err))
   }, [])
 
   return (
     <div>
-      <Overview  />
+      <Overview/>
       <Related/>
-      <Questions/>
+      <Questions itemId={currentItem.id}/>
       <RatingsAndReviews/>
     </div>
   );
