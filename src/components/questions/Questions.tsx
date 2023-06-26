@@ -4,14 +4,18 @@ import SearchBar from "./SearchBar";
 import axios from "axios";
 import getRequest from './request';
 
+type QuestionsProps = {
+  itemId: string
+}// thing.toString()
 
-export default function Questions() {
+export default function Questions(props: QuestionsProps) {
   const[questions,setQuestions] = useState([]);
 
   const getQuestions = () => {
-    axios.request(getRequest())
-    .then((response) => {  
-      console.log('Got Data');
+
+    axios.request(getRequest(props.itemId))
+    .then((response) => {
+      console.log('response from server: ', response.data.results);
       setQuestions(response.data.results)
     })
     .catch((error) => {
