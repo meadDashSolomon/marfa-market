@@ -12,7 +12,7 @@ const App = () => {
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
     headers: {
-      Authorization: import.meta.env.VITE_AUTH_TOKEN
+      Authorization: import.meta.env.VITE_API_KEY
     }
   }
 
@@ -27,7 +27,7 @@ const App = () => {
     )
     .catch((err) => console.log("APP GET ERROR:::::", err))
   }, [])
-
+// console.log(currentItem)
   return (
     <div>
       <Overview itemArray={allItems} description={currentItem.description} slogan={currentItem.slogan} id={currentItem.id} setCurrentItem={setCurrentItem}/>
