@@ -1,15 +1,13 @@
-// @ts-ignore
-import React from 'react';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 
-const ProductOverview = () => {
+const ProductOverview = ({description, slogan}) => {
   return (
     <div className="ProductOverviewContainer">
       <div className="overviewLeft">
-        <h6>Slogan</h6>
-        <p>Lorem ipsum</p>
+        <h6>{slogan}</h6>
+        <p>{description}</p>
       </div>
       <div className="overviewCenter">
         <div className="">

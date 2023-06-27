@@ -28,7 +28,7 @@ export default function Questions(props: QuestionsProps) {
 
   return (
     <div>
-      <button onClick={(e)=> {console.log(e)}}>SCREAMMMINGGGGGGGGG</button>
+      {/* <button onClick={(e)=> {console.log(e)}}>SCREAMMMINGGGGGGGGG</button> */}
       <h3>QUESTIONS & ANSWERS</h3>
       <SearchBar questions = {questions}/>
       <QuestionList questions = {questions}/>

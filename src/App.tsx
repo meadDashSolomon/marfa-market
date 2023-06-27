@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const App = () => {
   const [currentItem, setCurrentItem] = useState({});
+  const [allItems, setAllItems] = useState([]);
 
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
@@ -17,13 +18,17 @@ const App = () => {
 
   useEffect(() => {
     axios.get(endpoint + 'products', config)
-    .then((results) => setCurrentItem(results.data[0]))
+    .then((results) => {
+      setCurrentItem(results.data[0]);
+      setAllItems(results.data);
+    }
+    )
     .catch((err) => console.log(err))
   }, [])
 
   return (
     <div>
-      <Overview/>
+      <Overview itemArray={allItems} description={currentItem.description} slogan={currentItem.slogan} id={currentItem.id} setCurrentItem={setCurrentItem}/>
       <Related/>
       <Questions itemId={currentItem.id}/>
       <RatingsAndReviews/>

@@ -9,13 +9,13 @@ type QuestionListProps = {
         reported:boolean,
         answers:object[]
     }[]
-} 
+}
 
 export default function QuestionList(props:QuestionListProps) {
-    console.log(props.questions)
+    // console.log(props.questions)
     const mappingQuestions = () => {
-        props.questions.map((question) => {
-            console.log(question)
+        return props.questions.map((question) => {
+            // console.log(question)
             // eslint-disable-next-line no-constant-condition
             if(!question.reported){
                 return (<QuestionListEntry

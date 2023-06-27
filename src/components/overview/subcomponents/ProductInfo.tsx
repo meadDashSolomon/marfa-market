@@ -1,6 +1,3 @@
-// @ts-ignore
-import React from 'react';
-
 const ProductInfo = () => {
   // pass in prop with number of reviews
     // let areReviews = reviews.length

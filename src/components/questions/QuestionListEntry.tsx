@@ -12,7 +12,7 @@ type QuestionListEntryProps = {
     }
 }
 export default function QuestionListEntry(props:QuestionListEntryProps) {
-    console.log(props.question.question_id);
+    // console.log(props.question.question_id);
     return (
         <div>
         {/* question and answer feed */}
