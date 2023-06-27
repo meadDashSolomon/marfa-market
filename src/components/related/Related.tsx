@@ -6,8 +6,9 @@ export default function Related() {
       <Stack sx={{ height: '100%' }}
         justifyContent="center"
         alignItems="center">
-        <ItemScroller />
-        <ItemScroller />
+        <ItemScroller title={'RELATED PRODUCTS'}/>
+        <br/>
+        <ItemScroller title={'YOUR OUTFIT'}/>
       </Stack>
     </div>
   );

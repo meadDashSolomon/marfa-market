@@ -3,18 +3,19 @@ import Item from "./Item.tsx";
 import { useState, useEffect } from 'react';
 import Request from './Request.ts';
 
-function ItemScroller() {
+function ItemScroller({ title }) {
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
-    Request.get().then((data) => {
-      setData(data);
+    Request.get().then((res) => {
+      setData(res.data);
     })
   }, [])
 
   return (
     <div style={{height: 'justify-content'}}>
-      <Typography>Title</Typography>
+      <Typography>{ title }</Typography>
+      <br/>
       <Stack direction={'row'} spacing={2}>
         {
           data.map((item, index) => {
