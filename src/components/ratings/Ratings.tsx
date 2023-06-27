@@ -1,106 +1,156 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { useState, useEffect } from 'react'
-import { LinearProgress, Typography, Rating, Slider, Stack } from "@mui/material";
+import { LinearProgress, Rating, Slider, Stack, Box, Divider } from "@mui/material";
+import Typography from '@mui/joy/Typography';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const Ratings = ({allReviews, setAllReviews}) => {
+const Ratings = ({setShownReviews, allReviews, productRatings}) => {
+
+  console.log(productRatings)
+  const [averageRating, setAverageRating] = useState(0);
   const [currentRating, setCurrentRating] = useState(0);
-  const [totalReviews, getTotalReviews] = useState(0);
-  const [sumReviews, getSumReviews] = useState(0);
+  const [selectedRatings, setSelectedRatings] = useState([])
+  const [totalReviews, setTotalReviews] = useState(0);
 
-  const [filterFive, setFilterFive] = useState(false);
-  const [filterFour, setFilterFour] = useState(false);
-  const [filterThree, setFilterThree] = useState(false);
-  const [filterTwo, setFilterTwo] = useState(false);
-  const [filterOne, setFilterOne] = useState(false);
+  const [availableRatings, setAvailableRatings] = useState([5, 4, 3, 2, 1]);
+
+  useEffect(() => {
+    if(Object.keys(productRatings).length !== 0) {
+      const totalReviews = Object.values(productRatings.ratings).reduce((total, current) => {
+        return total + Number(current);
+      }, 0)
+      setTotalReviews(totalReviews)
+      const combinedRating = Object.entries(productRatings.ratings).map((star) => {
+        return star[0] * star[1];
+      }).reduce((total, current) => {
+        return total + current;
+      }, 0)
+      setAverageRating(Math.round((combinedRating / totalReviews) * 10) / 10);
+    }
+  }, [productRatings])
 
   useEffect(() => {
     // get the total reviews and sumReviews
-  }, [allReviews])
-
-  useEffect(() => {
-    // call filterReviews with filters as parameters
-  }, [filterFive, filterFour, filterThree, filterTwo, filterOne])
-
-  const filterReviews = () => {
-    // check to if none of the filters are true
-      // dont do anything
-    // else
-      // setAllReviews based on if any of the filters are true is true
-  }
-
-  const getAverageRating = () => {
-    // algorithm for determining the average rating
-      // add up all ratings and divide by the amount of reviews
-  }
+    const filteredReviews = allReviews.filter((review) => {
+      return selectedRatings.includes(review.rating)
+    })
+    setShownReviews(filteredReviews)
+    console.log(selectedRatings)
+  }, [selectedRatings])
 
   const getReviewPercentage = (starNumber) => {
-    // algorithm for determining the review percentage
-      // take starNumber and count the amount of times its found
-      // divide by the total reviews
+    if (totalReviews) {
+      if (productRatings.ratings[starNumber] !== undefined) {
+        return Math.round((productRatings.ratings[starNumber] / totalReviews) * 100)
+      } else {
+        return 0;
+      }
+    }
   }
 
+  const getRecommendedPercentage = () => {
+      return Math.round(Number(productRatings.recommended.true) /
+      (Number(productRatings.recommended.true) + Number(productRatings.recommended.false)) * 100)
+  }
+
+  const handleRatingClick = (rating) => {
+    if (selectedRatings.includes(rating)) {
+      setSelectedRatings((ratings) => {
+        return ratings.filter(selectedRating => rating != selectedRating)
+      })
+    } else {
+      setSelectedRatings([...selectedRatings, rating])
+    }
+  };
+
+  if (Object.keys(productRatings).length < 1) {
+    // replace with spinning wheel thing
+    return (
+      <Typography>Loading...</Typography>
+    )
+  }
+
+  const arrowIcon = (props) => {
+    console.log(props)
+    return (
+      <ArrowDropDownIcon {...props}/>
+    )
+  };
+
   return (
-    <div>
-      <Typography variant="h1">
-        {() => getAverageRating()}
-      </Typography>
-      <Rating value={() => getAverageRating()}/>
-      <br/>
-      <p>Amount of people who recommend this product</p>
-      <div>
-        <span>5<LinearProgress variant="determinate" value={() => getReviewPercentage(5)} onClick={() => setFilterFive(filter => !filter)}/></span>
-        <span>4<LinearProgress variant="determinate" value={() => getReviewPercentage(4)} onClick={() => setFilterFour(filter => !filter)}/></span>
-        <span>3<LinearProgress variant="determinate" value={() => getReviewPercentage(3)} onClick={() => setFilterThree(filter => !filter)}/></span>
-        <span>2<LinearProgress variant="determinate" value={() => getReviewPercentage(2)} onClick={() => setFilterTwo(filter => !filter)}/></span>
-        <span>1<LinearProgress variant="determinate" value={() => getReviewPercentage(1)} onClick={() => setFilterOne(filter => !filter)}/></span>
-      </div>
+    <Box>
+      <Box sx={{
+        display: "flex"
+      }}>
+        <Typography level="h1">
+          {averageRating}
+        </Typography>
+        <Rating value={averageRating} readOnly size='small' precision={0.25} sx={{
+          color: "#525252",
+          paddingTop: "12px",
+          paddingLeft: "7px"
+          }}/>
+      </Box>
+      <Typography
+      level='body3'
+      textColor="#25252D"
+      sx={{
+        flex: 1,
+        flexShrink: 0,
+        width: "100%",
+        fontWeight: 550
+      }}>{getRecommendedPercentage()}% of reviews recommend this product</Typography>
+        {availableRatings.map((rating) => {
+          return <Stack direction="column">
+          <Typography
+          level='body2'
+          sx={{
+            color: "#525252"
+          }}
+          >{rating} stars</Typography>
+          <LinearProgress variant="determinate"
+          sx={{
+            backgroundColor: "#ebebeb",
+            '& .MuiLinearProgress-bar': {
+              backgroundColor: "#525252"
+            }
+          }}
+          color='secondary'
+          value={getReviewPercentage(rating)}
+          onClick={() => handleRatingClick(rating)}/>
+        </Stack>
+        })}
+      <Divider sx={{
+        marginBottom: "11px",
+        marginTop: "18px",
+      }}/>
       <Stack>
-        {/* Map this! */}
-        <Typography id='size-rating'>Size</Typography>
-        <Slider
-        disabled={true}
-        defaultValue={50}
-        size="medium">
-        {/* {marks} */}
-        </Slider>
-        <Typography id='width-rating'>Width</Typography>
-        <Slider
-        disabled={true}
-        defaultValue={50}
-        size="medium">
-        {/* {marks} */}
-        </Slider>
-        <Typography id='comfort-rating'>Comfort</Typography>
-        <Slider
-        disabled={true}
-        defaultValue={50}
-        size="medium">
-        {/* {marks} */}
-        </Slider>
-        <Typography id='quality-rating'>Quality</Typography>
-        <Slider
-        disabled={true}
-        defaultValue={50}
-        size="medium">
-        {/* {marks} */}
-        </Slider>
-        <Typography id='length-rating'>Length</Typography>
-        <Slider
-        disabled={true}
-        defaultValue={50}
-        size="medium">
-        {/* {marks} */}
-        </Slider>
-        <Typography id='fit-rating'>Fit</Typography>
-        <Slider
-        disabled={true}
-        defaultValue={50}
-        size="medium">
-        {/* {marks} */}
-        </Slider>
+        {Object.entries(productRatings.characteristics).map((item) => {
+          return (
+          <>
+            <Typography
+            level='body3'
+            textColor="#25252D"
+            sx={{
+              fontWeight: "bold"
+            }}
+            >{item[0]}</Typography>
+            <Slider
+            disabled={true}
+            defaultValue={Number(item[1].value)}
+            max={5}
+            // components={
+            //   { Thumb: arrowIcon }
+            // }
+            // ThumbComponent={arrowIcon}
+            size="small">
+            </Slider>
+          </>
+          )
+        })}
       </Stack>
-    </div>
+    </Box>
   )
 }
 
