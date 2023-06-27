@@ -71,7 +71,7 @@ const Review = ({ review }) => {
               }}>Hello</Typography>
             </Box> : null}
             <Typography level="body3" textColor="#25252D"
-            sx={{ marginTop: "10px"}}>Helpful? Yes ({review.helpfulness}) | Report</Typography>
+            sx={{ marginTop: "10px"}}>Helpful? <a onClick={() => handleHelpfulClick()}>Yes</a> ({review.helpfulness}) | Report</Typography>
           </Box>
         </CardContent>
       </Card>

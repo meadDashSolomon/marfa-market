@@ -20,7 +20,7 @@ export default function RatingsAndReviews() {
         "page": 1,
         "count": 10,
         "sort": "relevant",
-        "product_id": 37404
+        "product_id": 37406
       },
       headers
     }
@@ -37,7 +37,7 @@ export default function RatingsAndReviews() {
 
     const metaParams = {
       params: {
-        "product_id": 37404
+        "product_id": 37406
       },
       headers
     }

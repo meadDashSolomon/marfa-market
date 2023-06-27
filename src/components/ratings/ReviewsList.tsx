@@ -11,7 +11,7 @@ const ReviewsList = ({ reviews }) => {
       display: "flex",
       flexDirection: "column",
       gap: "10px",
-      height: "510px",
+      height: "auto",
       overflowY: 'auto'
     }}>
       {reviews.map((review, index) => <Review key={index} review={review}/>

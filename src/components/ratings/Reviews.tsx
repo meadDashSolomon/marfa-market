@@ -42,7 +42,7 @@ const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
       flexGrow: 0
     }}>
       <Typography level="body1" sx={{ display: "inline"}}>{allReviews.length} reviews, sorted by </Typography>
-      <FormControl sx={{minWidth: 100}} size="small">
+      <FormControl sx={{ minWidth: 100 }} size="small">
         <Select
         variant="standard"
         onChange={handleSortChange}
