@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { LinearProgress, Rating, Slider, Stack, Box, Divider } from "@mui/material";
 import Typography from '@mui/joy/Typography';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Ratings = ({setShownReviews, allReviews, productRatings}) => {
 
@@ -70,6 +71,13 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
     )
   }
 
+  const arrowIcon = (props) => {
+    console.log(props)
+    return (
+      <ArrowDropDownIcon {...props}/>
+    )
+  };
+
   return (
     <Box>
       <Box sx={{
@@ -132,6 +140,10 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
             disabled={true}
             defaultValue={Number(item[1].value)}
             max={5}
+            // components={
+            //   { Thumb: arrowIcon }
+            // }
+            // ThumbComponent={arrowIcon}
             size="small">
             </Slider>
           </>

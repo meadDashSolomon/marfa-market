@@ -85,23 +85,19 @@ export default function RatingsAndReviews() {
       }}>
         Ratings & Reviews
       </Typography>
-      <Divider sx={{
-        marginBottom: "5px"
-      }}/>
-      <Box sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "start",
-        gap: "50px"}}>
+      <Divider inset="none" sx={{
+          marginBottom: "5px",
+          maxWidth: "974px",
+          minWidth: "650px"
+          }}/>
           <Stack
           direction="row"
-          justifyContent="center"
+          justifyContent="start"
           alignItems="start"
           spacing="50px">
             <Ratings allReviews={allReviews} setShownReviews={setShownReviews} productRatings={productRatings}/>
             <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams}/>
           </Stack>
       </Box>
-    </Box>
   );
 }

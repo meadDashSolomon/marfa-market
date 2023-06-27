@@ -8,33 +8,53 @@ import { format } from "date-fns";
 
 const Review = ({ review }) => {
   return (
-    // Remove border and add border bottom
     <Box>
-      <Card variant="outlined">
+      <Card variant="outlined" sx={{
+        boxShadow: "1px 1px 6px #e8e4e4"
+      }}>
         <CardContent sx={{
           display: "flex",
           flexDirection: "column",
+          minWidth: "400px",
           maxWidth: "650px"
       }}>
-          {/* <Box sx={{
-            display: "flex",
-            justifyContent: "start",
-            alignItems: "start",
-            gap: "5px"
-          }}> */}
             <Stack
             direction="row"
-            alignItems="flex-start">
-            <Rating value={review.rating} readOnly={true} size="small" precision={.25} sx={{
-              color: "#525252",
-              margin: "auto"}}></Rating>
-            <CheckCircleIcon fontSize="small"/>
-            <Typography level="body3"> {review.reviewer_name}, </Typography>
-            <Typography level="body3"> {format(new Date(review.date), "PPP")}</Typography>
+            justifyContent="space-between"
+            alignItems="center">
+              <Rating
+              value={review.rating}
+              readOnly={true} size="small"
+              precision={.25}
+              sx={{
+                color: "#525252"}}></Rating>
+              <Stack
+              direction="row"
+              alignItems="center">
+                <CheckCircleIcon
+                fontSize="16px"
+                sx={{
+                  color: "#525252",
+                  marginRight: "4px"
+                }}/>
+                <Typography level="body3"
+                textColor="#25252D"
+                sx={{
+                  marginRight: "3px",
+                  fontWeight: 425
+                }}> {review.reviewer_name}, </Typography>
+                <Typography level="body3" textColor="#25252D"
+                sx={{
+                  fontWeight: 425
+                }}> {format(new Date(review.date), "PPP")}</Typography>
+              </Stack>
             </Stack>
-          {/* </Box> */}
           <Box>
-            <Typography level="h6" sx={{ marginBottom: "10px"}}>{review.summary}</Typography>
+            <Typography
+            level="h6"
+            sx={{
+                my: "10px"
+              }}>{review.summary}</Typography>
             <Typography level="body2" textColor="#545454" sx={{ marginBottom: "10px"}}>{review.body}</Typography>
             {review.recommend ?
             <Stack direction="row" spacing="8px">
@@ -55,26 +75,6 @@ const Review = ({ review }) => {
           </Box>
         </CardContent>
       </Card>
-      {/* <Box>
-        <span id="stars-rating">Will be the stars component</span>
-        <span>Verified Purchaser</span>
-        <span>Username</span>
-        <span>Date or review</span>
-      </Box>
-      <h3 id="review-summary">
-      {review.summary}
-      </h3>
-      <p id="review-body">
-        {review.body}
-      </p>
-      {review.recommend ? (<Box>Yesrecommends</Box>) :
-      (<Box>No recommend</Box>)}
-      <Box>
-        Response
-      </Box>
-      <Box>
-        {`Helpful? Yes ${review.helpfulness}`}
-      </Box> */}
     </Box>
   )
 }

@@ -10,7 +10,9 @@ const ReviewsList = ({ reviews }) => {
     <Box sx={{
       display: "flex",
       flexDirection: "column",
-      gap: "10px"
+      gap: "10px",
+      height: "510px",
+      overflowY: 'auto'
     }}>
       {reviews.map((review, index) => <Review key={index} review={review}/>
       )}

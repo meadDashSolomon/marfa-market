@@ -5,7 +5,7 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { Box, Fade, Modal, Card, Divider, CardContent, Rating, Button } from "@mui/material"
+import { Box, Fade, Modal, Card, Divider, CardContent, Rating, Button, TextField, Stack, Checkbox, FormControlLabel } from "@mui/material"
 import Typography from '@mui/joy/Typography';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
@@ -33,6 +33,7 @@ const NewReview = ({setIsWriting, isWriting}) => {
     left: '50%',
     maxHeight: 'max-content',
     maxWidth: '100%',
+    width: "650px",
     mx: 'auto',
     transform: 'translate(-50%, -50%)',
     p: 2,
@@ -51,7 +52,10 @@ const NewReview = ({setIsWriting, isWriting}) => {
               <FormControl>
                 <FormLabel>Enter Photo Url:</FormLabel>
                 <Input onChange={(e) => console.log(e.target.value)}/>
-                <Button onClick={handlePhotoSubmission} sx={{color: "#525252"}}>Submit</Button>
+                <Button onClick={handlePhotoSubmission} sx={{
+                  marginTop: "10px",
+                  color: "#525252"
+                }}>Submit</Button>
               </FormControl>
               </CardContent>
             </Card>
@@ -69,22 +73,58 @@ const NewReview = ({setIsWriting, isWriting}) => {
       onClose={handleClose}>
         <Fade in={isWriting}>
           <Card variant="outlined" sx={style}>
-            <Typography level="h2" fontSize="xl">Write Your Review</Typography>
+            <Typography
+            level="h2"
+            fontSize="xl"
+            sx={{
+              marginBottom: "8px"
+            }}
+            >Write Your Review</Typography>
             <Divider inset="none"/>
             <CardContent>
-              <Typography level="body1">Overall Rating</Typography>
-              <Rating size="small"></Rating>
-              <Typography level="body3">Click to rate</Typography>
-              <Divider/>
-              <FormControl>
-                <FormLabel>Summary</FormLabel>
-                <Input onChange={(e) => console.log(e.target.value)}/>
+              <Typography
+              level="body2"
+              textColor="#25252D"
+              sx={{
+                marginBottom: "5px"
+              }}>Overall Rating:</Typography>
+              <Rating
+              sx={{
+                fontSize: "25px",
+                color: "#525252"
+              }}></Rating>
+              <Typography level="body3" textColor="#25252D">Click to rate</Typography>
+              <Divider sx={{ marginY: "10px" }}/>
+              <Stack direction="row" spacing="50px">
+                <FormControl>
+                  <FormLabel>Name: </FormLabel>
+                  <TextField multiline='true' onChange={(e) => console.log(e.target.value)}/>
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Email: </FormLabel>
+                  <TextField multiline='true' onChange={(e) => console.log(e.target.value)}/>
+                </FormControl>
+              </Stack>
+              <FormControl sx={{ marginY: "10px" }}>
+                <FormLabel>Summary:</FormLabel>
+                <TextField multiline='true' onChange={(e) => console.log(e.target.value)}/>
               </FormControl>
               <FormControl>
-                <FormLabel>Product Review</FormLabel>
-                <Input onChange={(e) => console.log(e.target.value)}/>
+                <FormLabel>Product Review: </FormLabel>
+                <TextField multiline='true'
+                onChange={(e) => console.log(e.target.value)}/>
               </FormControl>
-              <Button onClick={() => setAddingPhotos(true)} sx={{color: "#525252"}}>Add Photo</Button>
+              <Stack direction="row" alignItems="center" marginTop="8px">
+                <Checkbox/>
+                <Typography>Recommend</Typography>
+              </Stack>
+              <Button onClick={() => setAddingPhotos(true)}
+              variant="outlined"
+              sx={{
+                borderColor: "#e8e4e4",
+                color: "#525252",
+                marginTop: "12px"
+                }}>Add Photo</Button>
               {addingPhotos ? <ChildModal/> : null}
               {/* {photos.length > 1 ? <Box>Hello</Box> : null} */}
             </CardContent>
