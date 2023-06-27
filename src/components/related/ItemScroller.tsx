@@ -1,17 +1,25 @@
 import { Stack, Typography } from '@mui/material';
 import Item from "./Item.tsx";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Request from './Request.ts';
 
-function ItemScroller() {
-  const [data, setData] = useState([0,1]);
+function ItemScroller({ title }) {
+  const [data, setData] = useState([{}]);
+
+  useEffect(() => {
+    Request.get().then((res) => {
+      setData(res.data);
+    })
+  }, [])
 
   return (
     <div style={{height: 'justify-content'}}>
-      <Typography>Title</Typography>
+      <Typography>{ title }</Typography>
+      <br/>
       <Stack direction={'row'} spacing={2}>
         {
-          data.map(() => {
-            return <Item/>
+          data.map((item, index) => {
+            return <Item item={item} key={index}/>
           })
         }
       </Stack>
