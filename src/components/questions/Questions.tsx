@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import QuestionList from "./QuestionList";
 import SearchBar from "./SearchBar";
 import axios from "axios";
-import getRequest from './request';
+import getRequest from './requests/getRequest';
 
 type QuestionsProps = {
   itemId: string
@@ -25,7 +25,7 @@ export default function Questions(props: QuestionsProps) {
 
   useEffect(() => {
     getQuestions();
-  }, []);
+  },[]);
   return (
     <div>
       <button onClick={(e)=> {console.log(e)}}>SCREAMMMINGGGGGGGGG</button>

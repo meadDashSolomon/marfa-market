@@ -6,21 +6,25 @@ import Related from './components/related/Related';
 import axios from 'axios';
 
 const App = () => {
-  const [currentItem, setCurrentItem] = useState({});
+  const [currentItem, setCurrentItem] = useState<object>({});
 
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
     headers: {
-      Authorization: import.meta.env.VITE_AUTH_TOKEN
+      Authorization: import.meta.env.VITE_API_KEY
     }
   }
 
   useEffect(() => {
     axios.get(endpoint + 'products', config)
-    .then((results) => setCurrentItem(results.data[0]))
-    .catch((err) => console.log(err))
+    .then((results) => {
+      setCurrentItem(results.data[0])
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }, [])
-
+console.log(currentItem)
   return (
     <div>
       <Overview/>
