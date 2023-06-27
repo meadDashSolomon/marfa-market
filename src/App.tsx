@@ -17,13 +17,15 @@ const App = () => {
   }
 
   useEffect(() => {
+    console.log("ARE YOU HERE??????")
     axios.get(endpoint + 'products', config)
     .then((results) => {
       setCurrentItem(results.data[0]);
       setAllItems(results.data);
+      console.log("RESUlTS::::", results)
     }
     )
-    .catch((err) => console.log(err))
+    .catch((err) => console.log("APP GET ERROR:::::", err))
   }, [])
 
   return (

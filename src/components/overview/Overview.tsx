@@ -61,10 +61,10 @@ type OverviewProps = {
 
   return (
     <div className='container'>
+      <ImgGallery itemStylePhotos={itemStylePhotos}/>
       <ProductInfo itemArray={itemArray}/>
       {/* <StyleSelector />
       <AddToCart /> */}
-      <ImgGallery itemStylePhotos={itemStylePhotos}/>
       <ProductOverview slogan={slogan} description={description}/>
     </div>
   );
