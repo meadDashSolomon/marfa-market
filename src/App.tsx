@@ -24,7 +24,7 @@ const App = () => {
       console.log(err)
     })
   }, [])
-console.log(currentItem)
+// console.log(currentItem)
   return (
     <div>
       <Overview/>

@@ -5,7 +5,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { format } from "date-fns";
 
 const Review = ({ review }) => {
-  console.log("what is this: ", review)
+  // console.log("what is this: ", review)
   return (
     // Remove border and add border bottom
     <Box sx={{display: "flex"}}>

@@ -14,13 +14,12 @@ type QuestionListEntryProps = {
     }
 }
 export default function QuestionListEntry(props:QuestionListEntryProps) {
-    console.log(props.question.question_id);
+    // console.log(props.question.question_id);
 
     
 
     return (
         <div>
-        {/* question and answer feed */}
             <h5><strong>Q:</strong>{props.question.question_body}</h5>
             <small>{format(new Date(props.question.question_date),"PPP")}</small>
             <p>Helpful?<a onClick={(e)=> {

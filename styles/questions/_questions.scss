@@ -1,0 +1,23 @@
+.mainHeader{
+    display: flex;
+    flex-direction: row;
+    text-size-adjust: 500px;
+}
+.QuestionsAndAnswers{
+    display: 'flex';
+    flex-Direction: 'column';
+    justify-Content: 'center';
+    background-color: #929292;
+    color: rgb(0, 0, 0);
+    margin: 1.5%;
+}
+.SearchBar {
+    display: flex;
+    margin:500px;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #e6b3b3;
+    &.input{
+        border:0px;
+    }
+}

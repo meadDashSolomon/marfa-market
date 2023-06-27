@@ -1,5 +1,6 @@
 import QuestionListEntry from "./QuestionListEntry"
 type QuestionListProps = {
+    className: string;
     questions: {
         question_id:number,
         question_body:string,
@@ -12,11 +13,11 @@ type QuestionListProps = {
 } 
 
 export default function QuestionList(props:QuestionListProps) {
-    console.log(props.questions)
+    // console.log(props.questions)
 
     const mappingQuestions = () => {
         return props.questions.map((question) => {
-            console.log('THIS IS THE QUESTION THAT IS BEING MAPPED ', question)
+            // console.log('THIS IS THE QUESTION THAT IS BEING MAPPED ', question)
             if(!question.reported){
                 return (<QuestionListEntry
                     key = {props.questions.indexOf(question)}
