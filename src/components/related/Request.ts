@@ -1,12 +1,11 @@
 import axios from "axios";
-import SECRETS from "../../config";
 const Request = {
   url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/',
   get: () => {
     return new Promise( (resolve, reject) => {
       axios.get(Request.url + 'products', {
         headers: {
-          "Authorization": SECRETS.AUTH_TOKEN
+          "Authorization": import.meta.env.VITE_AUTH_TOKEN
         },
         params: {
           "sort": "newest",
@@ -19,8 +18,6 @@ const Request = {
           output.push(Request.getStyles(data[i].id));
         }
         Promise.all(output).then((result) => {
-          console.log("RESULT", result);
-          console.log("OUTPUT", data);
           for (let i = 0; i < result.length; i++) {
             data[i] = {...data[i], ...result[i].data};
           }
@@ -32,7 +29,17 @@ const Request = {
   getStyles: (id : number) => {
     return axios.get(Request.url + `products/${id}/styles`, {
       headers: {
-        "Authorization" : SECRETS.AUTH_TOKEN
+        "Authorization" : import.meta.env.VITE_AUTH_TOKEN
+      },
+      params: {
+        "product_id": id
+      }
+    })
+  },
+  getRatings: (id: number) => {
+    return axios.get(Request.url + 'reviews/meta', {
+      headers: {
+        "Authorization" : import.meta.env.VITE_AUTH_TOKEN
       },
       params: {
         "product_id": id

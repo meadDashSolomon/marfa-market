@@ -8,7 +8,6 @@ function ItemScroller() {
 
   useEffect(() => {
     Request.get().then((data) => {
-      console.log(data);
       setData(data);
     })
   }, [])
