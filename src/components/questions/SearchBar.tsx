@@ -10,10 +10,10 @@ export default function SearchBar(props:SearchBarProps) {
 
   // }
     return (
-        <Box className = {'QuestionsAndAnswers.SearchBar'}>
+        <Box className = {'Questions SearchBar'}>
       {/* inputbox and search button */}
         <input 
-        className="Searchbar.input"
+        className="Questions Searchbar input"
         type='text'
         placeholder="Have a question? Search for answers…"
         

@@ -29,10 +29,10 @@ export default function Questions(props: QuestionsProps) {
   },[]);
 
   return (
-    <Box className = {'QuestionsAndAnswers'}>
-      <Typography variant="h6" className="mainHeader">QUESTIONS & ANSWERS</Typography>
+    <Box className = {'Questions'}>
+      <Typography variant="h6" className="Questions Header">QUESTIONS & ANSWERS</Typography>
       <SearchBar questions = {questions}/>
-      <QuestionList className = {'QuestionList'} questions = {questions}/>
+      <QuestionList questions = {questions}/>
 
       </Box>
   );

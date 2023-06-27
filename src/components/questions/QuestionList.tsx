@@ -1,6 +1,6 @@
+import { Box } from "@mui/material";
 import QuestionListEntry from "./QuestionListEntry"
 type QuestionListProps = {
-    className: string;
     questions: {
         question_id:number,
         question_body:string,
@@ -27,7 +27,7 @@ export default function QuestionList(props:QuestionListProps) {
         })//map close
     }
     return (
-        <div>
+        <Box className = {'Questions QuestionList'} >
             {/* Map this */}
             {/* <QuestionListEntry/> */}
             <>{mappingQuestions()}</>
@@ -37,6 +37,6 @@ export default function QuestionList(props:QuestionListProps) {
             {/* <Modal> */}
                 {/* whatever */}
             {/* </Modal> */}
-        </div>
+        </Box>
     )
 }
