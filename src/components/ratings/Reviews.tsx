@@ -6,9 +6,10 @@ import ReviewsList from "./ReviewsList";
 import AddMoreReviewsButton from "./AddMoreReviewsButton";
 import MoreReviewsButton from "./MoreReviewsButton";
 import NewReview from "./NewReview";
-import { Box, FormControl, MenuItem, Select, Typography } from "@mui/material"
+import { Box, FormControl, MenuItem, Select } from "@mui/material"
+import { Typography } from "@mui/joy";
 
-const Reviews = ({allReviews, fetchReviews, params}) => {
+const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
   const [numReviews, setNumReviews] = useState(2);
   const [displayedReviews, setDisplayedReviews] = useState([]);
   const [isWriting, setIsWriting] = useState(false);
@@ -19,15 +20,17 @@ const Reviews = ({allReviews, fetchReviews, params}) => {
   }
 
   useEffect(() => {
-    params['sort'] = sort;
-    fetchReviews(params)
+    reviewParams['params']['sort'] = sort;
+    fetchReviews(reviewParams)
   }, [sort])
 
   useEffect(() => {
     if(!allReviews.length < 1) {
       const additionalReviews = [];
       for(let i = 0; i < numReviews; i++) {
-        additionalReviews.push(allReviews[i]);
+        if (allReviews[i] !== undefined) {
+          additionalReviews.push(allReviews[i]);
+        }
       }
       setDisplayedReviews(additionalReviews)
     }
@@ -35,13 +38,14 @@ const Reviews = ({allReviews, fetchReviews, params}) => {
 
   return (
     // {isWriting ? display modal}
-    <Box>
-      <Typography sx={{ display: "inline"}}>{allReviews.length} reviews, sorted by </Typography>
+    <Box sx={{
+      flexGrow: 0
+    }}>
+      <Typography level="body1" sx={{ display: "inline"}}>{allReviews.length} reviews, sorted by </Typography>
       <FormControl sx={{minWidth: 100}} size="small">
         <Select
         variant="standard"
         onChange={handleSortChange}
-        autoWidth={true}
         value={sort}
         label="">
           <MenuItem value={'relevant'}>relevance</MenuItem>
@@ -50,17 +54,18 @@ const Reviews = ({allReviews, fetchReviews, params}) => {
         </Select>
       </FormControl>
       <Box>
-        {isWriting ? <NewReview/> : null}
+        {isWriting ? <NewReview isWriting={isWriting} setIsWriting={setIsWriting}/> : null}
       </Box>
       <Box>
         <ReviewsList reviews={displayedReviews}/>
       </Box>
       <Box sx={{
         display: 'flex',
-        gap: '10px'
+        gap: '10px',
+        marginTop: "10px"
       }}>
         <AddMoreReviewsButton setIsWriting={setIsWriting}/>
-        <MoreReviewsButton setNumReviews={setNumReviews} numReviews={numReviews}/>
+        {displayedReviews.length !== allReviews.length ? <MoreReviewsButton setNumReviews={setNumReviews}/> : null}
       </Box>
     </Box>
   )

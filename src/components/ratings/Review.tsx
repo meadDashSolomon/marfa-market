@@ -1,41 +1,57 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Box, Card, CardContent, Typography, Rating} from "@mui/material"
+import { Box, Card, CardContent, Rating, Stack} from "@mui/material"
+import { Typography } from "@mui/joy";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckIcon from '@mui/icons-material/Check';
 import { format } from "date-fns";
 
 const Review = ({ review }) => {
-  console.log("what is this: ", review)
   return (
     // Remove border and add border bottom
-    <Box sx={{display: "flex"}}>
+    <Box>
       <Card variant="outlined">
         <CardContent sx={{
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
+          maxWidth: "650px"
       }}>
-          <Box sx={{
+          {/* <Box sx={{
             display: "flex",
-            justifyContent: "space-evenly",
+            justifyContent: "start",
+            alignItems: "start",
             gap: "5px"
-          }}>
-            <Rating value={review.rating} readOnly="true" size="small"></Rating>
+          }}> */}
+            <Stack
+            direction="row"
+            alignItems="flex-start">
+            <Rating value={review.rating} readOnly={true} size="small" precision={.25} sx={{
+              color: "#525252",
+              margin: "auto"}}></Rating>
             <CheckCircleIcon fontSize="small"/>
-            <Typography variant="caption">{review.reviewer_name}</Typography>
-            <Typography variant="caption">{format(new Date(review.date), "PPP")}</Typography>
-          </Box>
+            <Typography level="body3"> {review.reviewer_name}, </Typography>
+            <Typography level="body3"> {format(new Date(review.date), "PPP")}</Typography>
+            </Stack>
+          {/* </Box> */}
           <Box>
-            <Typography variant="body1">{review.summary}</Typography>
-            <Typography variant="body2">{review.body}</Typography>
+            <Typography level="h6" sx={{ marginBottom: "10px"}}>{review.summary}</Typography>
+            <Typography level="body2" textColor="#545454" sx={{ marginBottom: "10px"}}>{review.body}</Typography>
             {review.recommend ?
-              <Typography variant="body2"><CheckIcon fontSize="small"/>  I recommend this product</Typography>: null}
-            {!review.response === null ? <Box>
+            <Stack direction="row" spacing="8px">
+              <CheckIcon fontSize="small"/>
+              <Typography
+              level="body2"
+              textColor="#25252D"
+              >I recommend this product</Typography>
+            </Stack> : null}
+            {!review.response === null ?
+            <Box>
               <Typography sx={{
                 backgroundColor: "text.secondary"
               }}>Hello</Typography>
             </Box> : null}
-            <Typography>Helpful? Yes ({review.helpfulness}) | Report</Typography>
+            <Typography level="body3" textColor="#25252D"
+            sx={{ marginTop: "10px"}}>Helpful? Yes ({review.helpfulness}) | Report</Typography>
           </Box>
         </CardContent>
       </Card>

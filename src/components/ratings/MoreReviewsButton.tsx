@@ -2,7 +2,7 @@
 // @ts-nocheck
 import { Box, Button } from "@mui/material";
 
-const MoreReviewsButton = ({ setNumReviews, numReviews}) => {
+const MoreReviewsButton = ({ setNumReviews }) => {
 
   const handleClick = () => {
     setNumReviews(num => num + 2);
@@ -10,7 +10,12 @@ const MoreReviewsButton = ({ setNumReviews, numReviews}) => {
 
   return (
     <Box>
-      <Button onClick={handleClick}>More Reviews +</Button>
+      <Button onClick={handleClick}
+      sx={{
+        color: "#525252",
+        borderColor: "#e8e4e4"
+      }}
+      variant="outlined">More Reviews</Button>
     </Box>
   )
 }
