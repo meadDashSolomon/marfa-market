@@ -1,62 +1,64 @@
-import ProductInfo from './subcomponents/ProductInfo';
-import ProductOverview from './subcomponents/ProductOverview';
-import ImgGallery from './subcomponents/ImgGallery';
-import StyleSelector from './subcomponents/StyleSelector';
-import AddToCart from './subcomponents/AddToCart';
-import {useState, useEffect} from 'react';
-import axios from 'axios';
+import ProductInfo from "./subcomponents/ProductInfo";
+import ProductOverview from "./subcomponents/ProductOverview";
+import ImgGallery from "./subcomponents/ImgGallery";
+import StyleSelector from "./subcomponents/StyleSelector";
+import AddToCart from "./subcomponents/AddToCart";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 type OverviewProps = {
   itemArray: object[] | string;
   description: string;
   slogan: string;
   id: number;
+  currentItem: object;
+  setCurrentItem: Function;
 };
 
- const Overview = ({ itemArray, description, slogan, id }: OverviewProps) => {
-  console.log("itemArray:::::::::::", itemArray);
+const defaultStyle = {
+  style_id: 1,
+  name: "Loading . . .",
+  original_price: "0",
+  sale_price: "0",
+  "default?": false,
+  photos: [
+    {
+      thumbnail_url: "",
+      url: "",
+    },
+  ],
+  skus: {},
+};
 
+const Overview = ({
+  itemArray,
+  currentItem,
+  setCurrentItem,
+  description,
+  slogan,
+  id,
+}: OverviewProps) => {
   const [skus, setSkus] = useState([]);
   const [itemStylePhotos, setItemSylePhotos] = useState([]);
   const [styles, setStyles] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState(null);
-
-
-  useEffect(() => {
-    const getSkus = (id) => {
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}/styles`, {
-        headers: {
-          Authorization: import.meta.env.VITE_AUTH_TOKEN
-        }
-      })
-      .then((response) => {
-        console.log("SKUSSSSS?????????????:::::", response.data.results[0].skus)
-        setSkus(response.data.results[0].skus);
-        setItemSylePhotos(response.data.results[0].photos);
-        setStyles(response.data.results);
-      })
-      .catch((error) => {
-        console.log('ERROR GETTING PRODUCT STYLES:::::::::::', error)
-      })
-    }
-
-    if (id) {
-      getSkus(id);
-    }
-  }, [id]);
-
-
-
+  const [selectedStyle, setSelectedStyle] = useState(defaultStyle);
 
   return (
-    <div className='container'>
-      <ImgGallery itemStylePhotos={itemStylePhotos}/>
-      <ProductInfo itemArray={itemArray} selectedStyle={selectedStyle}/>
-      <StyleSelector styles={styles} setSelectedStyle={setSelectedStyle} />
-      <AddToCart skus={skus}/>
-      <ProductOverview slogan={slogan} description={description}/>
+    <div className="container">
+      <ImgGallery selectedStyle={selectedStyle} />
+      <ProductInfo itemArray={itemArray} selectedStyle={selectedStyle} />
+      <StyleSelector
+        currentItem={currentItem}
+        selectedStyle={selectedStyle}
+        setSelectedStyle={setSelectedStyle}
+      />
+      <AddToCart skus={selectedStyle.skus} />
+      <ProductOverview
+        slogan={currentItem.slogan}
+        description={currentItem.description}
+      />
     </div>
   );
-}
+};
 
 export default Overview;

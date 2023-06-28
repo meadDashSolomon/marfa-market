@@ -1,14 +1,22 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const ImgGallery = ({itemStylePhotos}) => {
-  const [mainPicURL, setMainPicURL] = useState(itemStylePhotos[0] ? itemStylePhotos[0].url : "");
+const ImgGallery = ({ selectedStyle }) => {
+  const [itemStylePhotos, setItemSylePhotos] = useState([{url: ''}]);
+  const [mainPicURL, setMainPicURL] = useState("");
+
 
   const handleThumbnailClick = (url) => {
     setMainPicURL(url);
   }
+  useEffect(() => {
+    setMainPicURL(itemStylePhotos[0].url || '');
+  }, [itemStylePhotos])
+  useEffect(() => {
+    setItemSylePhotos(selectedStyle.photos);
+  }, [selectedStyle]);
 
   return (
     <div className="imgContainer">
