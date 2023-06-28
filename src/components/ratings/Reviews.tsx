@@ -5,11 +5,11 @@ import { useState, useEffect } from "react";
 import ReviewsList from "./ReviewsList";
 import AddMoreReviewsButton from "./AddMoreReviewsButton";
 import MoreReviewsButton from "./MoreReviewsButton";
-import NewReview from "./NewReview";
+import NewReview from "./AddReview/NewReview";
 import { Box, FormControl, MenuItem, Select } from "@mui/material"
 import { Typography } from "@mui/joy";
 
-const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
+const Reviews = ({allReviews, fetchReviews, reviewParams, productRatings}) => {
   const [numReviews, setNumReviews] = useState(2);
   const [displayedReviews, setDisplayedReviews] = useState([]);
   const [isWriting, setIsWriting] = useState(false);
@@ -54,7 +54,7 @@ const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
         </Select>
       </FormControl>
       <Box>
-        {isWriting ? <NewReview isWriting={isWriting} setIsWriting={setIsWriting}/> : null}
+        {isWriting ? <NewReview isWriting={isWriting} setIsWriting={setIsWriting} productRatings={productRatings}/> : null}
       </Box>
       <Box>
         <ReviewsList reviews={displayedReviews}/>

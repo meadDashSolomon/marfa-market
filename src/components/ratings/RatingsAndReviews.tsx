@@ -20,7 +20,7 @@ export default function RatingsAndReviews() {
         "page": 1,
         "count": 10,
         "sort": "relevant",
-        "product_id": 37406
+        "product_id": 37404
       },
       headers
     }
@@ -37,7 +37,7 @@ export default function RatingsAndReviews() {
 
     const metaParams = {
       params: {
-        "product_id": 37406
+        "product_id": 37404
       },
       headers
     }
@@ -59,6 +59,7 @@ export default function RatingsAndReviews() {
     const [allReviews, setAllReviews] = useState([]);
     const [shownReviews, setShownReviews] = useState([]);
     const [productRatings, setProductRatings] = useState({});
+    const [productId, setProductId] = useState(37404);
 
     useState(() => {
       console.log('hello')
@@ -96,7 +97,7 @@ export default function RatingsAndReviews() {
           alignItems="start"
           spacing="50px">
             <Ratings allReviews={allReviews} setShownReviews={setShownReviews} productRatings={productRatings}/>
-            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams}/>
+            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams} productId={productId}/>
           </Stack>
       </Box>
   );
