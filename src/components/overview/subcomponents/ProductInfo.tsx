@@ -1,5 +1,5 @@
 const ProductInfo = ({ itemArray, selectedStyle }) => {
-  const originalPrice = selectedStyle ? selectedStyle.original_price : itemArray[0].default_price;
+  const originalPrice = selectedStyle ? selectedStyle.original_price : itemArray[0] ? itemArray[0].default_price : 0;
   const salePrice = selectedStyle && selectedStyle.sale_price !== "0" ? selectedStyle.sale_price : null;
 
   return (
