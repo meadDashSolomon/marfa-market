@@ -12,12 +12,11 @@ const App = () => {
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
     headers: {
-      Authorization: import.meta.env.VITE_API_KEY
+      Authorization: import.meta.env.VITE_AUTH_TOKEN
     }
   }
 
   useEffect(() => {
-    console.log("ARE YOU HERE??????")
     axios.get(endpoint + 'products', config)
     .then((results) => {
       setCurrentItem(results.data[0]);
@@ -27,7 +26,7 @@ const App = () => {
     )
     .catch((err) => console.log("APP GET ERROR:::::", err))
   }, [])
-// console.log(currentItem)
+
   return (
     <div>
       <Overview itemArray={allItems} description={currentItem.description} slogan={currentItem.slogan} id={currentItem.id} setCurrentItem={setCurrentItem}/>

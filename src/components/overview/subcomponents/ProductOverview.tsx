@@ -4,7 +4,7 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 
 const ProductOverview = ({description, slogan}) => {
   return (
-    <div className="ProductOverviewContainer">
+    <div className="productOverviewContainer">
       <div className="overviewLeft">
         <h6>{slogan}</h6>
         <p>{description}</p>

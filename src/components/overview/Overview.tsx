@@ -1,6 +1,8 @@
 import ProductInfo from './subcomponents/ProductInfo';
 import ProductOverview from './subcomponents/ProductOverview';
 import ImgGallery from './subcomponents/ImgGallery';
+import StyleSelector from './subcomponents/StyleSelector';
+import AddToCart from './subcomponents/AddToCart';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
@@ -14,34 +16,34 @@ type OverviewProps = {
  const Overview = ({ itemArray, description, slogan, id }: OverviewProps) => {
   console.log("itemArray:::::::::::", itemArray);
 
-  const [itemInfo, setItemInfo] = useState({});
-  const [itemStyles, setItemStyles] = useState([]);
+  const [productFeatures, setProductFeatures] = useState({});
+  const [skus, setSkus] = useState([]);
   const [itemStylePhotos, setItemSylePhotos] = useState([]);
 
   useEffect(() => {
-    const getItemInfo = (id) => {
+    const getProductFeatures = (id) => {
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}`, {
         headers: {
           Authorization: import.meta.env.VITE_AUTH_TOKEN
         }
       })
       .then((response) => {
-        setItemInfo(response.data.features)
+        setProductFeatures(response.data.features)
       })
       .catch((error) => {
         console.log('ERROR GETTING ITEM INFO:::::', error)
       })
     }
 
-    const getItemStyles = (id) => {
+    const getSkus = (id) => {
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}/styles`, {
         headers: {
           Authorization: import.meta.env.VITE_AUTH_TOKEN
         }
       })
       .then((response) => {
-        console.log("picssssss:::::", response.data.results[0].photos)
-        setItemStyles(response.data.results)
+        console.log("SKUSSSSSSsssss:::::", response.data.results[1])
+        setSkus(response.data.results[1])
         setItemSylePhotos(response.data.results[0].photos)
 
       })
@@ -51,8 +53,8 @@ type OverviewProps = {
     }
 
     if (id) {
-      getItemInfo(id);
-      getItemStyles(id);
+      getProductFeatures(id);
+      getSkus(id);
     }
   }, [id]);
 
@@ -63,8 +65,8 @@ type OverviewProps = {
     <div className='container'>
       <ImgGallery itemStylePhotos={itemStylePhotos}/>
       <ProductInfo itemArray={itemArray}/>
-      {/* <StyleSelector />
-      <AddToCart /> */}
+      <StyleSelector itemStylePhotos={itemStylePhotos}/>
+      <AddToCart skus={skus}/>
       <ProductOverview slogan={slogan} description={description}/>
     </div>
   );
