@@ -16,25 +16,13 @@ type OverviewProps = {
  const Overview = ({ itemArray, description, slogan, id }: OverviewProps) => {
   console.log("itemArray:::::::::::", itemArray);
 
-  const [productFeatures, setProductFeatures] = useState({});
   const [skus, setSkus] = useState([]);
   const [itemStylePhotos, setItemSylePhotos] = useState([]);
+  const [styles, setStyles] = useState([]);
+  const [selectedStyle, setSelectedStyle] = useState(null);
+
 
   useEffect(() => {
-    const getProductFeatures = (id) => {
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}`, {
-        headers: {
-          Authorization: import.meta.env.VITE_AUTH_TOKEN
-        }
-      })
-      .then((response) => {
-        setProductFeatures(response.data.features)
-      })
-      .catch((error) => {
-        console.log('ERROR GETTING ITEM INFO:::::', error)
-      })
-    }
-
     const getSkus = (id) => {
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}/styles`, {
         headers: {
@@ -42,10 +30,10 @@ type OverviewProps = {
         }
       })
       .then((response) => {
-        console.log("SKUSSSSSSsssss:::::", response.data.results[1])
-        setSkus(response.data.results[1])
-        setItemSylePhotos(response.data.results[0].photos)
-
+        console.log("SKUSSSSS?????????????:::::", response.data.results[0].skus)
+        setSkus(response.data.results[0].skus);
+        setItemSylePhotos(response.data.results[0].photos);
+        setStyles(response.data.results);
       })
       .catch((error) => {
         console.log('ERROR GETTING PRODUCT STYLES:::::::::::', error)
@@ -53,7 +41,6 @@ type OverviewProps = {
     }
 
     if (id) {
-      getProductFeatures(id);
       getSkus(id);
     }
   }, [id]);
@@ -64,8 +51,8 @@ type OverviewProps = {
   return (
     <div className='container'>
       <ImgGallery itemStylePhotos={itemStylePhotos}/>
-      <ProductInfo itemArray={itemArray}/>
-      <StyleSelector itemStylePhotos={itemStylePhotos}/>
+      <ProductInfo itemArray={itemArray} selectedStyle={selectedStyle}/>
+      <StyleSelector styles={styles} setSelectedStyle={setSelectedStyle} />
       <AddToCart skus={skus}/>
       <ProductOverview slogan={slogan} description={description}/>
     </div>
