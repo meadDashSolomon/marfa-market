@@ -1,5 +1,5 @@
 import { Card } from "@mui/material";
-import AnswerList from "./AnswerList";
+import AnswerList from "../answerComponents/AnswerList";
 import { format } from "date-fns"
 
 type QuestionListEntryProps = {

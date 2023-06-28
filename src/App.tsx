@@ -11,7 +11,7 @@ const App = () => {
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
     headers: {
-      Authorization: import.meta.env.VITE_API_KEY
+      Authorization: import.meta.env.VITE_AUTH_TOKEN
     }
   }
 
@@ -19,6 +19,7 @@ const App = () => {
     axios.get(endpoint + 'products', config)
     .then((results) => {
       setCurrentItem(results.data[0])
+      console.log(results.data)
     })
     .catch((err) => {
       console.log(err)

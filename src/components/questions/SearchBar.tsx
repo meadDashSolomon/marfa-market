@@ -1,24 +1,34 @@
-import { Box } from "@mui/material";
-import { useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+
 type SearchBarProps = {
-  questions: object;
+  setQuestionSort: any;
+  searchQuery: string;
+  setSearchQuery: any;
 }
 
 export default function SearchBar(props:SearchBarProps) {
-  // console.log(props);
-  // if (){
-
-  // }
+  console.log("CHANGE SETQUESTIONSORT TYPE FROM ANY WHEN DEFINED");
+  
+  const searchFunc = (query:string) => {
+    if (query.length >= 3){
+      props.setQuestionSort(query);
+    }
+  }
     return (
         <Box className = {'Questions SearchBar'}>
-      {/* inputbox and search button */}
-        <input 
-        className="Questions Searchbar input"
-        type='text'
-        placeholder="Have a question? Search for answers…"
-        
+        <TextField
+          className="Question Searchbar"
+          type={"search"}
+          id="QuestionSearchBar"
+          defaultValue={props.searchQuery}
+          placeholder="Have a question? Search for answers…"
+          onChange={(e) => {
+            console.log('SEARCH ONCHANGE RAN ',e.target.value)
+            searchFunc(e.target.value);
+          }}
         />
-        <button type="submit" >Submit</button>
+
+        <Button type="submit" >Submit</Button>
       </Box>
     )
 }

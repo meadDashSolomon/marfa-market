@@ -12,7 +12,7 @@ export default function RatingsAndReviews() {
   const endpoint = "http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe"
 
   const headers = {
-    "Authorization": import.meta.env.VITE_API_KEY
+    "Authorization": import.meta.env.VITE_AUTH_TOKEN
     }
 
     const reviewParams = {
@@ -37,7 +37,8 @@ export default function RatingsAndReviews() {
 
     const metaParams = {
       params: {
-        "product_id": 37406
+        // "product_id": 37406
+        product_id: 37315
       },
       headers
     }

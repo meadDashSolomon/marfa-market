@@ -5,13 +5,14 @@ type AnswerListProps = {
 }
 
 export default function AnswerList(props:AnswerListProps) {
+    console.log('THIS IS ANSWERS IN ANSWERLISTENTRY', AnswerList)
     const listOfAnswers = Object.keys(props.answers);
     const mappingAnswers = () => {
-        listOfAnswers.map(answer => {
+        return listOfAnswers.map(answer => {
             return (
             <AnswerListEntry
                 key = {Number(answer)}
-                answer = {props.answers[answer]}
+                answer = {props.answers[Number(answer)]}
             />)
         })
     }

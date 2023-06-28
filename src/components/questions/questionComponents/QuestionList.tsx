@@ -1,6 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/joy"
 import QuestionListEntry from "./QuestionListEntry"
+import QuestionModal from "./QuestionModal"
+import { useState } from "react"
 type QuestionListProps = {
+    searchQuery:string
     questions: {
         question_id:number,
         question_body:string,
@@ -13,8 +16,8 @@ type QuestionListProps = {
 } 
 
 export default function QuestionList(props:QuestionListProps) {
-    // console.log(props.questions)
-
+    console.log(props.questions)
+    const[questionModal, setQuestionModal] = useState<boolean>(false);
     const mappingQuestions = () => {
         return props.questions.map((question) => {
             // console.log('THIS IS THE QUESTION THAT IS BEING MAPPED ', question)
@@ -26,17 +29,24 @@ export default function QuestionList(props:QuestionListProps) {
             }
         })//map close
     }
+
+    const AddQuestionButton = () => {
+        console.log(5)
+    }
+
     return (
         <Box className = {'Questions QuestionList'} >
-            {/* Map this */}
-            {/* <QuestionListEntry/> */}
             <>{mappingQuestions()}</>
-            <button>MORE ANSWERED QUESTIONS</button>
-            {/* adds modal */}
-            <button>ADD A QUESTION +</button>
-            {/* <Modal> */}
-                {/* whatever */}
-            {/* </Modal> */}
+            <Button>MORE ANSWERED QUESTIONS</Button>
+            <Button
+                onClick={()=> {
+                    setQuestionModal(true);
+                }}
+            >ADD A QUESTION +</Button>
+            <QuestionModal
+                questionModal={questionModal}
+                setQuestionModal={setQuestionModal}
+            />
         </Box>
     )
 }

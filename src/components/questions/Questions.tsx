@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import QuestionList from "./QuestionList";
+import QuestionList from "./questionComponents/QuestionList";
 import SearchBar from "./SearchBar";
 import axios from "axios";
 import getRequest from './requests/getRequest';
 import { Box, Typography } from "@mui/material";
+import { Divider } from "@mui/joy";
 
 type QuestionsProps = {
   itemId: number
@@ -11,6 +12,8 @@ type QuestionsProps = {
 
 export default function Questions(props: QuestionsProps) {
   const[questions,setQuestions] = useState([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const[questionSort, setQuestionSort] = useState();
 
   const getQuestions = () => {
 
@@ -24,6 +27,7 @@ export default function Questions(props: QuestionsProps) {
     })
   };//end of getQuestions
 
+
   useEffect(() => {
     getQuestions();
   },[]);
@@ -31,8 +35,16 @@ export default function Questions(props: QuestionsProps) {
   return (
     <Box className = {'Questions'}>
       <Typography variant="h6" className="Questions Header">QUESTIONS & ANSWERS</Typography>
-      <SearchBar questions = {questions}/>
-      <QuestionList questions = {questions}/>
+      <Divider/>
+      <SearchBar
+        searchQuery={searchQuery}
+        setQuestionSort={setQuestionSort}
+        setSearchQuery={setSearchQuery}
+        />
+      <QuestionList
+        questions = {questions}
+        searchQuery ={searchQuery}
+      />
 
       </Box>
   );
