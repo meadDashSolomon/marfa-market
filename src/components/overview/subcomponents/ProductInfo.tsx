@@ -1,5 +1,6 @@
 const ProductInfo = ({ itemArray, selectedStyle }) => {
-  const price = selectedStyle ? selectedStyle.original_price : itemArray[0].default_price;
+  const originalPrice = selectedStyle ? selectedStyle.original_price : itemArray[0].default_price;
+  const salePrice = selectedStyle && selectedStyle.sale_price !== "0" ? selectedStyle.sale_price : null;
 
   return (
     <div className="productInfoContainer">
@@ -11,7 +12,14 @@ const ProductInfo = ({ itemArray, selectedStyle }) => {
         <>
           <p className="category">{itemArray[0].category}</p>
           <h1>{itemArray[0].name}</h1>
-          <p className="price">{price}</p>
+          {salePrice ? (
+            <>
+              <p className="price" style={{color: 'red'}}>{salePrice}</p>
+              <p className="originalPrice" style={{textDecoration: 'line-through'}}>{originalPrice}</p>
+            </>
+          ) : (
+            <p className="price">{originalPrice}</p>
+          )}
         </>
       )}
     </div>
