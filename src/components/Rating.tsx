@@ -7,6 +7,8 @@ function Rating({ item }) {
   const [ stars, setStars ] = useState(0);
   useEffect(() => {
     if (item !== undefined && item.id !== undefined) {
+      console.count();
+      console.log(item.id);
       Request.getRatings(item.id).then((res) => {
         const data = res.data.ratings;
         let count = 0;

@@ -14,8 +14,12 @@ function Item( { item } ) {
     }
   }, []);
 
+  useEffect(() => {
+    console.log('CHANGE', item.id);
+  }, [ item ])
+
   return (
-    <Card sx={{padding: '10px'}}>
+    <Card sx={{padding: '10px',margin:'5px', minWidth:'calc(33% - 29px)'}}>
       <div className='item-card'>
       <img src={img} style={{width: '100%', height: '150px', objectFit: 'cover'}}/>
       <Typography variant='h8' sx={{color: '#124559'}}> { item.category } </Typography>
