@@ -8,8 +8,9 @@ import MoreReviewsButton from "./MoreReviewsButton";
 import NewReview from "./AddReview/NewReview";
 import { Box, FormControl, MenuItem, Select } from "@mui/material"
 import { Typography } from "@mui/joy";
+import RequestHandler from "./RequestHandler";
 
-const Reviews = ({allReviews, fetchReviews, reviewParams, productRatings}) => {
+const Reviews = ({allReviews, reviewParams, productRatings, fetchReviews}) => {
   const [numReviews, setNumReviews] = useState(2);
   const [displayedReviews, setDisplayedReviews] = useState([]);
   const [isWriting, setIsWriting] = useState(false);
@@ -20,7 +21,7 @@ const Reviews = ({allReviews, fetchReviews, reviewParams, productRatings}) => {
   }
 
   useEffect(() => {
-    reviewParams['params']['sort'] = sort;
+    reviewParams.sort = sort;
     fetchReviews(reviewParams)
   }, [sort])
 
@@ -37,7 +38,6 @@ const Reviews = ({allReviews, fetchReviews, reviewParams, productRatings}) => {
   }, [allReviews, numReviews])
 
   return (
-    // {isWriting ? display modal}
     <Box sx={{
       flexGrow: 0
     }}>
