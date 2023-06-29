@@ -1,6 +1,7 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import { useState, useEffect } from 'react';
 
 const ImgGallery = ({ selectedStyle }) => {
@@ -8,7 +9,7 @@ const ImgGallery = ({ selectedStyle }) => {
   const [mainPicURL, setMainPicURL] = useState("");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
-
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleThumbnailClick = (url, index) => {
     setMainPicURL(url);
@@ -43,27 +44,59 @@ const ImgGallery = ({ selectedStyle }) => {
     });
   }
 
+  const handleFullscreenClick = () => {
+    setIsFullscreen(!isFullscreen);
+
+    const leftArrow = document.querySelector('.mainPicArrowLeft');
+    const rightArrow = document.querySelector('.mainPicArrowRight');
+    const mainPic = document.querySelector('.mainPic');
+
+    if (isFullscreen) {
+      mainPic.classList.remove('mainPicFullscreen');
+      leftArrow.classList.remove('mainPicArrowLeftFullscreen');
+      rightArrow.classList.remove('mainPicArrowRightFullscreen');
+    } else {
+      mainPic?.classList.add('mainPicFullscreen')
+      leftArrow.classList.add('mainPicArrowLeftFullscreen');
+      rightArrow.classList.add('mainPicArrowRightFullscreen');
+    }
+  };
+
+
+
   return (
     <div className="imgContainer">
       {itemStylePhotos.length > 0 ? (
         <>
-          <div className="mainPicWrapper">
-            <img className="mainPic" src={mainPicURL} alt="main picture of currently selected style" />
+          <div className="mainPicWrapper"
+               style={{
+                 width: isFullscreen ? '100vw' : 'auto',
+                 height: isFullscreen ? '100vh' : 'auto',
+               }}>
+            <img className="mainPic"
+                 src={mainPicURL}
+                 alt="main picture of currently selected style"
+                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}/>
+            <FullscreenIcon className='fullscreenIcon'
+                            style={{ position: 'absolute', top: '10px', right: '100px', color: 'white', zIndex: '2', }}
+                            onClick={handleFullscreenClick} />
           </div>
-          <div className="thumbnails">
-            {itemStylePhotos.map((photo, index) => {
-              return (
-                <img
-                  className={`thumbnail ${index === highlightedThumbnail ? 'selectedThumbnail' : ''}`}
-                  key={index}
-                  src={photo.thumbnail_url}
-                  alt={`Thumbnail ${index + 1}`}
-                  onClick={() => handleThumbnailClick(photo.url, index)}
-                />
-              )
-            })}
-            <KeyboardArrowDownIcon className='thumbnailDownArrow' />
-          </div>
+          {!isFullscreen && (
+            <div className="thumbnails">
+              {itemStylePhotos.map((photo, index) => {
+                return (
+                  <img
+                    className={`thumbnail ${index === highlightedThumbnail ? 'selectedThumbnail' : ''}`}
+                    key={index}
+                    src={photo.thumbnail_url}
+                    alt={`Thumbnail ${index + 1}`}
+                    onClick={() => handleThumbnailClick(photo.url, index)}
+                  />
+                )
+              })}
+              <KeyboardArrowDownIcon className='thumbnailDownArrow' />
+            </div>
+          )}
           <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
           <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
         </>
@@ -72,6 +105,8 @@ const ImgGallery = ({ selectedStyle }) => {
       )}
     </div>
   )
+
+
 }
 
 

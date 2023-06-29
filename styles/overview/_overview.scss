@@ -2,21 +2,21 @@
   .container {
     display: grid;
     grid-template-columns: 62% 38%;
-    grid-template-rows: 75% 25%;
+    grid-template-rows: 25% 75%;
     gap: 20px;
   }
 
   .imgContainer {
     position: relative;
     width: 100%;
-    padding-bottom: 75%; /* This sets the aspect ratio to 4:3. Adjust as needed. */
+    padding-bottom: 100%; /* This sets the aspect ratio */
     grid-area: 1 / 1 / 2 / 2;
   }
 
   .mainPicWrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 75%; /* Adjust this to change the aspect ratio. */
+    padding-bottom: 100%; /* Aspect ratio. */
   }
 
   .mainPic {
@@ -26,6 +26,10 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .mainPicFullscreen {
+    z-index: 1;
   }
 
   .thumbnails {
@@ -49,33 +53,47 @@
 
   .thumbnailDownArrow {
     position: absolute;
-    bottom: -12%;
+    bottom: -17%;
     left: -7%;
     margin-left: 10%;
     margin-bottom: 5%;
     border: 2px solid black;
     border-radius: 5px;
+    background-color: white;
   }
 
   .mainPicArrowLeft {
     position: absolute;
-    top: 25%;
-    left: 15%;
+    top: 50%;
+    left: 10%;
     transform: translateY(-50%);
     z-index: 1;
     border: 2px solid black;
     border-radius: 5px;
+    background-color: white;
   }
 
   .mainPicArrowRight {
     position: absolute;
-    top: 25%; /* This positions the arrow in the middle vertically. */
-    right: 5%;
+    top: 50%; /* This positions the arrow in the middle vertically. */
+    right: 10%;
     transform: translateY(-50%);
     z-index: 1;
     border: 2px solid black;
     border-radius: 5px;
+    background-color: white;
   }
+
+  .mainPicArrowLeftFullscreen {
+    top: 50vh;
+    left: 10vw;
+  }
+
+  .mainPicArrowRightFullscreen {
+    top: 50vh;
+    right: -29vw;
+  }
+
 
   .category {
     font-size: 120%;
@@ -115,6 +133,7 @@
 
   .styleSelectorContainer {
     grid-area: 1 / 2 / 2 / 3;
+    padding-bottom: 20px;
   }
 
   .addToCartContainer {

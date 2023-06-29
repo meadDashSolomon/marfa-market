@@ -28,7 +28,7 @@ const AddToCart = ({skus}) => {
 
       <select
         className="sizeSelector"
-        value={allOutOfStock ? "OUT OF STOCK" : selectedSize}
+        value={selectedSize}
         onChange={(e) => {
           const size = e.target.value;
           setSelectedSize(size);
@@ -37,6 +37,7 @@ const AddToCart = ({skus}) => {
         }}
         disabled={allOutOfStock}
       >
+        <option disabled={selectedSize !== "Select a Size"}>Select a Size</option>
         {allOutOfStock ? (
           <option value="OUT OF STOCK">OUT OF STOCK</option>
         ) : (
