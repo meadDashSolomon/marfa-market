@@ -1,13 +1,31 @@
-const AddToCart = () => {
+import { useState } from 'react';
 
+const AddToCart = ({skus}) => {
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedQuantity, setSelectedQuantity] = useState("");
+  const [showSizeWarning, setShowSizeWarning] = useState(false);
+
+  // find sku that corresponds to selected size
+  const selectedSku = Object.values(skus).find((sku) => {
+    sku.size === selectedSize
+  })
+
+  // define func to handle add to cart btn click
+  const handleAddToCart = () => {
+    if (selectedSize === "") {
+      setShowSizeWarning(true);
+    }
+  }
 
   return (
     <div className="addToCartContainer">
-      <select className="sizeSelector">
+      {/* if showSizeWarning is true, show size warning message */}
+      {showSizeWarning && <p>Please select size</p>}
+      <select
+      className="sizeSelector"
+      value={selectedSize}
+      onChange={(e) => setSelectedSize(e.target.value)}>
         <option value="">Select Size</option>
-        <option value="s">Small</option>
-        <option value="m">Medium</option>
-        <option value="l">Large</option>
       </select>
 
       <select className="quantitySelector">
