@@ -11,6 +11,7 @@ const AddToCart = ({skus}) => {
   // define func to handle add to cart btn click
   const handleAddToCart = () => {
     // if no size selected, show size warning
+    console.log('handleAddToCart called');
     if (selectedItem === "") {
       setShowSizeWarning(true);
     }
@@ -32,8 +33,10 @@ const AddToCart = ({skus}) => {
         onChange={(e) => {
           const size = e.target.value;
           setSelectedSize(size);
+          console.log('Size set to', size);
           const item = size === "Select a Size" ? null : Object.values(skus).find(sku => sku.size === size);
           setSelectedItem(item);
+          console.log('Item set to', item);
         }}
         disabled={allOutOfStock}
       >
@@ -41,10 +44,10 @@ const AddToCart = ({skus}) => {
         {allOutOfStock ? (
           <option value="OUT OF STOCK">OUT OF STOCK</option>
         ) : (
-          Object.values(skus).map((sku) => {
+          Object.entries(skus).map(([key, sku]) => {
             // only list sizes currently in stock
             if (sku.quantity > 0) {
-              return <option value={sku.size}>{sku.size}</option>
+              return <option key={key} value={sku.size}>{sku.size}</option>
             }
           })
         )}
@@ -62,7 +65,7 @@ const AddToCart = ({skus}) => {
           // If an item is selected, create an array from 1 to the minimum of the selected item's quantity or 15
           Array.from({ length: Math.min(selectedItem.quantity, 15) }, (_, i) => i + 1).map((value) => {
             // For each number in the array, create an option with that number
-            return <option value={value}>{value}</option>
+            return <option key={value} value={value}>{value}</option>
           })
         )}
       </select>
