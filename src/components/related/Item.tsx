@@ -19,7 +19,7 @@ function Item( { item } ) {
   }, [ item ])
 
   return (
-    <Card sx={{padding: '10px',margin:'5px', minWidth:'calc(33% - 29px)'}}>
+    <Card sx={{padding: '10px',margin:'5px', minWidth:'calc(25% - 29px)'}}>
       <div className='item-card'>
       <img src={img} style={{width: '100%', height: '150px', objectFit: 'cover'}}/>
       <Typography variant='h8' sx={{color: '#124559'}}> { item.category } </Typography>

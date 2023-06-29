@@ -26,6 +26,10 @@ function Slider({ children }) {
   useEffect(() => {
     onScroll();
   }, []);
+  useEffect(() => {
+    onScroll();
+  }, [children]);
+
   return (
     <div className="slider-container">
       <Stack direction='row'>
