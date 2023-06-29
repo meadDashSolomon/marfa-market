@@ -7,7 +7,10 @@ import Reviews from "./Reviews"
 import { useEffect, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { Divider, Typography } from "@mui/joy";
+import RequestHandler from "./RequestHandler";
 
+export default function RatingsAndReviews({ itemId }) {
+    console.log(itemId)
 export default function RatingsAndReviews() {
   const endpoint = "http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe"
 
@@ -16,21 +19,20 @@ export default function RatingsAndReviews() {
     }
 
     const reviewParams = {
-      params: {
-        "page": 1,
-        "count": 10,
-        "sort": "relevant",
-        "product_id": 37406
-      },
-      headers
+      "page": 1,
+      "count": 10,
+      "sort": "relevant",
+      "product_id": itemId
+    }
+    const metaParams = {
+        "product_id": itemId
     }
 
-
     const fetchReviews = (reviewParams) => {
-      axios.get(endpoint + "/reviews", reviewParams)
+      RequestHandler("GET", '/reviews', reviewParams)
       .then((response) => {
-        setAllReviews(response["data"]["results"]);
-        setShownReviews(response["data"]["results"]);
+        setAllReviews(response.data.results);
+        setShownReviews(response.data.results);
       })
       .catch((err) => console.log("There was an error: ", err))
     };
@@ -50,36 +52,42 @@ export default function RatingsAndReviews() {
     }
 
     useEffect(() => {
-      fetchReviews(reviewParams);
+      if(itemId) {
+        fetchReviews(reviewParams)
+      }
     }, []);
 
+
     useEffect(() => {
-      fetchMetaData(metaParams);
+      if(itemId) {
+        RequestHandler("GET", '/reviews/meta', metaParams)
+        .then((response) => setProductRatings(response.data))
+        .catch((err) => console.log(err));
+      }
     }, []);
 
     const [allReviews, setAllReviews] = useState([]);
     const [shownReviews, setShownReviews] = useState([]);
     const [productRatings, setProductRatings] = useState({});
+    const [productId, setProductId] = useState(37423);
 
     useState(() => {
-      console.log('hello')
       setShownReviews(allReviews)
     }, [])
 
-    if (allReviews.length < 1 && shownReviews.length < 1) {
-      console.log('hello')
+    if (allReviews.length < 1 && shownReviews.length < 1 && !itemId) {
       return (
         <div>Loading</div> // replace with loading symbol
-      )
-    }
+        )
+      }
 
-    return (
-      <Box sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        width: "auto",
-        mx: "80px"}}>
+      return (
+        <Box sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "auto",
+          mx: "80px"}}>
       <Typography level="h3"sx={{
         display: "flex",
         marginBottom: "7px"
@@ -97,7 +105,7 @@ export default function RatingsAndReviews() {
           alignItems="start"
           spacing="50px">
             <Ratings allReviews={allReviews} setShownReviews={setShownReviews} productRatings={productRatings}/>
-            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams}/>
+            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams} productRatings={productRatings}/>
           </Stack>
       </Box>
   );

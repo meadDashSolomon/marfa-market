@@ -26,12 +26,22 @@ const App = () => {
     })
   }, [])
 // console.log(currentItem)
+
+  if(Object.keys(currentItem).length < 1) {
+    return (
+      // could use a loading spinner
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
   return (
     <div>
       <Overview/>
       <Related/>
       <Questions itemId={currentItem.id}/>
-      <RatingsAndReviews/>
+      <RatingsAndReviews itemId={currentItem.id}/>
     </div>
   );
 };
