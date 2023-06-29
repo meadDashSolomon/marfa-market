@@ -1,0 +1,31 @@
+// // import { Form}
+
+// const InputFields = () => {
+//   return (
+//     <div><
+//   )
+// }
+
+// <Stack direction='row' spacing='30px'>
+//                   <FormControl required={true}>
+//                     <FormLabel>Name: </FormLabel>
+//                     <TextField size='small' multiline={true} onChange={(e) => console.log(e.target.value)}/>
+//                   </FormControl>
+//                   <FormControl required='true' sx={{
+//                     flexGrow: 1
+//                   }}>
+//                     <FormLabel>Email: </FormLabel>
+//                     <TextField size='small' multiline={true} onChange={(e) => console.log(e.target.value)}/>
+//                   </FormControl>
+//                 </Stack>
+//                 <FormControl sx={{ marginY: '10px' }}>
+//                   <FormLabel>Summary:</FormLabel>
+//                   <TextField size='small' multiline={true} onChange={(e) => console.log(e.target.value)}/>
+//                 </FormControl>
+//                 <FormControl required='true'>
+//                   <FormLabel>Product Review: </FormLabel>
+//                   <TextField rows='6'size='small' multiline={true}
+//                   onChange={(e) => console.log(e.target.value)}/>
+//                 </FormControl>
+
+export default InputFields;

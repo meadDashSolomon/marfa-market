@@ -8,7 +8,9 @@ import { format } from "date-fns";
 
 const Review = ({ review }) => {
   return (
-    <Box>
+    <Box sx={{
+      flex: "1"
+    }}>
       <Card variant="outlined" sx={{
         boxShadow: "1px 1px 6px #e8e4e4"
       }}>
@@ -16,7 +18,7 @@ const Review = ({ review }) => {
           display: "flex",
           flexDirection: "column",
           minWidth: "400px",
-          maxWidth: "650px"
+          maxWidth: "700px"
       }}>
             <Stack
             direction="row"
