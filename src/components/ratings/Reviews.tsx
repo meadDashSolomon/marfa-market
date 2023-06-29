@@ -1,15 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { useState, useEffect } from "react";
-import ReviewsList from "./ReviewsList";
-import AddMoreReviewsButton from "./AddMoreReviewsButton";
-import MoreReviewsButton from "./MoreReviewsButton";
-import NewReview from "./NewReview";
-import { Box, FormControl, MenuItem, Select } from "@mui/material"
-import { Typography } from "@mui/joy";
+import { useState, useEffect } from 'react';
+import ReviewsList from './ReviewsList';
+import AddMoreReviewsButton from './AddMoreReviewsButton';
+import MoreReviewsButton from './MoreReviewsButton';
+import NewReview from './AddReview/NewReview';
+import { Box, FormControl, MenuItem, Select } from '@mui/material'
+import { Typography } from '@mui/joy';
+import RequestHandler from './RequestHandler';
 
-const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
+const Reviews = ({allReviews, reviewParams, productRatings, fetchReviews}) => {
   const [numReviews, setNumReviews] = useState(2);
   const [displayedReviews, setDisplayedReviews] = useState([]);
   const [isWriting, setIsWriting] = useState(false);
@@ -20,7 +21,7 @@ const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
   }
 
   useEffect(() => {
-    reviewParams['params']['sort'] = sort;
+    reviewParams.sort = sort;
     fetchReviews(reviewParams)
   }, [sort])
 
@@ -37,24 +38,25 @@ const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
   }, [allReviews, numReviews])
 
   return (
-    // {isWriting ? display modal}
     <Box sx={{
+      flexBasis: '685px',
+      flexShrink: 1,
       flexGrow: 0
     }}>
-      <Typography level="body1" sx={{ display: "inline"}}>{allReviews.length} reviews, sorted by </Typography>
-      <FormControl sx={{ minWidth: 100 }} size="small">
+      <Typography level='body1' sx={{ display: 'inline' }}>{allReviews.length} reviews, sorted by </Typography>
+      <FormControl sx={{ minWidth: 100 }} size='small'>
         <Select
-        variant="standard"
+        variant='standard'
         onChange={handleSortChange}
         value={sort}
-        label="">
+        label=''>
           <MenuItem value={'relevant'}>relevance</MenuItem>
           <MenuItem value={'newest'}>newest</MenuItem>
           <MenuItem value={'helpfulness'}>helpfulness</MenuItem>
         </Select>
       </FormControl>
       <Box>
-        {isWriting ? <NewReview isWriting={isWriting} setIsWriting={setIsWriting}/> : null}
+        {isWriting ? <NewReview isWriting={isWriting} setIsWriting={setIsWriting} productRatings={productRatings}/> : null}
       </Box>
       <Box>
         <ReviewsList reviews={displayedReviews}/>
@@ -62,7 +64,7 @@ const Reviews = ({allReviews, fetchReviews, reviewParams}) => {
       <Box sx={{
         display: 'flex',
         gap: '10px',
-        marginTop: "10px"
+        marginTop: '10px'
       }}>
         <AddMoreReviewsButton setIsWriting={setIsWriting}/>
         {displayedReviews.length !== allReviews.length ? <MoreReviewsButton setNumReviews={setNumReviews}/> : null}
