@@ -45,20 +45,24 @@ const Overview = ({
 
   return (
     <div className="container">
-      <ImgGallery selectedStyle={selectedStyle} />
-      <div className="topRightContainer">
-        <ProductInfo itemArray={itemArray} selectedStyle={selectedStyle} />
-        <StyleSelector
-          currentItem={currentItem}
-          selectedStyle={selectedStyle}
-          setSelectedStyle={setSelectedStyle}
-        />
-        <AddToCart skus={selectedStyle.skus} />
+      <div className="topContainer">
+        <ImgGallery selectedStyle={selectedStyle} />
+        <div className="topRightContainer">
+          <ProductInfo itemArray={itemArray} selectedStyle={selectedStyle} />
+          <StyleSelector
+            currentItem={currentItem}
+            selectedStyle={selectedStyle}
+            setSelectedStyle={setSelectedStyle}
+          />
+          <AddToCart skus={selectedStyle.skus} />
+        </div>
       </div>
-      <ProductOverview
-        slogan={currentItem.slogan}
-        description={currentItem.description}
-      />
+      <div className="bottomContainer">
+        <ProductOverview
+          slogan={currentItem.slogan}
+          description={currentItem.description}
+        />
+      </div>
     </div>
   );
 };

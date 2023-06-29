@@ -10,6 +10,7 @@ const ImgGallery = ({ selectedStyle }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleThumbnailClick = (url, index) => {
     setMainPicURL(url);
@@ -46,6 +47,7 @@ const ImgGallery = ({ selectedStyle }) => {
 
   const handleFullscreenClick = () => {
     setIsFullscreen(!isFullscreen);
+    setIsExpanded(!isExpanded);
 
     const leftArrow = document.querySelector('.mainPicArrowLeft');
     const rightArrow = document.querySelector('.mainPicArrowRight');
@@ -81,22 +83,20 @@ const ImgGallery = ({ selectedStyle }) => {
                             style={{ position: 'absolute', top: '10px', right: '100px', color: 'white', zIndex: '2', }}
                             onClick={handleFullscreenClick} />
           </div>
-          {!isFullscreen && (
-            <div className="thumbnails">
-              {itemStylePhotos.map((photo, index) => {
-                return (
-                  <img
-                    className={`thumbnail ${index === highlightedThumbnail ? 'selectedThumbnail' : ''}`}
-                    key={index}
-                    src={photo.thumbnail_url}
-                    alt={`Thumbnail ${index + 1}`}
-                    onClick={() => handleThumbnailClick(photo.url, index)}
-                  />
-                )
-              })}
-              <KeyboardArrowDownIcon className='thumbnailDownArrow' />
-            </div>
-          )}
+          <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
+            {itemStylePhotos.map((photo, index) => {
+              return (
+                <img
+                  className={`thumbnail ${index === highlightedThumbnail ? 'selectedThumbnail' : ''} ${isExpanded ? 'smallIcon' : ''} ${index === selectedImageIndex && isExpanded ? 'selectedIconExpanded' : ''}`}
+                  key={index}
+                  src={photo.thumbnail_url}
+                  alt={`Thumbnail ${index + 1}`}
+                  onClick={() => handleThumbnailClick(photo.url, index)}
+                />
+              )
+            })}
+            <KeyboardArrowDownIcon className='thumbnailDownArrow' />
+          </div>
           <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
           <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
         </>
