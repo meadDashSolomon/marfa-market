@@ -21,8 +21,9 @@
   .imgContainer {
     position: relative;
     width: 100%;
-    padding-bottom: 100%; /* This sets the aspect ratio */
+    padding-bottom: 1100px;
     grid-area: 1 / 1 / 2 / 2;
+    padding-right: 15px;
   }
 
   .mainPicWrapper {
