@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     axios.get(endpoint + 'products', config)
-    .then((results) => setCurrentItem(results.data[0]))
+    .then((results) => setCurrentItem(results.data[2]))
     .catch((err) => console.log(err))
   }, [])
 

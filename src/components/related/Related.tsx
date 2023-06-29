@@ -11,7 +11,6 @@ export default function Related({ current }) {
   useEffect(() => {
     if (current !== undefined) {
       if (current.id !== undefined) {
-        console.log('CURRENT', current);
         Request.getRelated( current.id ).then((res) => {
           setRelated(res.data);
         });
@@ -20,10 +19,8 @@ export default function Related({ current }) {
   }, [current])
 
   useEffect(() => {
-    console.log('RELATED CALLED');
     const promises = [];
     for (let i = 0; i < related.length; i++) {
-      console.log('RELATED', related);
       promises.push(Request.getById(related[i]))
       // .then((res) => {
       //   items.current.push(res.data);
@@ -34,7 +31,6 @@ export default function Related({ current }) {
       const data = res.map((data) => {
         return data.data;
       })
-      console.log('ALL DATA', data);
       setItems(data);
     })
   }, [related]);
@@ -44,9 +40,9 @@ export default function Related({ current }) {
       <Stack sx={{ height: '100%' }}
         justifyContent="center"
         alignItems="center">
-        <ItemScroller title={'RELATED PRODUCTS'} items={items}/>
+        <ItemScroller current={current} type={1} title={'RELATED PRODUCTS'} items={items}/>
         <br/>
-        <ItemScroller title={'YOUR OUTFIT'} items={items}/>
+        <ItemScroller current={current} type={2} title={'YOUR OUTFIT'} items={items}/>
       </Stack>
     </div>
   );
