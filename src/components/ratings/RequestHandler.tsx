@@ -9,7 +9,7 @@ const RequestHandler = (method, path = '', params = {}) => {
     'url': `http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe${path}`,
     'params': params,
     'headers': {
-      "Authorization": import.meta.env.VITE_API_KEY
+      "Authorization": import.meta.env.VITE_AUTH_TOKEN
     }
   })
 }
