@@ -11,7 +11,7 @@ const App = () => {
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
     headers: {
-      Authorization: import.meta.env.VITE_API_KEY
+      Authorization: import.meta.env.VITE_AUTH_TOKEN
     }
   }
 
@@ -25,12 +25,22 @@ const App = () => {
     })
   }, [])
 // console.log(currentItem)
+
+  if(Object.keys(currentItem).length < 1) {
+    return (
+      // could use a loading spinner
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
   return (
     <div>
       <Overview/>
       <Related/>
       <Questions itemId={currentItem.id}/>
-      <RatingsAndReviews/>
+      <RatingsAndReviews itemId={currentItem.id}/>
     </div>
   );
 };

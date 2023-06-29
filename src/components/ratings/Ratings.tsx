@@ -8,11 +8,10 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 const Ratings = ({setShownReviews, allReviews, productRatings}) => {
   // console.log(productRatings)
   const [averageRating, setAverageRating] = useState(0);
-  const [currentRating, setCurrentRating] = useState(0);
   const [selectedRatings, setSelectedRatings] = useState([])
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const [availableRatings, setAvailableRatings] = useState([5, 4, 3, 2, 1]);
+  const [availableRatings] = useState([5, 4, 3, 2, 1]);
 
   useEffect(() => {
     if(Object.keys(productRatings).length !== 0) {

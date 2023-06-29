@@ -9,16 +9,16 @@ import { Box, Stack } from "@mui/material";
 import { Divider, Typography } from "@mui/joy";
 import RequestHandler from "./RequestHandler";
 
-export default function RatingsAndReviews() {
-
+export default function RatingsAndReviews({ itemId }) {
+    console.log(itemId)
     const reviewParams = {
       "page": 1,
       "count": 10,
       "sort": "relevant",
-      "product_id": 37423
+      "product_id": itemId
     }
     const metaParams = {
-        "product_id": 37423
+        "product_id": itemId
     }
 
     const fetchReviews = (reviewParams) => {
@@ -31,14 +31,18 @@ export default function RatingsAndReviews() {
     }
 
     useEffect(() => {
-      fetchReviews(reviewParams)
+      if(itemId) {
+        fetchReviews(reviewParams)
+      }
     }, []);
 
 
     useEffect(() => {
-      RequestHandler("GET", '/reviews/meta', metaParams)
-      .then((response) => setProductRatings(response.data))
-      .catch((err) => console.log(err));
+      if(itemId) {
+        RequestHandler("GET", '/reviews/meta', metaParams)
+        .then((response) => setProductRatings(response.data))
+        .catch((err) => console.log(err));
+      }
     }, []);
 
     const [allReviews, setAllReviews] = useState([]);
@@ -50,7 +54,7 @@ export default function RatingsAndReviews() {
       setShownReviews(allReviews)
     }, [])
 
-    if (allReviews.length < 1 && shownReviews.length < 1) {
+    if (allReviews.length < 1 && shownReviews.length < 1 && !itemId) {
       return (
         <div>Loading</div> // replace with loading symbol
         )
