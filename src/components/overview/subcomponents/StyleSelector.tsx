@@ -26,7 +26,6 @@ const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
 
   useEffect(() => {
     let id = currentItem.id;
-    console.log("iddddddd", id);
     if (id !== 0) {
       axios
         .get(
@@ -38,7 +37,6 @@ const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
           }
         )
         .then((response) => {
-          console.log("RES DATA????????????:::::", response.data);
           setStyles(response.data.results);
           setSelectedStyle(response.data.results[0]);
         })

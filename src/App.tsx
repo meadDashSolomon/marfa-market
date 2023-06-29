@@ -53,6 +53,15 @@ const App = () => {
     // console.log("CURRENT ITEM::::", currentItem);
   }, [currentItem])
 
+  if(Object.keys(currentItem).length < 1) {
+    return (
+      // could use a loading spinner
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
   return (
     <div>
       <Overview
@@ -65,7 +74,7 @@ const App = () => {
       />
       <Related setItem={setCurrentItem} />
       <Questions itemId={currentItem.id} />
-      <RatingsAndReviews />
+      <RatingsAndReviews itemId={currentItem.id}/>
     </div>
   );
 };

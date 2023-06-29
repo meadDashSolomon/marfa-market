@@ -1,15 +1,22 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { useState } from "react";
-const ReviewsList = ({ displayedReviews }) => {
+import { Box } from '@mui/material'
+import Review from "./Review";
+
+const ReviewsList = ({ reviews }) => {
   // Display 2 reviews initially
   return (
-    <div>
-      ReviewsList
-      {/* {reviews.map((review, index) => {
-        <Review key={index} review={review}/>
-      })} */}
-    </div>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+      height: "auto",
+      overflowY: 'auto'
+    }}>
+      {reviews.map((review, index) => <Review key={index} review={review}/>
+      )}
+    </Box>
   )
 }
 

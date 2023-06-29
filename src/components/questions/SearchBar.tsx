@@ -1,9 +1,24 @@
-export default function SearchBar() {
+import { Box } from "@mui/material";
+import { useState } from "react";
+type SearchBarProps = {
+  questions: object;
+}
+
+export default function SearchBar(props:SearchBarProps) {
+  // console.log(props);
+  // if (){
+
+  // }
     return (
-        <div>
+        <Box className = {'Questions SearchBar'}>
       {/* inputbox and search button */}
-        <input type='text' placeholder="Have a question? Search for answers…"/>
+        <input 
+        className="Questions Searchbar input"
+        type='text'
+        placeholder="Have a question? Search for answers…"
+        
+        />
         <button type="submit" >Submit</button>
-      </div>
+      </Box>
     )
 }

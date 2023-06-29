@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import { Box, Button } from "@mui/material";
 
 const AddMoreReviewsButton = ({ setIsWriting }) => {
 
@@ -6,9 +8,14 @@ const AddMoreReviewsButton = ({ setIsWriting }) => {
     setIsWriting(true);
   }
   return (
-    <div>
-      <button onClick={handleClick}>Add A Review</button>
-    </div>
+    <Box>
+      <Button onClick={handleClick}
+      variant="outlined"
+      sx={{
+        color: "#525252",
+        borderColor: "#e8e4e4"
+      }}>Add A Review</Button>
+    </Box>
   )
 }
 
