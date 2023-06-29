@@ -1,6 +1,7 @@
 import { Card } from "@mui/material";
 import AnswerList from "../answerComponents/AnswerList";
 import { format } from "date-fns"
+import { Typography } from "@mui/joy";
 
 type QuestionListEntryProps = {
     key:number,
@@ -20,8 +21,8 @@ export default function QuestionListEntry(props:QuestionListEntryProps) {
     
 
     return (
-        <Card className = 'Questions QuestionListEntry'>
-            <h5><strong>Q:</strong>{props.question.question_body}</h5>
+        <Card className = "Questions QuestionList QuestionListEntry">
+            <Typography level="h4"><strong>Q:</strong>{props.question.question_body}</Typography>
             <small>{format(new Date(props.question.question_date),"PPP")}</small>
             <p>Helpful?<a onClick={(e)=> {
                 console.log(e);

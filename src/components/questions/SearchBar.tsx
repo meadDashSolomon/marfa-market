@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, IconButton, TextField } from "@mui/material";
 
 type SearchBarProps = {
   setQuestionSort: any;
@@ -17,7 +17,7 @@ export default function SearchBar(props:SearchBarProps) {
     return (
         <Box className = {'Questions SearchBar'}>
         <TextField
-          className="Question Searchbar"
+          className="Question Searchbar Bar"
           type={"search"}
           id="QuestionSearchBar"
           defaultValue={props.searchQuery}
@@ -27,8 +27,7 @@ export default function SearchBar(props:SearchBarProps) {
             searchFunc(e.target.value);
           }}
         />
-
-        <Button type="submit" >Submit</Button>
+        <IconButton type="button" sx={{ p: '10px' }} aria-label="search"></IconButton>
       </Box>
     )
 }

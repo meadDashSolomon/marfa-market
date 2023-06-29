@@ -1,3 +1,4 @@
+import { Button, Card } from "@mui/joy";
 import AnswerListEntry from "./AnswerListEntry";
 
 type AnswerListProps = {
@@ -12,15 +13,14 @@ export default function AnswerList(props:AnswerListProps) {
             return (
             <AnswerListEntry
                 key = {Number(answer)}
-                answer = {props.answers[Number(answer)]}
+                answer = {props.answers[answer]}
             />)
         })
     }
     return (
-        <div>
-            {/* to map */}
-            <div>{mappingAnswers()}</div>
-            <a>LOAD MORE ANSWERS</a>
-        </div>
+        <Card className = "Questions AnswerList">
+            <Card>{mappingAnswers()}</Card>
+            <Button>LOAD MORE ANSWERS</Button>
+        </Card>
     )
 }

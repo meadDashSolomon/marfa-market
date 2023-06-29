@@ -1,5 +1,5 @@
-import { CardContent, Modal, Typography } from "@mui/joy";
-import { TextField, Box, Card, Fade, FormControl, FormLabel, Button } from "@mui/material";
+import { CardContent, Typography, Divider } from "@mui/joy";
+import { TextField, Box, Card, Fade, FormControl, FormLabel, Button, Modal } from "@mui/material";
 // import {useState} from "react"
 // import axios from "axios";
 
@@ -10,17 +10,27 @@ type QuestionModalProps = {
 
 export default function QuestionModal (props:QuestionModalProps) {
 
+    const handleClose = () => {
+        props.setQuestionModal(false);
+    }
     return (
         <Box>
             <Modal
                 className = {'Questions QuestionModal'}
                 open={props.questionModal}
+                onClose={handleClose}
             >
-                {/*in={isOpen}*/ }
-                <Fade>
-                    <Card variant="outlined">
-                        <Typography>Submit your Question</Typography>
+                <Fade in={props.questionModal}>
+                    <Card
+                        variant="outlined"
+                        className="Questions QuestionModal modal"
+                    >
+                        <Typography
+                            level="h2"
+                            fontSize='x1'
+                        >Submit your Question</Typography>
                         <Typography>this will be the subtitle saying what item</Typography>
+                        <Divider inset="none"/>
                         <CardContent>
                             <FormControl>
                                 <FormLabel>Question *</FormLabel>

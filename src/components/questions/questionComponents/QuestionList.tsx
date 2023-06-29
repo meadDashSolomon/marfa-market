@@ -1,7 +1,7 @@
-import { Box, Button } from "@mui/joy"
+import { Box, Button, Stack } from "@mui/joy"
 import QuestionListEntry from "./QuestionListEntry"
 import QuestionModal from "./QuestionModal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 type QuestionListProps = {
     searchQuery:string
     questions: {
@@ -30,23 +30,36 @@ export default function QuestionList(props:QuestionListProps) {
         })//map close
     }
 
-    const AddQuestionButton = () => {
-        console.log(5)
+    const renderQuestionModal = () => {
+        console.log(questionModal);
+        if(questionModal) {
+            return (
+                <QuestionModal
+                questionModal={questionModal}
+                setQuestionModal={setQuestionModal}
+            />
+            );
+        }
     }
+    useEffect(()=> {
+        console.log()
+    },[questionModal])
 
     return (
         <Box className = {'Questions QuestionList'} >
             <>{mappingQuestions()}</>
+            <Stack
+                className = "Questions QuestionsList Buttons"
+                direction={'row'}
+            >
             <Button>MORE ANSWERED QUESTIONS</Button>
             <Button
                 onClick={()=> {
                     setQuestionModal(true);
                 }}
             >ADD A QUESTION +</Button>
-            <QuestionModal
-                questionModal={questionModal}
-                setQuestionModal={setQuestionModal}
-            />
+            </Stack>
+            <>{renderQuestionModal()}</>
         </Box>
     )
 }

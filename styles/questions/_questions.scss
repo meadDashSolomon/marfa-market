@@ -1,51 +1,78 @@
 .Questions{
+    background-color: #f3f3f3;
     display: flex;
     flex-Direction: column;
-    justify-Content: left;
-    background-color: #f3f3f3;
+
+    justify-Content: center;
     color: rgb(0, 0, 0);
-    margin: 1.5%;
+    margin: auto;
+
+    //component dimensions
+    max-width:100lvb;
+    max-height: 95vh;
     &.Header{
-        display: flex;
+        background-color: pink;
         flex-direction: row;
-        margin-left: 50px;
+        justify-content: left;
+        margin-left: 15px;
     }
 
     &.SearchBar {
-        display: flex;
-        flex-direction: row;
-        flex-direction: row;
-        justify-content: center;
         background-color: #e6b3b3;
-        &.input{
-            
+        flex-direction: row;
+        justify-content: left;
+        float: inline-start;
+        width: 100%;
+        &.Bar {
+            background-color: #000000;
         }
     }
     &.QuestionList {
         background-color: aqua;
+        max-height:inherit;
+        width: 95%;
         border: 5px;
+        &.Buttons {
+            display: flex;
+        }
+        &.QuestionListEntry {
+            width: 100%;
+            background-color: rgb(214, 119, 255);
+            border: 5px solid;
+            display: flex;
+            padding: 1%;
+        }
     }
-    &.QuestionListEntry {
-        display: flex;
-        padding: 5%;
+    &.AnswerList {
+        width: 95%;
+        background-color: indianred;
+    }
+    &.AnswerListEntry {
+        width: 95%;
+        background-color: rgb(171, 252, 171);
     }
 
     &.AnswersModal {
-
-        
+    background-color: rgb(249, 255, 60);        
     }
     &.QuestionModal {
+        justify-content: center;
         color:brown;
+        display: flex;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        // maxHeight: max-content;
-        // maxWidth: 100%;
-        width: 650px;
-        // mx: auto;
-        // transform: translate(-50%, -50%);
-        // p: 2;
-        background-color:#ddcecea1;
+        
+        
+        &.modal {
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            padding: 5%;
+            max-height: 70%;
+            overflow-y: auto;
+            margin: left 35% right 35%;
+            width: 70%;
+        }
+
     }
 }
 
