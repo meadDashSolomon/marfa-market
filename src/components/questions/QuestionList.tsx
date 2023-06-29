@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import QuestionListEntry from "./QuestionListEntry"
 type QuestionListProps = {
     questions: {
@@ -12,10 +13,11 @@ type QuestionListProps = {
 } 
 
 export default function QuestionList(props:QuestionListProps) {
-    console.log(props.questions)
+    // console.log(props.questions)
+
     const mappingQuestions = () => {
-        props.questions.map((question) => {
-            console.log(question)
+        return props.questions.map((question) => {
+            // console.log('THIS IS THE QUESTION THAT IS BEING MAPPED ', question)
             if(!question.reported){
                 return (<QuestionListEntry
                     key = {props.questions.indexOf(question)}
@@ -25,7 +27,7 @@ export default function QuestionList(props:QuestionListProps) {
         })//map close
     }
     return (
-        <div>
+        <Box className = {'Questions QuestionList'} >
             {/* Map this */}
             {/* <QuestionListEntry/> */}
             <>{mappingQuestions()}</>
@@ -35,6 +37,6 @@ export default function QuestionList(props:QuestionListProps) {
             {/* <Modal> */}
                 {/* whatever */}
             {/* </Modal> */}
-      </div>
+        </Box>
     )
 }

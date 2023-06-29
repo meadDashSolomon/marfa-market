@@ -1,4 +1,7 @@
+import { Card } from "@mui/material";
 import AnswerList from "./AnswerList";
+import { format } from "date-fns"
+
 type QuestionListEntryProps = {
     key:number,
     question:{
@@ -12,16 +15,18 @@ type QuestionListEntryProps = {
     }
 }
 export default function QuestionListEntry(props:QuestionListEntryProps) {
-    console.log(props.question.question_id);
+    // console.log(props.question.question_id);
+
+    
+
     return (
-        <div>
-        {/* question and answer feed */}
+        <Card className = 'Questions QuestionListEntry'>
             <h5><strong>Q:</strong>{props.question.question_body}</h5>
-            <small>{props.question.question_date}</small>
+            <small>{format(new Date(props.question.question_date),"PPP")}</small>
             <p>Helpful?<a onClick={(e)=> {
                 console.log(e);
-            }}>YES</a><small>{props.question.question_helpfulness}</small> | <a>Add Answer</a></p>
+            }}>  YES  </a><small>  {props.question.question_helpfulness}  </small> | <a>Add Answer</a></p>
             <AnswerList answers = {props.question.answers}/>
-        </div>
+        </Card>
     )
 }
