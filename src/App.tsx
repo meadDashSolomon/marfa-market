@@ -17,12 +17,8 @@ const App = () => {
 
   useEffect(() => {
     axios.get(endpoint + 'products', config)
-    .then((results) => {
-      setCurrentItem(results.data[0])
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    .then((results) => setCurrentItem(results.data[2]))
+    .catch((err) => console.log(err))
   }, [])
 // console.log(currentItem)
 
@@ -38,7 +34,7 @@ const App = () => {
   return (
     <div>
       <Overview/>
-      <Related/>
+      <Related current={currentItem} setCurrent={setCurrentItem}/>
       <Questions itemId={currentItem.id}/>
       <RatingsAndReviews itemId={currentItem.id}/>
     </div>
