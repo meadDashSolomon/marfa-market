@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div>
       {/* <Overview/> */}
-      <Related current={currentItem}/>
+      <Related current={currentItem} setCurrent={setCurrentItem}/>
       {/* <Questions itemId={currentItem.id}/> */}
       {/* <RatingsAndReviews/> */}
     </div>

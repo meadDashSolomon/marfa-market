@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import ItemScroller from "./ItemScroller";
 import { Stack } from "@mui/material";
 import Request from "./Request";
-export default function Related({ current }) {
+export default function Related({ current, setCurrent }) {
   // const items = useRef([]);
   const [ items, setItems ] = useState([]);
   const [ related, setRelated] = useState([]);
@@ -40,9 +40,9 @@ export default function Related({ current }) {
       <Stack sx={{ height: '100%' }}
         justifyContent="center"
         alignItems="center">
-        <ItemScroller current={current} type={1} title={'RELATED PRODUCTS'} items={items}/>
+        <ItemScroller setCurrent={setCurrent} current={current} type={1} title={'RELATED PRODUCTS'} items={items}/>
         <br/>
-        <ItemScroller current={current} type={2} title={'YOUR OUTFIT'} items={items}/>
+        <ItemScroller setCurrent={setCurrent} current={current} type={2} title={'YOUR OUTFIT'} items={items}/>
       </Stack>
     </div>
   );

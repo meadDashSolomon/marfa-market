@@ -1,12 +1,16 @@
 import { Card, IconButton, Stack, Modal, Typography} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Request from "./Request";
 import { Clear, StarBorder } from "@mui/icons-material";
 
-function Action1({ current, item }) {
+function Action1({ setModal, current, item }) {
   const [open, setOpen] = useState(false);
   const [compare, setCompare] = useState({});
+
+  useEffect(() => {
+    setModal(open);
+  }, [open])
 
   const handleOpen = () => {
     setOpen(true);
@@ -18,7 +22,7 @@ function Action1({ current, item }) {
         features[a.features[i].feature].main = a.features[i].value;
       }
       for (let i = 0; i < item.features.length; i++) {
-        features[item.features[i].feature] = {}
+        features[item.features[i].feature] ||= {}
         features[item.features[i].feature].compare = item.features[i].value;
       }
       setCompare(features);
@@ -74,11 +78,22 @@ function Action1({ current, item }) {
     <IconButton onClick={handleOpen} sx={{ color: 'black', backgroundColor: 'rgba(255,255,20,0.1)', position: 'absolute', right: '2px', top: '2px' }}><StarBorder fontSize='small' /></IconButton>
   </div>);
 }
-function Action2({ current, item }) {
+function Action2({ item, outfit, setOutfit }) {
+
+  const handleClick = () => {
+    let temp: object[] = [];
+    temp = temp.concat(outfit);
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i].id == item.id) {
+        temp.splice(i, 1);
+      }
+    }
+    setOutfit(temp);
+  }
 
   return (
     <div>
-      <IconButton sx={{ color: 'black', backgroundColor: 'rgba(255,255,20,0.1)', position: 'absolute', right: '2px', top: '2px' }}><Clear fontSize='small' /></IconButton>
+      <IconButton onClick={handleClick} sx={{ color: 'black', backgroundColor: 'rgba(255,255,20,0.1)', position: 'absolute', right: '2px', top: '2px' }}><Clear fontSize='small' /></IconButton>
     </div>)
 }
 
