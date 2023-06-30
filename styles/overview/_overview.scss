@@ -46,11 +46,15 @@
     cursor: zoom-in;
   }
 
-  .crosshairCursor:hover {
+  .mainPicExpanded:hover {
     cursor: crosshair;
   }
 
-  .zoomOutCursor:hover {
+  .mainPicZoomed {
+    z-index: 3;
+  }
+
+  .mainPicZoomed:hover {
     cursor: zoom-out;
   }
 

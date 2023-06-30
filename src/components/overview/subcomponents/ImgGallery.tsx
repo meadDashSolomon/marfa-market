@@ -122,7 +122,7 @@ const ImgGallery = ({ selectedStyle }) => {
                  width: isFullscreen ? '100vw' : 'auto',
                  height: isFullscreen ? '100vh' : 'auto',
                }}>
-            <img className={`mainPic ${isExpanded ? 'crosshairCursor' : ''} ${zoomLevel === 2.5 ? 'zoomOutCursor' : ''}`}
+            <img className={`mainPic ${isExpanded ? 'mainPicExpanded' : ''} ${zoomLevel === 2.5 ? 'mainPicZoomed' : ''}`}
                  src={mainPicURL}
                  alt="main picture of currently selected style"
                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
