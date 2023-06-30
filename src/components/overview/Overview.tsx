@@ -48,7 +48,11 @@ const Overview = ({
       <div className="topContainer">
         <ImgGallery selectedStyle={selectedStyle} />
         <div className="topRightContainer">
-          <ProductInfo itemArray={itemArray} selectedStyle={selectedStyle} />
+          <ProductInfo
+            itemArray={itemArray}
+            selectedStyle={selectedStyle}
+            id={currentItem.id}
+          />
           <StyleSelector
             currentItem={currentItem}
             selectedStyle={selectedStyle}

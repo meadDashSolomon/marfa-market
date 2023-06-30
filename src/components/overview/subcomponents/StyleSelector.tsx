@@ -6,7 +6,7 @@ const defaultStyle = {
   results: [
     {
       style_id: 1,
-      name: "Loading . . .",
+      name: "Loading . . . ",
       original_price: "0",
       sale_price: "0",
       "default?": false,
