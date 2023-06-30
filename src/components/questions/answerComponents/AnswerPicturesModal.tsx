@@ -4,6 +4,7 @@ import { Box, Card, Fade, Button } from "@mui/material";
 // import axios from "axios";
 
 type AnswerPicturesModalProps = {
+    setPictures:(value:[])=> void;
     picturesModal: boolean;
     setPictuesModal: (value:boolean) => void;
 }

@@ -1,9 +1,12 @@
 import { CardContent, Typography, Divider } from "@mui/joy";
 import { TextField, Box, Card, Fade, FormControl, FormLabel, Button, Modal } from "@mui/material";
+import axios from "axios";
+import postQuestion from "../requests/postQuestion";
 // import {useState} from "react"
 // import axios from "axios";
 
 type QuestionModalProps = {
+    productId:number;
     questionModal: boolean;
     setQuestionModal:(value:boolean)=> void;
 }
@@ -13,6 +16,14 @@ export default function QuestionModal (props:QuestionModalProps) {
     const handleClose = () => {
         props.setQuestionModal(false);
     }
+
+    // const postRequest = () => {//axios post request
+    //     axios.request(postQuestion())
+    //     .then(response=> {
+    //         console.log(response)
+    //     }).catch(error=> console.log('error in questions post request', error))
+    // }
+
     return (
         <Box>
             <Modal
@@ -44,6 +55,7 @@ export default function QuestionModal (props:QuestionModalProps) {
                             <FormControl>
                                 <FormLabel>Nickname *</FormLabel>
                                 <TextField 
+                                    inputProps={{maxLength:60}}
                                     required={true}
                                     onChange={(e) => {
                                         console.log(e.target.value)
@@ -52,8 +64,10 @@ export default function QuestionModal (props:QuestionModalProps) {
                             </FormControl>
                             <Button
                                 type="submit"
-                                onClick={(e) => {
-                                    console.log(e);
+                                onClick={() => {
+                                    console.log('Question submitted')
+                                    // postRequest();
+                                    props.setQuestionModal(false)
                                 }}
                             >Submit</Button>
                         </CardContent>

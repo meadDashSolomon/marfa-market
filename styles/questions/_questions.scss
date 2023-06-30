@@ -1,15 +1,20 @@
 .Questions{
-    background-color: #f3f3f3;
+    background-color: $color-1;
     display: flex;
     flex-Direction: column;
 
     justify-Content: center;
     color: rgb(0, 0, 0);
     margin: auto;
+    width: 80%;
+    // height: 100lh;
+    height: 80%;
+
+    overflow-y: auto;
 
     //component dimensions
-    max-width:100lvb;
-    max-height: 95vh;
+    max-width: 100%;
+    max-height: 50%;
     &.Header{
         background-color: pink;
         flex-direction: row;
@@ -24,7 +29,7 @@
         float: inline-start;
         width: 100%;
         &.Bar {
-            background-color: #000000;
+            min-width: 80%;
         }
     }
     &.QuestionList {
@@ -32,6 +37,9 @@
         max-height:inherit;
         width: 95%;
         border: 5px;
+        margin: auto;
+        overflow-y: auto;
+
         &.Buttons {
             display: flex;
         }
@@ -53,7 +61,10 @@
     }
 
     &.AnswersModal {
-    background-color: rgb(249, 255, 60);        
+        background-color: rgb(249, 255, 60); 
+        justify-content: center;     
+        display: flex;
+        position: absolute;  
     }
     &.QuestionModal {
         justify-content: center;

@@ -1,4 +1,5 @@
-import { Box, IconButton, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 type SearchBarProps = {
   setQuestionSort: any;
@@ -27,7 +28,7 @@ export default function SearchBar(props:SearchBarProps) {
             searchFunc(e.target.value);
           }}
         />
-        <IconButton type="button" sx={{ p: '10px' }} aria-label="search"></IconButton>
+        <Button variant="outlined" endIcon={<SearchRoundedIcon/>}></Button>
       </Box>
     )
 }

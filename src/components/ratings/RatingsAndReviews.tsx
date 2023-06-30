@@ -10,8 +10,6 @@ import { Divider, Typography } from "@mui/joy";
 import RequestHandler from "./RequestHandler";
 
 export default function RatingsAndReviews({ itemId }) {
-    console.log(itemId)
-export default function RatingsAndReviews() {
   const endpoint = "http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe"
 
   const headers = {
@@ -37,13 +35,7 @@ export default function RatingsAndReviews() {
       .catch((err) => console.log("There was an error: ", err))
     };
 
-    const metaParams = {
-      params: {
-        // "product_id": 37406
-        product_id: 37315
-      },
-      headers
-    }
+
 
     const fetchMetaData = (params) => {
       axios.get(endpoint + "/reviews/meta", params)
@@ -104,8 +96,15 @@ export default function RatingsAndReviews() {
           justifyContent="start"
           alignItems="start"
           spacing="50px">
-            <Ratings allReviews={allReviews} setShownReviews={setShownReviews} productRatings={productRatings}/>
-            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams} productRatings={productRatings}/>
+            <Ratings
+            allReviews={allReviews}
+            setShownReviews={setShownReviews}
+            productRatings={productRatings}/>
+            <Reviews
+            allReviews={shownReviews}
+            fetchReviews={fetchReviews}
+            reviewParams={reviewParams}
+            productRatings={productRatings}/>
           </Stack>
       </Box>
   );
