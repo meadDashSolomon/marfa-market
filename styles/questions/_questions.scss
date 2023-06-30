@@ -29,6 +29,7 @@
         float: inline-start;
         width: 100%;
         &.Bar {
+            background-color: #784747;
             min-width: 80%;
         }
     }
@@ -65,6 +66,16 @@
         justify-content: center;     
         display: flex;
         position: absolute;  
+        &.modal {
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            padding: 5%;
+            max-height: 70%;
+            overflow-y: auto;
+            margin: left 35% right 35%;
+            width: 70%;
+        }
     }
     &.QuestionModal {
         justify-content: center;

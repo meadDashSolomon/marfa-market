@@ -1,9 +1,11 @@
-import { useState, useEffect }  from 'react';
+// import { useState, useEffect }  from 'react';
 import Overview from './components/overview/Overview';
 import Questions from './components/questions/Questions';
 import RatingsAndReviews from './components/ratings/RatingsAndReviews';
 import Related from './components/related/Related';
 import axios from 'axios';
+import { Stack } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 const App = () => {
   const [currentItem, setCurrentItem] = useState<object>({});
@@ -19,7 +21,7 @@ const App = () => {
     axios.get(endpoint + 'products', config)
     .then((results) => {
       setCurrentItem(results.data[0])
-      console.log(results.data)
+      // console.log(results.data)
     })
     .catch((err) => {
       console.log(err)
@@ -37,12 +39,12 @@ const App = () => {
   }
 
   return (
-    <div>
-      <Overview/>
-      <Related/>
+    <Stack>
+      {/* <Overview/> */}
+      {/* <Related/> */}
       <Questions itemId={currentItem.id}/>
-      <RatingsAndReviews itemId={currentItem.id}/>
-    </div>
+      {/* <RatingsAndReviews itemId={currentItem.id}/> */}
+    </Stack>
   );
 };
 

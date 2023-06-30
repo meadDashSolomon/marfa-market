@@ -29,7 +29,7 @@ export default function QuestionList(props:QuestionListProps) {
     const[numQuestions, setNumQuestions] = useState<number>(10); //tracks number of questions
     const getQuestionsFromServer = () => {
                                 //productNum = 37314, page = 1, count = 5
-        axios.request(getQuestions(/*props.itemId*/37311,1,numQuestions))
+        axios.request(getQuestions(/*props.itemId*/37314,1,numQuestions))
         .then((response) => {
           for( const el of response.data.results) {
             if(!listOfQuestions.includes(el)) {

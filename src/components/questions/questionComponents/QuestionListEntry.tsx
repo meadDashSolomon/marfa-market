@@ -4,8 +4,7 @@ import { format } from "date-fns"
 import { Typography } from "@mui/joy";
 import { useEffect, useState } from "react";
 import AnswerModal from "../answerComponents/AnswerModal";
-import axios from "axios";
-import postAnswer from "../requests/postAnswer";
+
 
 type QuestionListEntryProps = {
     searchQuery:string;
@@ -22,15 +21,6 @@ type QuestionListEntryProps = {
 }
 export default function QuestionListEntry(props:QuestionListEntryProps) {
     const[answerModal, setAnswerModal] = useState<boolean>(false);
-
-
-
-
-    
-
-
-
-
 
     let wasHelpfulClicked = false; // for 
     const helpfulPostRequest = () => { // need to finish

@@ -1,5 +1,5 @@
-import { CardContent, Modal, Typography } from "@mui/joy";
 import { TextField, Box, Card, Fade, FormControl, FormLabel, Button, Stack } from "@mui/material";
+import { CardContent, Modal, Typography, Divider } from "@mui/joy";
 import AnswerPicturesModal from "./AnswerPicturesModal";
 import {useState} from "react"
 import axios from "axios";
@@ -72,9 +72,16 @@ export default function AnswerModal (props:AnswerModalProps) {
                 onClose={handleClose}
             >
                 <Fade in={props.answerModal}>
-                    <Card variant="outlined">
-                        <Typography>Submit your Answer</Typography>
+                    <Card
+                        variant="outlined"
+                        className="Questions AnswerModal modal"
+                    >
+                        <Typography
+                            level="h2"
+                            fontSize="x1"
+                        >Submit your Answer</Typography>
                         <Typography>this will be the subtitle saying what item</Typography>
+                        <Divider inset="none"/>
                         <CardContent>
                             <FormControl>
                                 <FormLabel>userName *</FormLabel>
