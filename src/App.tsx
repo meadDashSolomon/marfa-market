@@ -23,10 +23,10 @@ const App = () => {
 
   return (
     <div>
-      {/* <Overview/> */}
+      <Overview/>
       <Related current={currentItem} setCurrent={setCurrentItem}/>
-      {/* <Questions itemId={currentItem.id}/> */}
-      {/* <RatingsAndReviews/> */}
+      <Questions itemId={currentItem.id}/>
+      <RatingsAndReviews/>
     </div>
   );
 };
