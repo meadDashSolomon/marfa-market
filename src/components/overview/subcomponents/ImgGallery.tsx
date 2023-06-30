@@ -142,8 +142,12 @@ const ImgGallery = ({ selectedStyle }) => {
               </>
             )}
           </div>
-          <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
-          <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
+          {selectedImageIndex > 0 && (
+            <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
+          )}
+          {selectedImageIndex < itemStylePhotos.length -1 && (
+            <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
+          )}
         </>
       ) : (
         <p>No photos available.</p>
