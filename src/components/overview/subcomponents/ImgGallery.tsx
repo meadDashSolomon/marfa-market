@@ -8,14 +8,13 @@ const ImgGallery = ({ selectedStyle }) => {
   const [itemStylePhotos, setItemSylePhotos] = useState([{url: ''}]);
   const [mainPicURL, setMainPicURL] = useState("");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [highlightedThumbnail, setHighlightedThumbnail] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [firstImageIndex, setFirstImageIndex] = useState(0);
 
   const handleThumbnailClick = (url, index) => {
     setMainPicURL(url);
     setSelectedImageIndex(index);
-    setHighlightedThumbnail(index);
   }
 
   useEffect(() => {
@@ -31,17 +30,11 @@ const ImgGallery = ({ selectedStyle }) => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
       return (prevSelectedImageIndex + 1) % itemStylePhotos.length;
     });
-    setHighlightedThumbnail((prevHighlightedThumbnail) => {
-      return (prevHighlightedThumbnail + 1) % itemStylePhotos.length;
-    });
   }
 
   const handlePrevClick = () => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
       return (prevSelectedImageIndex - 1 + itemStylePhotos.length) % itemStylePhotos.length;
-    });
-    setHighlightedThumbnail((prevHighlightedThumbnail) => {
-      return (prevHighlightedThumbnail - 1 + itemStylePhotos.length) % itemStylePhotos.length;
     });
   }
 
@@ -58,7 +51,7 @@ const ImgGallery = ({ selectedStyle }) => {
       leftArrow.classList.remove('mainPicArrowLeftFullscreen');
       rightArrow.classList.remove('mainPicArrowRightFullscreen');
     } else {
-      mainPic?.classList.add('mainPicFullscreen')
+      mainPic.classList.add('mainPicFullscreen')
       leftArrow.classList.add('mainPicArrowLeftFullscreen');
       rightArrow.classList.add('mainPicArrowRightFullscreen');
     }
@@ -87,7 +80,7 @@ const ImgGallery = ({ selectedStyle }) => {
             {itemStylePhotos.map((photo, index) => {
               return (
                 <img
-                  className={`thumbnail ${index === highlightedThumbnail ? 'selectedThumbnail' : ''} ${isExpanded ? 'smallIcon' : ''} ${index === selectedImageIndex && isExpanded ? 'selectedIconExpanded' : ''}`}
+                  className={`thumbnail ${index === selectedImageIndex ? 'selectedThumbnail' : ''} ${isExpanded ? 'smallIcon' : ''} ${index === selectedImageIndex && isExpanded ? 'selectedIconExpanded' : ''}`}
                   key={index}
                   src={photo.thumbnail_url}
                   alt={`Thumbnail ${index + 1}`}
