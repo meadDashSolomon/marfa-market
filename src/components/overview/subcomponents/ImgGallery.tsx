@@ -52,10 +52,7 @@ const ImgGallery = ({ selectedStyle }) => {
     });
   }
 
-  const handleFullscreenClick = () => {
-    setIsFullscreen(!isFullscreen);
-    setIsExpanded(!isExpanded);
-
+  const updateArrowKeyClasses = () => {
     const leftArrow = document.querySelector('.mainPicArrowLeft');
     const rightArrow = document.querySelector('.mainPicArrowRight');
     const mainPic = document.querySelector('.mainPic');
@@ -69,6 +66,22 @@ const ImgGallery = ({ selectedStyle }) => {
       leftArrow.classList.add('mainPicArrowLeftFullscreen');
       rightArrow.classList.add('mainPicArrowRightFullscreen');
     }
+  }
+
+  const handleFullscreenClick = () => {
+    setIsFullscreen(!isFullscreen);
+    setIsExpanded(!isExpanded);
+
+    updateArrowKeyClasses();
+  };
+
+  const handleMainPicClick = () => {
+    if (!isFullscreen) {
+      setIsFullscreen(!isFullscreen);
+      setIsExpanded(!isExpanded);
+    }
+
+    updateArrowKeyClasses();
   };
 
   const handleUpClick = () => {
@@ -103,7 +116,9 @@ const ImgGallery = ({ selectedStyle }) => {
             <img className="mainPic"
                  src={mainPicURL}
                  alt="main picture of currently selected style"
-                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}/>
+                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                 onClick={handleMainPicClick}
+                 />
             <FullscreenIcon className='fullscreenIcon'
                             style={{ position: 'absolute', top: '10px', right: '100px', color: 'white', zIndex: '2', }}
                             onClick={handleFullscreenClick} />

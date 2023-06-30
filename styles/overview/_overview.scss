@@ -42,6 +42,10 @@
     object-fit: cover;
   }
 
+  .mainPic:hover {
+    cursor: zoom-in;
+  }
+
   .mainPicFullscreen {
     z-index: 1;
   }
