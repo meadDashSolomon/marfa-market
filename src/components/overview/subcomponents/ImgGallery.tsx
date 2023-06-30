@@ -14,12 +14,7 @@ const ImgGallery = ({ selectedStyle }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   // keep track of first image to limit shown thumbnails to 7
   const [firstImageIndex, setFirstImageIndex] = useState(0);
-
-  const handleThumbnailClick = (url, index) => {
-    setMainPicURL(url);
-    // highlighting and scrolling
-    setSelectedImageIndex(index);
-  }
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   useEffect(() => {
     setItemSylePhotos(selectedStyle.photos);
@@ -79,9 +74,10 @@ const ImgGallery = ({ selectedStyle }) => {
     if (!isFullscreen) {
       setIsFullscreen(!isFullscreen);
       setIsExpanded(!isExpanded);
+      updateArrowKeyClasses();
+    } else {
+      handleZoomClick();
     }
-
-    updateArrowKeyClasses();
   };
 
   const handleUpClick = () => {
@@ -103,6 +99,19 @@ const ImgGallery = ({ selectedStyle }) => {
     });
   };
 
+  const handleThumbnailClick = (url, index) => {
+    setMainPicURL(url);
+    // highlighting and scrolling
+    setSelectedImageIndex(index);
+  }
+
+  const handleZoomClick = () => {
+    if (isExpanded) {
+      // react keyword for previous state
+      setZoomLevel(prevZoomLevel => prevZoomLevel === 1 ? 2.5 : 1);
+    }
+  };
+
 
   return (
     <div className="imgContainer">
@@ -113,10 +122,10 @@ const ImgGallery = ({ selectedStyle }) => {
                  width: isFullscreen ? '100vw' : 'auto',
                  height: isFullscreen ? '100vh' : 'auto',
                }}>
-            <img className="mainPic"
+            <img className={`mainPic ${isExpanded ? 'crosshairCursor' : ''} ${zoomLevel === 2.5 ? 'zoomOutCursor' : ''}`}
                  src={mainPicURL}
                  alt="main picture of currently selected style"
-                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                 style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
                  onClick={handleMainPicClick}
                  />
             <FullscreenIcon className='fullscreenIcon'

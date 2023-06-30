@@ -9,7 +9,7 @@
 
   .topContainer {
     display: flex;
-    margin-bottom: -1000px;
+    margin-bottom: -900px;
   }
 
   .topRightContainer {
@@ -44,6 +44,14 @@
 
   .mainPic:hover {
     cursor: zoom-in;
+  }
+
+  .crosshairCursor:hover {
+    cursor: crosshair;
+  }
+
+  .zoomOutCursor:hover {
+    cursor: zoom-out;
   }
 
   .mainPicFullscreen {
