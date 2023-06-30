@@ -11,10 +11,16 @@ import { Typography } from '@mui/joy';
 import characteristics from './Characteristics';
 import { useState } from 'react'
 
-const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues }) => {
+const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues, setFormData, formData }) => {
 
   const handleChange = (event, char) => {
-    console.log(event.target.value);
+    console.log('this ish th avlues: ', Number(event.target.value))
+    setFormData({
+      ...formData,
+      characteristics: {
+        ...(formData.characteristics || {}),
+        [productRatings.characteristics[char].id]: Number(event.target.value)}
+    })
     setSelectedValues({ ...selectedValues, [productRatings.characteristics[char].id]: Number(event.target.value)});
   };
 
@@ -24,11 +30,9 @@ const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues
     <>
       {Object.keys(productRatings.characteristics).map((char, index) => (
         <Box key={index}>
-          {console.log('what is this', char)}
           <FormLabel>{char}:</FormLabel>
             <RadioGroup
             onChange={(event) => handleChange(event, char)}
-            row={true}
             sx={{
               display: 'flex',
               flexDirection: 'row',

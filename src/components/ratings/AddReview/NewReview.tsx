@@ -3,26 +3,30 @@
 
 // Documentation on Modal: https://mui.com/material-ui/react-modal/
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Fade, Modal, Card, Divider, CardContent, Rating, Button, TextField, Stack, Checkbox, RadioGroup, FormControlLabel } from '@mui/material'
 import { Typography, FormControl, FormLabel, Radio } from '@mui/joy';
 import PhotosModal from './PhotosModal';
 import characteristics from './Characteristics';
 import CharacteristicsList from './CharacteristicsList';
+import RequestHandler from '../RequestHandler';
+import InputFields from './InputFields';
 
-const NewReview = ({setIsWriting, isWriting, productRatings}) => {
+const NewReview = ({ setIsWriting, isWriting, productRatings, itemId, fetchReviews, reviewParams }) => {
 
-  console.log(productRatings)
+  console.log('item id in new review', itemId)
 
   const [selectedValues, setSelectedValues] = useState({})
   const [addingPhotos, setAddingPhotos] = useState(false)
   const [photos, setPhotos] = useState([])
+  const [formData, setFormData] = useState({})
+  const [checked, setChecked] = useState(false)
 
   const handleClose = () => {
     setIsWriting(false);
   }
 
-  console.log('these shoud be the characteristics', productRatings.characteristics)
+  console.log('these shoud be the form data', formData)
 
   const style = {
     position: 'absolute',
@@ -39,11 +43,52 @@ const NewReview = ({setIsWriting, isWriting, productRatings}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // check to see if all valid things are there
-      // if so send data to server
-      // set is writing to false
-    // if not, show error message to user
+    axios.post(`http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews`, formData, {
+      headers: {
+        "Authorization": import.meta.env.VITE_AUTH_TOKEN,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      fetchReviews(reviewParams);
+      setIsWriting(false);
+    })
+    .catch((error) => {
+      console.error('There was an error:', error.response.data);
+    })
   }
+
+
+  const handleFormChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
+    console.log(event.target.name)
+    console.log(event.target.value)
+    console.log(formData)
+  }
+
+  const handleRatingChange = (event, newValue) => {
+    setFormData({
+      ...formData,
+      rating: newValue
+    })
+  }
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      recommend: checked
+    })
+  }, [checked])
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      product_id: itemId
+    })
+  }, [])
 
   return (
     <Box>
@@ -56,9 +101,7 @@ const NewReview = ({setIsWriting, isWriting, productRatings}) => {
               <Typography
               level='h2'
               fontSize='xl'
-              sx={{
-                marginBottom: '8px'
-              }}
+              sx={{ marginBottom: '8px' }}
               >Write Your Review</Typography>
               <Divider inset='none'/>
               <CardContent>
@@ -69,44 +112,33 @@ const NewReview = ({setIsWriting, isWriting, productRatings}) => {
                   marginBottom: '5px'
                 }}>Overall Rating: *</Typography>
                 <Rating
+                onChange={(handleRatingChange)}
                 sx={{
                   fontSize: '25px',
                   color: '#525252'
                 }}></Rating>
                 <Typography level='body3' textColor='#25252D'>Click to rate</Typography>
                 <Divider sx={{ marginY: '10px' }}/>
-                <Stack direction='row' spacing='30px'>
-                  <FormControl required={true}>
-                    <FormLabel>Name: </FormLabel>
-                    <TextField size='small' multiline={true} onChange={(e) => console.log(e.target.value)}/>
-                  </FormControl>
-                  <FormControl required='true' sx={{
-                    flexGrow: 1
-                  }}>
-                    <FormLabel>Email: </FormLabel>
-                    <TextField size='small' multiline={true} onChange={(e) => console.log(e.target.value)}/>
-                  </FormControl>
+                {/* { name, required, multiline, styles, handleFormChange, rows } */}
+                <Stack direction="row" sx={{ marginY: '10px'}} spacing="30px">
+                  <InputFields name={"Name"} multiline={true} styles={{ flexGrow: 1 }} handleFormChange={handleFormChange}/>
+                  <InputFields name={"Email"} multiline={true} styles={{ flexGrow: 2 }} handleFormChange={handleFormChange}/>
                 </Stack>
-                <FormControl sx={{ marginY: '10px' }}>
-                  <FormLabel>Summary:</FormLabel>
-                  <TextField size='small' multiline={true} onChange={(e) => console.log(e.target.value)}/>
-                </FormControl>
-                <FormControl required='true'>
-                  <FormLabel>Product Review: </FormLabel>
-                  <TextField rows='6'size='small' multiline={true}
-                  onChange={(e) => console.log(e.target.value)}/>
-                </FormControl>
-                <CharacteristicsList productRatings={productRatings} selectedValues={selectedValues} setSelectedValues={setSelectedValues}/>
+                <InputFields name={"Summary"} multiline={true} styles={{ marginY: '10px' }} handleFormChange={handleFormChange}/>
+                <InputFields name={"Product Review"} multiline={true} rows={6} styles={{ marginY: '10px' }} handleFormChange={handleFormChange}/>
+                <CharacteristicsList productRatings={productRatings} selectedValues={selectedValues} setSelectedValues={setSelectedValues} formData={formData} setFormData={setFormData}/>
                 <Stack direction='row' alignItems='center' marginTop='8px'>
-                  <Checkbox/>
+                  <Checkbox checked={checked} onChange={() => setChecked(!checked)}/>
                   <Typography> Do you recommend this product? *</Typography>
                 </Stack>
                 <Stack direction='row' spacing='20px' overflow='auto'>
-                {photos.length > 0 ? photos.map((url) => {
+                {formData.photos && formData.photos.length > 0 ?
+                  formData.photos.map((url, index) => {
                     return (
-                      <Box
-                      component='img'
-                      sx={{
+                      <Box component='img' key={index} sx={{
+                        border: '1px solid grey',
+                        borderRadius: '10px',
+                        boxShadow: "0px 1px 6px #e0e0e0",
                         display: 'flex',
                         flexDirection: 'row',
                         height: 100,
@@ -123,7 +155,7 @@ const NewReview = ({setIsWriting, isWriting, productRatings}) => {
                   marginTop: '12px'
                   }}>Add Photo</Button>
                   <Box>
-                    {addingPhotos ? <PhotosModal isWriting={isWriting} setAddingPhotos={setAddingPhotos} style={style} addingPhotos={addingPhotos} setPhotos={setPhotos}/> : null}
+                    {addingPhotos ? <PhotosModal setFormData={setFormData} formData={formData} isWriting={isWriting} setAddingPhotos={setAddingPhotos} style={style} addingPhotos={addingPhotos} setPhotos={setPhotos}/> : null}
                   </Box>
                   <Stack direction="row" spacing={3}
                   sx={{

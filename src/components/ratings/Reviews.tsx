@@ -10,7 +10,7 @@ import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import { Typography } from '@mui/joy';
 import RequestHandler from './RequestHandler';
 
-const Reviews = ({allReviews, reviewParams, productRatings, fetchReviews}) => {
+const Reviews = ({allReviews, reviewParams, productRatings, fetchReviews, itemId}) => {
   const [numReviews, setNumReviews] = useState(2);
   const [displayedReviews, setDisplayedReviews] = useState([]);
   const [isWriting, setIsWriting] = useState(false);
@@ -56,7 +56,7 @@ const Reviews = ({allReviews, reviewParams, productRatings, fetchReviews}) => {
         </Select>
       </FormControl>
       <Box>
-        {isWriting ? <NewReview isWriting={isWriting} setIsWriting={setIsWriting} productRatings={productRatings}/> : null}
+        {isWriting ? <NewReview reviewParams={reviewParams} fetchReviews={fetchReviews} itemId={itemId} isWriting={isWriting} setIsWriting={setIsWriting} productRatings={productRatings}/> : null}
       </Box>
       <Box>
         <ReviewsList reviews={displayedReviews}/>
