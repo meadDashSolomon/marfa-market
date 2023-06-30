@@ -1,19 +1,23 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import { useState, useEffect } from 'react';
 
 const ImgGallery = ({ selectedStyle }) => {
   const [itemStylePhotos, setItemSylePhotos] = useState([{url: ''}]);
   const [mainPicURL, setMainPicURL] = useState("");
+  // keep track of which image is selected for scrolling and highlighting
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  // keep track of first image to limit shown thumbnails to 7
   const [firstImageIndex, setFirstImageIndex] = useState(0);
 
   const handleThumbnailClick = (url, index) => {
     setMainPicURL(url);
+    // highlighting and scrolling
     setSelectedImageIndex(index);
   }
 
@@ -28,13 +32,23 @@ const ImgGallery = ({ selectedStyle }) => {
 
   const handleNextClick = () => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
-      return (prevSelectedImageIndex + 1) % itemStylePhotos.length;
+      const newIndex = (prevSelectedImageIndex + 1) % itemStylePhotos.length;
+      // if the next image is not visible, scroll thumbnails
+      if (newIndex >= firstImageIndex + 7) {
+        setFirstImageIndex(firstImageIndex + 1);
+      }
+      return newIndex;
     });
   }
 
   const handlePrevClick = () => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
-      return (prevSelectedImageIndex - 1 + itemStylePhotos.length) % itemStylePhotos.length;
+      const newIndex = (prevSelectedImageIndex - 1 + itemStylePhotos.length) % itemStylePhotos.length;
+      // if next image is not visible, scroll thumbnails
+      if (newIndex < firstImageIndex) {
+        setFirstImageIndex(firstImageIndex + 1);
+      }
+      return newIndex;
     });
   }
 
@@ -57,6 +71,24 @@ const ImgGallery = ({ selectedStyle }) => {
     }
   };
 
+  const handleUpClick = () => {
+    setFirstImageIndex((prevFirstImageIndex) => {
+      if (prevFirstImageIndex <= 0) {
+        return 0;
+      }
+      return prevFirstImageIndex -1;
+    });
+  };
+
+  const handleDownClick = () => {
+    setFirstImageIndex((prevFirstImageIndex) => {
+      // don't scroll visible thumnails beyond 7 less than number of thumbnails
+      if (prevFirstImageIndex >= itemStylePhotos.length - 7) {
+        return prevFirstImageIndex;
+      }
+      return prevFirstImageIndex + 1;
+    });
+  };
 
 
   return (
@@ -77,10 +109,26 @@ const ImgGallery = ({ selectedStyle }) => {
                             onClick={handleFullscreenClick} />
           </div>
           <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
-            {itemStylePhotos.map((photo, index) => {
+            {itemStylePhotos.length > 7 && (
+              <>
+                <KeyboardArrowUpIcon className='thumbnailUpArrow' onClick={handleUpClick} />
+              </>
+            )}
+            {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
               return (
                 <img
-                  className={`thumbnail ${index === selectedImageIndex ? 'selectedThumbnail' : ''} ${isExpanded ? 'smallIcon' : ''} ${index === selectedImageIndex && isExpanded ? 'selectedIconExpanded' : ''}`}
+                  className={
+                    // its a thumbnail
+                    // is it the selected thumbnail?
+                    // is the mainPic expanded?
+                    // is the small thumbnail selected?
+                    `thumbnail
+                    ${index + firstImageIndex === selectedImageIndex ?
+                       'selectedThumbnail' : ''}
+                     ${isExpanded ?
+                       'smallIcon' : ''}
+                     ${index === selectedImageIndex && isExpanded ?
+                       'selectedIconExpanded' : ''}`}
                   key={index}
                   src={photo.thumbnail_url}
                   alt={`Thumbnail ${index + 1}`}
@@ -88,7 +136,11 @@ const ImgGallery = ({ selectedStyle }) => {
                 />
               )
             })}
-            <KeyboardArrowDownIcon className='thumbnailDownArrow' />
+            {itemStylePhotos.length > 7 && (
+              <>
+                <KeyboardArrowDownIcon className='thumbnailDownArrow' onClick={handleDownClick}/>
+              </>
+            )}
           </div>
           <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
           <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
