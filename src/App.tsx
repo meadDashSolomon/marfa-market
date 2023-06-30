@@ -6,7 +6,7 @@ import Related from './components/related/Related';
 import axios from 'axios';
 
 const App = () => {
-  const [currentItem, setCurrentItem] = useState({});
+  const [currentItem, setCurrentItem] = useState<object>({});
 
   const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
   const config = {
@@ -20,13 +20,23 @@ const App = () => {
     .then((results) => setCurrentItem(results.data[2]))
     .catch((err) => console.log(err))
   }, [])
+// console.log(currentItem)
+
+  if (Object.keys(currentItem).length < 1) {
+    return (
+      // could use a loading spinner
+      <div>
+        Loading...
+      </div>
+    )
+  }
 
   return (
     <div>
       <Overview/>
       <Related current={currentItem} setCurrent={setCurrentItem}/>
       <Questions itemId={currentItem.id}/>
-      <RatingsAndReviews/>
+      <RatingsAndReviews itemId={currentItem.id}/>
     </div>
   );
 };

@@ -6,14 +6,12 @@ import Typography from '@mui/joy/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Ratings = ({setShownReviews, allReviews, productRatings}) => {
-
   console.log(productRatings)
   const [averageRating, setAverageRating] = useState(0);
-  const [currentRating, setCurrentRating] = useState(0);
   const [selectedRatings, setSelectedRatings] = useState([])
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const [availableRatings, setAvailableRatings] = useState([5, 4, 3, 2, 1]);
+  const [availableRatings] = useState([5, 4, 3, 2, 1]);
 
   useEffect(() => {
     if(Object.keys(productRatings).length !== 0) {
@@ -36,16 +34,14 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
       return selectedRatings.includes(review.rating)
     })
     setShownReviews(filteredReviews)
-    console.log(selectedRatings)
+    // console.log('shown reviews: ', shownReviews)
   }, [selectedRatings])
 
   const getReviewPercentage = (starNumber) => {
-    if (totalReviews) {
-      if (productRatings.ratings[starNumber] !== undefined) {
-        return Math.round((productRatings.ratings[starNumber] / totalReviews) * 100)
-      } else {
-        return 0;
-      }
+    if (productRatings.ratings[starNumber] !== undefined) {
+      return Math.round((productRatings.ratings[starNumber] / totalReviews) * 100)
+    } else {
+      return 0;
     }
   }
 
@@ -99,36 +95,44 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
         flex: 1,
         flexShrink: 0,
         width: "100%",
-        fontWeight: 550
+        fontWeight: 550,
+        marginBottom: '10px'
       }}>{getRecommendedPercentage()}% of reviews recommend this product</Typography>
-        {availableRatings.map((rating) => {
-          return <Stack direction="column">
-          <Typography
-          level='body2'
-          sx={{
-            color: "#525252"
-          }}
-          >{rating} stars</Typography>
-          <LinearProgress variant="determinate"
-          sx={{
-            backgroundColor: "#ebebeb",
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: "#525252"
-            }
-          }}
-          color='secondary'
-          value={getReviewPercentage(rating)}
-          onClick={() => handleRatingClick(rating)}/>
-        </Stack>
+        {availableRatings.map((rating, index) => {
+          return (
+            <Stack direction="column" key={index}>
+            <Rating
+            readOnly={true}
+            value={rating}
+            sx={{ fontSize: "16px",
+            color: "#525252",
+            paddingBottom: "7px"
+            }}
+            />
+            <LinearProgress variant="determinate"
+            sx={{
+              backgroundColor: "#ebebeb",
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: "#525252"
+              }
+            }}
+            color='secondary'
+            value={getReviewPercentage(rating)}
+            onClick={() => handleRatingClick(rating)}/>
+            <Divider sx={{
+              my: "20px"
+            }}/>
+          </Stack>
+        )
         })}
-      <Divider sx={{
+      {/* <Divider sx={{
         marginBottom: "11px",
         marginTop: "18px",
-      }}/>
+      }}/> */}
       <Stack>
-        {Object.entries(productRatings.characteristics).map((item) => {
+        {Object.entries(productRatings.characteristics).map((item, index) => {
           return (
-          <>
+          <Box key={index}>
             <Typography
             level='body3'
             textColor="#25252D"
@@ -146,7 +150,7 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
             // ThumbComponent={arrowIcon}
             size="small">
             </Slider>
-          </>
+          </Box>
           )
         })}
       </Stack>
