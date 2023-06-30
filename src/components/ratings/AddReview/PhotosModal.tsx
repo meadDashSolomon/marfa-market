@@ -5,7 +5,7 @@ import { Box, Fade, Modal, Card, CardContent, Button } from "@mui/material";
 import { FormControl, FormLabel, Input } from '@mui/joy';
 import { useState } from 'react';
 
-const PhotosModal = ({isWriting, addingPhotos, setAddingPhotos, setPhotos, style}) => {
+const PhotosModal = ({isWriting, setAddingPhotos, style, setFormData, formData, addingPhotos}) => {
 
   const [photoUrl, setPhotoUrl] = useState('');
   const [isInvalid, setIsInvalid] = useState(false);
@@ -20,7 +20,10 @@ const PhotosModal = ({isWriting, addingPhotos, setAddingPhotos, setPhotos, style
 
   const handlePhotoSubmission = () => {
     if (validPhotoUrl.test(photoUrl)) {
-      setPhotos((prevPhotos) => [...prevPhotos, photoUrl])
+      setFormData({
+        ...formData,
+        photos: [...(formData.photos || []), photoUrl]
+      })
       handleChildClose();
     } else {
       setIsInvalid(true);
@@ -47,7 +50,7 @@ const PhotosModal = ({isWriting, addingPhotos, setAddingPhotos, setPhotos, style
                 <CardContent>
                 <FormControl>
                   <FormLabel>Photo Url:</FormLabel>
-                  <Input multiline error={isInvalid} value={inputValue} placeholder={errorMessage} onChange={handleInputChange}/>
+                  <Input multiline="true" error={isInvalid} value={inputValue} placeholder={errorMessage} onChange={handleInputChange}/>
                   <Button onClick={handlePhotoSubmission} sx={{
                     marginTop: "10px",
                     color: "#525252"
