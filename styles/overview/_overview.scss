@@ -9,7 +9,7 @@
 
   .topContainer {
     display: flex;
-    margin-bottom: -900px;
+    margin-bottom: -800px;
   }
 
   .topRightContainer {
@@ -253,5 +253,13 @@
 
   .starButton:hover {
     color: #f39c12;
+  }
+
+  .reviewsLink {
+    text-decoration: underline;
+  }
+
+  .reviewsLink:hover {
+    cursor: pointer;
   }
 }

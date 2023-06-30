@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import fetchReviewMetaData from "./routes/reviewRoutes";
+import { useEffect, useState, useRef } from "react";
+import { Rating as Star} from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
 
-const ProductInfo = ({ itemArray, selectedStyle, id }) => {
+const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef }) => {
   // state for number of reviews
   const [totalReviews, SetTotalReviews] = useState(0);
+  const [ stars, setStars ] = useState(0);
 
   // check for selected style
   const originalPrice = selectedStyle ?
@@ -19,7 +21,6 @@ const ProductInfo = ({ itemArray, selectedStyle, id }) => {
   // conditionally render sale price if it's not 0
   const salePrice = selectedStyle && selectedStyle.sale_price !== "0" ? selectedStyle.sale_price : null;
 
-  console.log("idddd::::::", id);
   useEffect(() => {
     if (id !== 0) {
       axios
@@ -34,13 +35,19 @@ const ProductInfo = ({ itemArray, selectedStyle, id }) => {
         }
       )
       .then((response) => {
-          console.log("RES.RATINGS:::::::::::", response.data.ratings);
           let ratingsObject = response.data.ratings;
           let numberOfReviews = 0;
           for (const rating in ratingsObject) {
             numberOfReviews += parseInt(ratingsObject[rating]);
           }
           SetTotalReviews(numberOfReviews);
+          let count = 0;
+          let total = 0;
+          for (let i = 1; i < 6; i++) {
+            count += parseInt(ratingsObject[i]);
+            total += i * parseInt(ratingsObject[i]);
+          }
+          setStars(total/count);
         })
       .catch((error) => {
         console.log("ERROR GETTING REVIEWS:::::::::::", error);
@@ -51,8 +58,18 @@ const ProductInfo = ({ itemArray, selectedStyle, id }) => {
   return (
     <div className="productInfoContainer">
       <div className="reviews">
-        <p className="reviewsLink">Read all {totalReviews} reviews</p>
-        {/* stars § */}
+        <Star
+          name="text-feedback"
+          value={stars}
+          readOnly
+          precision={0.25}
+          emptyIcon={<StarIcon style={{ opacity: 1 }} fontSize="inherit" />}
+        />
+        <p
+          className="reviewsLink"
+          onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>
+          Read all {totalReviews} reviews
+        </p>
       </div>
       {itemArray.length > 0 && (
         <>

@@ -10,7 +10,6 @@ import { Divider, Typography } from "@mui/joy";
 import RequestHandler from "./RequestHandler";
 
 export default function RatingsAndReviews({ itemId }) {
-    console.log(itemId)
     const reviewParams = {
       "page": 1,
       "count": 10,
