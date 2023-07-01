@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 const AddToCart = ({skus}) => {
+  const [availableSizes, setAvailableSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState("Select a Size");
+  // state to find quantity based on selectedSize
   const [selectedItem, setSelectedItem] = useState(null);
+  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState("");
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const [starFilled, setStarFilled] = useState(false);
-  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState([]);
+
 
   // define func to handle add to cart btn click
   const handleAddToCart = () => {
@@ -17,6 +20,40 @@ const AddToCart = ({skus}) => {
     }
   }
 
+  //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
+  const allOutOfStock = Object.values(skus).every((sku) => {
+    return sku.quantity === 0;
+  })
+
+
+  // -------------------------- HOOKS -------------------------------------------------------
+
+  // create array of available sizes
+  useEffect(() => {
+    let sizes = [];
+    Object.values(skus).forEach((sku) => {
+      // only list sizes currently in stock
+      if (sku.quantity > 0) {
+        sizes.push(sku.size);
+      }
+    });
+    setAvailableSizes(sizes);
+  }, [skus]);
+
+  // find available quantities based on size's sku
+  useEffect(() => {
+    if (selectedSize === "Select a Size") {
+      setSelectedItem(null);
+    } else {
+      // find item in skus object that's size property matches selected size
+      const item = Object.values(skus).find((sku) => {
+        return sku.size === selectedSize;
+      })
+      setSelectedItem(item);
+    }
+  }, [selectedSize, skus])
+
+  // create array of available qty's
   useEffect(() => {
     if (showSizeWarning === true) {
       setShowSizeWarning(false);
@@ -25,7 +62,7 @@ const AddToCart = ({skus}) => {
   if (selectedItem) {
     // create variable set to the lesser of total quantity and 15
     const availableQuantity = Math.min(selectedItem.quantity, 15)
-      // create range of available quantities array
+    // create range of available quantities array
     const quantities = [];
     // iterate available quantity number of times
     for (var i = 0; i < availableQuantity; i++) {
@@ -37,11 +74,9 @@ const AddToCart = ({skus}) => {
 
   }, [selectedSize])
 
-  //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
-  const allOutOfStock = Object.values(skus).every((sku) => {
-    return sku.quantity === 0;
-  })
 
+
+  {/* --------------------SIZE SELECTOR-------------------- */}
   return (
     <div className="addToCartContainer">
       {/* if showSizeWarning is true, show size warning message */}
@@ -53,41 +88,37 @@ const AddToCart = ({skus}) => {
           onChange={(e) => {
             const size = e.target.value;
             setSelectedSize(size);
-            // helper function to set quantity based on size's sku
-            // create item variable
-            // find item in skus object that's size property matches selected size
-            const item = size === "Select a Size" ? null : Object.values(skus).find(sku => sku.size === size);
-            setSelectedItem(item);
           }}
           disabled={allOutOfStock}
         >
-          {/* disable select a size option after a size is selected */}
+          {/* disable "Select a Size" option after a size is selected */}
           <option disabled={selectedSize !== "Select a Size"}>Select a Size</option>
+          {/* is allOutOfStock? */}
           {allOutOfStock ? (
+            // if yes, then only value is "OUT OF STOCK"
             <option value="OUT OF STOCK">OUT OF STOCK</option>
           ) : (
-            Object.entries(skus).map(([key, sku]) => {
-              // only list sizes currently in stock
-              if (sku.quantity > 0) {
-                return <option
-                          key={key}
-                          value={sku.size}>
-                            {sku.size}
-                          </option>
-              }
-            })
-          )}
+                // else, map available sizes
+                availableSizes.map((size, index) => {
+                  return <option key={index} value={size}>{size}</option>
+                })
+              )}
         </select>
 
+
+        {/* --------------------QUANTITY SELECTOR-------------------- */}
         <select
           className="quantitySelector"
           value={selectedQuantity}
           onChange={(e) => setSelectedQuantity(e.target.value)}
           disabled={!selectedItem}
         >
+          {/* did user select an item? */}
           {!selectedItem ? (
+            // if no, then only option is "-"
             <option value="-">-</option>
           ) : (
+            // if yes, then map available qty's
             availableQuantitiesArray.map((quantity, index) => (
               <option key={index} value={quantity}>{quantity}</option>
             ))
