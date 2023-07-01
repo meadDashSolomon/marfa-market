@@ -3,7 +3,6 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import updateArrowKeyClasses from './arrowKeyClasses';
 import { useState, useEffect } from 'react';
 
 const ImgGallery = ({ selectedStyle }) => {
@@ -105,6 +104,21 @@ const ImgGallery = ({ selectedStyle }) => {
     }
   };
 
+  const updateArrowKeyClasses = () => {
+    const leftArrow = document.querySelector('.mainPicArrowLeft');
+    const rightArrow = document.querySelector('.mainPicArrowRight');
+    const mainPic = document.querySelector('.mainPic');
+
+    if (isFullscreen) {
+      mainPic.classList.remove('mainPicFullscreen');
+      leftArrow.classList.remove('mainPicArrowLeftFullscreen');
+      rightArrow.classList.remove('mainPicArrowRightFullscreen');
+    } else {
+      mainPic.classList.add('mainPicFullscreen')
+      leftArrow.classList.add('mainPicArrowLeftFullscreen');
+      rightArrow.classList.add('mainPicArrowRightFullscreen');
+    }
+  }
 
   return (
     <div className="imgContainer">
