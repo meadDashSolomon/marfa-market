@@ -10,10 +10,13 @@ const ImgGallery = ({ selectedStyle }) => {
   const [mainPicURL, setMainPicURL] = useState("");
   // keep track of which image is selected for mainPicUrl, scrolling thumnails, and highlighting thumbnails
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  // isFullscreen state for adding conditional class to mainPic wrapper that ∆s vh and vw to 100
   const [isFullscreen, setIsFullscreen] = useState(false);
+  // isExpanded state for crosshair cursor
   const [isExpanded, setIsExpanded] = useState(false);
   // keep track of first image to limit shown thumbnails to 7
   const [firstImageIndex, setFirstImageIndex] = useState(0);
+  // zoomLevel state adding conditional class to mainPic that transform based on scale
   const [zoomLevel, setZoomLevel] = useState(1);
 
   useEffect(() => {
@@ -125,13 +128,16 @@ const ImgGallery = ({ selectedStyle }) => {
       {itemStylePhotos.length > 0 ? (
         <>
           <div className="mainPicWrapper"
+              // conditional styles for isFullscreen
                style={{
                  width: isFullscreen ? '100vw' : 'auto',
                  height: isFullscreen ? '100vh' : 'auto',
                }}>
+            {/* conditinal classes for isExpanded (crosshair cursor) and zoomLevel */}
             <img className={`mainPic ${isExpanded ? 'mainPicExpanded' : ''} ${zoomLevel === 2.5 ? 'mainPicZoomed' : ''}`}
                  src={mainPicURL}
                  alt="main picture of currently selected style"
+                 // transform scale based on zoomLevel
                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
                  onClick={handleMainPicClick}
                  />
@@ -147,6 +153,7 @@ const ImgGallery = ({ selectedStyle }) => {
             )}
             {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
               return (
+                // conditional class names
                 <img
                   className={
                     // its a thumbnail
