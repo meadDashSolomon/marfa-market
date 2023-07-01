@@ -16,7 +16,7 @@ const PhotosModal = ({isWriting, setAddingPhotos, style, setFormData, formData, 
     setAddingPhotos(false);
   }
 
-  const validPhotoUrl = new RegExp('^(http(s?):)([/.\\w\\s-])*\.(?:jpg|gif|png)', 'i')
+  const validPhotoUrl = new RegExp('^(http(s?):)([/.\\w\\s-])*.(?:jpg|gif|png)', 'i')
 
   const handlePhotoSubmission = () => {
     if (validPhotoUrl.test(photoUrl)) {

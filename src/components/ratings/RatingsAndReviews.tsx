@@ -27,6 +27,14 @@ export default function RatingsAndReviews({ itemId }) {
         setShownReviews(response.data.results);
       })
       .catch((err) => console.log("There was an error: ", err))
+    };
+
+
+
+    const fetchMetaData = (params) => {
+      axios.get(endpoint + "/reviews/meta", params)
+      .then((response) => setProductRatings(response['data']))
+      .catch((err) => console.log(err));
     }
 
     useEffect(() => {

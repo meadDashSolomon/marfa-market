@@ -142,6 +142,7 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
             >{item[0]}</Typography>
             <Slider
             disabled={true}
+            key={Number(item[1].value)}
             defaultValue={Number(item[1].value)}
             max={5}
             // components={
