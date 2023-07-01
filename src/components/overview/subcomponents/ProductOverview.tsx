@@ -75,7 +75,7 @@ const SharePinterestModal = () => {
         </div>
         <div className="">
           <img src="" alt="" />
-          <p>Made up txt</p>
+          <a href='https://www.youtube.com/watch?v=KBsUODDDODU' target='_blank'>Now I'm Gonna Starve</a>
         </div>
       </div>
       <div className="share">
