@@ -1,9 +1,9 @@
-export default function reportAnswer(){
+export default function reportAnswer(answer_id:number){
   return {
     method:'PUT',
-    url: ``,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answer_id}/report`,
     article: {
-
+      
     },
     headers: {
             Authorization: import.meta.env.VITE_AUTH_TOKEN
