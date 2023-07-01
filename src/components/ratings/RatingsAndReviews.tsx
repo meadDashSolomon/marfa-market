@@ -10,15 +10,9 @@ import { Divider, Typography } from "@mui/joy";
 import RequestHandler from "./RequestHandler";
 
 export default function RatingsAndReviews({ itemId }) {
-  const endpoint = "http://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe"
-
-  const headers = {
-    "Authorization": import.meta.env.VITE_AUTH_TOKEN
-    }
-
     const reviewParams = {
       "page": 1,
-      "count": 10,
+      "count": 500,
       "sort": "relevant",
       "product_id": itemId
     }
@@ -61,7 +55,6 @@ export default function RatingsAndReviews({ itemId }) {
     const [allReviews, setAllReviews] = useState([]);
     const [shownReviews, setShownReviews] = useState([]);
     const [productRatings, setProductRatings] = useState({});
-    const [productId, setProductId] = useState(37423);
 
     useState(() => {
       setShownReviews(allReviews)
@@ -96,15 +89,8 @@ export default function RatingsAndReviews({ itemId }) {
           justifyContent="start"
           alignItems="start"
           spacing="50px">
-            <Ratings
-            allReviews={allReviews}
-            setShownReviews={setShownReviews}
-            productRatings={productRatings}/>
-            <Reviews
-            allReviews={shownReviews}
-            fetchReviews={fetchReviews}
-            reviewParams={reviewParams}
-            productRatings={productRatings}/>
+            <Ratings allReviews={allReviews} setShownReviews={setShownReviews} productRatings={productRatings}/>
+            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams} productRatings={productRatings} itemId={itemId}/>
           </Stack>
       </Box>
   );

@@ -7,12 +7,12 @@ import getAnswers from "../requests/getAnswers";
 type AnswerListProps = {questionID:number};
 
 type listOfAnswersProps = {
-    answer_id: number,
+    answers:{answer_id: number,
     body: string,
     date: string,
     answerer_name: string,
     helpfulness: number,
-    photos: []
+    photos: []}[]
 }
 
 export default function AnswerList(props:AnswerListProps) {

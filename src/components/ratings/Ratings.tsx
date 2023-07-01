@@ -6,7 +6,7 @@ import Typography from '@mui/joy/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Ratings = ({setShownReviews, allReviews, productRatings}) => {
-  // console.log(productRatings)
+  console.log(productRatings)
   const [averageRating, setAverageRating] = useState(0);
   const [selectedRatings, setSelectedRatings] = useState([])
   const [totalReviews, setTotalReviews] = useState(0);
@@ -34,6 +34,7 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
       return selectedRatings.includes(review.rating)
     })
     setShownReviews(filteredReviews)
+    // console.log('shown reviews: ', shownReviews)
   }, [selectedRatings])
 
   const getReviewPercentage = (starNumber) => {
@@ -94,17 +95,20 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
         flex: 1,
         flexShrink: 0,
         width: "100%",
-        fontWeight: 550
+        fontWeight: 550,
+        marginBottom: '10px'
       }}>{getRecommendedPercentage()}% of reviews recommend this product</Typography>
         {availableRatings.map((rating, index) => {
           return (
             <Stack direction="column" key={index}>
-            <Typography
-            level='body2'
-            sx={{
-              color: "#525252"
+            <Rating
+            readOnly={true}
+            value={rating}
+            sx={{ fontSize: "16px",
+            color: "#525252",
+            paddingBottom: "7px"
             }}
-            >{rating} stars</Typography>
+            />
             <LinearProgress variant="determinate"
             sx={{
               backgroundColor: "#ebebeb",
@@ -115,13 +119,16 @@ const Ratings = ({setShownReviews, allReviews, productRatings}) => {
             color='secondary'
             value={getReviewPercentage(rating)}
             onClick={() => handleRatingClick(rating)}/>
+            <Divider sx={{
+              my: "20px"
+            }}/>
           </Stack>
         )
         })}
-      <Divider sx={{
+      {/* <Divider sx={{
         marginBottom: "11px",
         marginTop: "18px",
-      }}/>
+      }}/> */}
       <Stack>
         {Object.entries(productRatings.characteristics).map((item, index) => {
           return (
