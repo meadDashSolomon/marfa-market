@@ -22,7 +22,7 @@ const AddToCart = ({skus}) => {
     }
   }, [selectedSize])
 
-  // check if all sizes out of stock
+  //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
   const allOutOfStock = Object.values(skus).every((sku) => {
     sku.quantity === 0;
   })
@@ -38,11 +38,15 @@ const AddToCart = ({skus}) => {
           onChange={(e) => {
             const size = e.target.value;
             setSelectedSize(size);
+            // helper function to set quantity based on size's sku
+            // create item variable
+            // find item in skus object that's size property matches selected size
             const item = size === "Select a Size" ? null : Object.values(skus).find(sku => sku.size === size);
             setSelectedItem(item);
           }}
           disabled={allOutOfStock}
         >
+          {/* disable select a size option after a size is selected */}
           <option disabled={selectedSize !== "Select a Size"}>Select a Size</option>
           {allOutOfStock ? (
             <option value="OUT OF STOCK">OUT OF STOCK</option>
@@ -50,7 +54,11 @@ const AddToCart = ({skus}) => {
             Object.entries(skus).map(([key, sku]) => {
               // only list sizes currently in stock
               if (sku.quantity > 0) {
-                return <option key={key} value={sku.size}>{sku.size}</option>
+                return <option
+                          key={key}
+                          value={sku.size}>
+                            {sku.size}
+                          </option>
               }
             })
           )}
@@ -65,8 +73,21 @@ const AddToCart = ({skus}) => {
           {!selectedItem ? (
             <option value="-">-</option>
           ) : (
-            // If an item is selected, create an array from 1 to the minimum of the selected item's quantity or 15
-            Array.from({ length: Math.min(selectedItem.quantity, 15) }, (_, i) => i + 1).map((value) => {
+            // create array with a range of numbers from one to the lesser of selectedItem quantity and 15
+              // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+              // Sequence generator function (commonly referred to as "range")
+              // array.from method creates arrays from array-like objects
+              // first arg is the array-like object
+              // array-like objs have length properties
+              // create object with key of length and value equal to the lesser of selectedItem quantity and 15
+            Array.from({ length: Math.min(selectedItem.quantity, 15) },
+            // fill array with numbers from 1 to the length of the array.
+            // second arg is mapFn, invoked for every element in array-like obj
+              // mapFn takes 2 args
+                // 1. current element, not used here so _ is a placeholder
+                // 2. index of current element proccessed in the array
+              // take index of current element, add one to it, make that the next element in the new array
+            (_, i) => i + 1).map((value) => {
               // For each number in the array, create an option with that number
               return <option key={value} value={value}>{value}</option>
             })
