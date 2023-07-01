@@ -41,6 +41,7 @@ export default function AnswerList(props:AnswerListProps) {
 
     // const listOfAnswers = Object.keys(props.questionID);
     const mappingAnswers = () => {
+        listOfAnswers.sort()
         return answers.slice(numOfAnswersShowing).map(answer => {
             return (
             <AnswerListEntry

@@ -18,7 +18,7 @@ type AnswerListEntryProps = {
 export default function AnswerListEntry(props: AnswerListEntryProps) {
     const validPhotoUrl = new RegExp('^(http(s?):)([/.\\w\\s-])*.(?:jpg|gif|png)', 'i')
 
-    console.log(props.answer.body)
+    // console.log(props.answer.body)
 
     const displayUserName = () => {
         // if the userName of the Seller is the same as the userName of the answerer but it in bold 
