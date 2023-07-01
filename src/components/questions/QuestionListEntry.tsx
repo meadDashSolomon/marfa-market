@@ -17,7 +17,7 @@ type QuestionListEntryProps = {
 export default function QuestionListEntry(props:QuestionListEntryProps) {
     // console.log(props.question.question_id);
 
-    
+
 
     return (
         <Card className = 'Questions QuestionListEntry'>
