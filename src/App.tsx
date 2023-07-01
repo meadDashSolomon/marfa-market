@@ -74,7 +74,7 @@ const App = () => {
         id={currentItem.id}
         setCurrentItem={setCurrentItem}
       />
-      <Related setItem={setCurrentItem} current={currentItem}/>
+      <Related setCurrent={setCurrentItem} current={currentItem}/>
       <Questions itemId={currentItem.id} />
 
       <RatingsAndReviews itemId={currentItem.id}/>
