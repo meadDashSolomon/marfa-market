@@ -79,7 +79,7 @@ const AddToCart = ({skus}) => {
   {/* --------------------SIZE SELECTOR-------------------- */}
   return (
     <div className="addToCartContainer">
-      {/* if showSizeWarning is true, show size warning message */}
+      {/* if showSizeWarning is true (ie selectedSize equals "Select a Size", then render a warning element */}
       {showSizeWarning && <p>Please select size</p>}
       <div className="selectors">
         <select
