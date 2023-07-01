@@ -7,6 +7,7 @@ const AddToCart = ({skus}) => {
   const [selectedQuantity, setSelectedQuantity] = useState("");
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const [starFilled, setStarFilled] = useState(false);
+  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState([]);
 
   // define func to handle add to cart btn click
   const handleAddToCart = () => {
@@ -20,11 +21,25 @@ const AddToCart = ({skus}) => {
     if (showSizeWarning === true) {
       setShowSizeWarning(false);
     }
+
+  if (selectedItem) {
+    // create variable set to the lesser of total quantity and 15
+    const availableQuantity = Math.min(selectedItem.quantity, 15)
+      // create range of available quantities array
+    const quantities = [];
+    // iterate available quantity number of times
+    for (var i = 0; i < availableQuantity; i++) {
+      // push index plus one to array
+      quantities.push(i+1);
+  }
+  setAvailableQuantitiesArray(quantities);
+  }
+
   }, [selectedSize])
 
   //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
   const allOutOfStock = Object.values(skus).every((sku) => {
-    sku.quantity === 0;
+    return sku.quantity === 0;
   })
 
   return (
@@ -73,24 +88,9 @@ const AddToCart = ({skus}) => {
           {!selectedItem ? (
             <option value="-">-</option>
           ) : (
-            // create array with a range of numbers from one to the lesser of selectedItem quantity and 15
-              // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
-              // Sequence generator function (commonly referred to as "range")
-              // array.from method creates arrays from array-like objects
-              // first arg is the array-like object
-              // array-like objs have length properties
-              // create object with key of length and value equal to the lesser of selectedItem quantity and 15
-            Array.from({ length: Math.min(selectedItem.quantity, 15) },
-            // fill array with numbers from 1 to the length of the array.
-            // second arg is mapFn, invoked for every element in array-like obj
-              // mapFn takes 2 args
-                // 1. current element, not used here so _ is a placeholder
-                // 2. index of current element proccessed in the array
-              // take index of current element, add one to it, make that the next element in the new array
-            (_, i) => i + 1).map((value) => {
-              // For each number in the array, create an option with that number
-              return <option key={value} value={value}>{value}</option>
-            })
+            availableQuantitiesArray.map((quantity, index) => (
+              <option key={index} value={quantity}>{quantity}</option>
+            ))
           )}
         </select>
       </div>
