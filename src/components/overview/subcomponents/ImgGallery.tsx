@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 const ImgGallery = ({ selectedStyle }) => {
   const [itemStylePhotos, setItemSylePhotos] = useState([{url: ''}]);
   const [mainPicURL, setMainPicURL] = useState("");
-  // keep track of which image is selected for scrolling and highlighting
+  // keep track of which image is selected for mainPicUrl, scrolling thumnails, and highlighting thumbnails
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -18,19 +18,26 @@ const ImgGallery = ({ selectedStyle }) => {
   const [zoomLevel, setZoomLevel] = useState(1);
 
   useEffect(() => {
+    // set item style photos with selected style photos
     setItemSylePhotos(selectedStyle.photos);
+    // check if there's a selected style with photos
     if (selectedStyle.photos[selectedImageIndex]) {
+      // if yes, then set main pic's url to the selected image's index (with default state of 0)
       setMainPicURL(selectedStyle.photos[selectedImageIndex].url);
     } else {
+      // if not, then don't load anything
       setMainPicURL('');
     }
   }, [selectedStyle, selectedImageIndex]);
 
   const handleNextClick = () => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
+      // new index set to prev state keyword + 1.
+      // modulo to ensure no counting past length of array of thumbnails
       const newIndex = (prevSelectedImageIndex + 1) % itemStylePhotos.length;
-      // if the next image is not visible, scroll thumbnails
+      // check if new thumbnail's index is past the 7 thumbnails showing
       if (newIndex >= firstImageIndex + 7) {
+        // if yes, then update first image index state
         setFirstImageIndex(firstImageIndex + 1);
       }
       return newIndex;
@@ -40,7 +47,6 @@ const ImgGallery = ({ selectedStyle }) => {
   const handlePrevClick = () => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
       const newIndex = (prevSelectedImageIndex - 1 + itemStylePhotos.length) % itemStylePhotos.length;
-      // if next image is not visible, scroll thumbnails
       if (newIndex < firstImageIndex) {
         setFirstImageIndex(firstImageIndex + 1);
       }
@@ -67,6 +73,8 @@ const ImgGallery = ({ selectedStyle }) => {
 
   const handleUpClick = () => {
     setFirstImageIndex((prevFirstImageIndex) => {
+      // edge case for trying to scroll up when at top
+      // check if the prev state for first img index is <= 0
       if (prevFirstImageIndex <= 0) {
         return 0;
       }
@@ -76,7 +84,8 @@ const ImgGallery = ({ selectedStyle }) => {
 
   const handleDownClick = () => {
     setFirstImageIndex((prevFirstImageIndex) => {
-      // don't scroll visible thumnails beyond 7 less than number of thumbnails
+      // edge case for trying to scroll past 7 from the end of the array of thumbnails
+      // check if the prev state for first img incex is >= 7 units from the end of the array
       if (prevFirstImageIndex >= itemStylePhotos.length - 7) {
         return prevFirstImageIndex;
       }
@@ -92,7 +101,6 @@ const ImgGallery = ({ selectedStyle }) => {
 
   const handleZoomClick = () => {
     if (isExpanded) {
-      // react keyword for previous state
       setZoomLevel(prevZoomLevel => prevZoomLevel === 1 ? 2.5 : 1);
     }
   };
