@@ -12,7 +12,7 @@ import RequestHandler from "./RequestHandler";
 export default function RatingsAndReviews({ itemId }) {
     const reviewParams = {
       "page": 1,
-      "count": 10,
+      "count": 500,
       "sort": "relevant",
       "product_id": itemId
     }
@@ -27,6 +27,14 @@ export default function RatingsAndReviews({ itemId }) {
         setShownReviews(response.data.results);
       })
       .catch((err) => console.log("There was an error: ", err))
+    };
+
+
+
+    const fetchMetaData = (params) => {
+      axios.get(endpoint + "/reviews/meta", params)
+      .then((response) => setProductRatings(response['data']))
+      .catch((err) => console.log(err));
     }
 
     useEffect(() => {
@@ -47,7 +55,6 @@ export default function RatingsAndReviews({ itemId }) {
     const [allReviews, setAllReviews] = useState([]);
     const [shownReviews, setShownReviews] = useState([]);
     const [productRatings, setProductRatings] = useState({});
-    const [productId, setProductId] = useState(37423);
 
     useState(() => {
       setShownReviews(allReviews)
@@ -83,7 +90,7 @@ export default function RatingsAndReviews({ itemId }) {
           alignItems="start"
           spacing="50px">
             <Ratings allReviews={allReviews} setShownReviews={setShownReviews} productRatings={productRatings}/>
-            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams} productRatings={productRatings}/>
+            <Reviews allReviews={shownReviews} fetchReviews={fetchReviews} reviewParams={reviewParams} productRatings={productRatings} itemId={itemId}/>
           </Stack>
       </Box>
   );

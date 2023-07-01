@@ -1,16 +1,32 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Box, Card, CardContent, Rating, Stack} from "@mui/material"
+import { Box, Card, CardContent, Rating, Stack, Link } from "@mui/material"
 import { Typography } from "@mui/joy";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckIcon from '@mui/icons-material/Check';
 import { format } from "date-fns";
+import RequestHandler from "./RequestHandler";
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import ReviewPhotos from "./ReviewPhotos";
 
 const Review = ({ review }) => {
+
+  console.log(review)
+
+  const handleHelpfulClick = (event) => {
+    console.log('hello')
+    event.preventDefault();
+    RequestHandler("PUT", `/reviews/${review.review_id}/helpful`)
+  }
+
+  const handleReportClick = (event) => {
+    console.log('hello')
+    event.preventDefault();
+    RequestHandler("PUT", `/reviews/${review.review_id}/report`)
+  }
+
   return (
-    <Box sx={{
-      flex: "1"
-    }}>
+    <Box>
       <Card variant="outlined" sx={{
         boxShadow: "1px 1px 6px #e8e4e4"
       }}>
@@ -72,8 +88,11 @@ const Review = ({ review }) => {
                 backgroundColor: "text.secondary"
               }}>Hello</Typography>
             </Box> : null}
+            <ReviewPhotos photos={review.photos}/>
             <Typography level="body3" textColor="#25252D"
-            sx={{ marginTop: "10px"}}>Helpful? <a onClick={() => handleHelpfulClick()}>Yes</a> ({review.helpfulness}) | Report</Typography>
+            sx={{ marginTop: "10px"}}>
+              Helpful? <Link onClick={handleHelpfulClick} color="inherit" href="#" underline="always" variant="body3">Yes</Link> ({review.helpfulness}) | <Link onClick={handleReportClick} color="inherit" href="#" underline="always" variant="body3">Report</Link>
+            </Typography>
           </Box>
         </CardContent>
       </Card>

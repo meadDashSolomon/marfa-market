@@ -50,10 +50,12 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("CURRENT ITEM::::", currentItem);
-  }, [currentItem])
+    axios.get(endpoint + 'products', config)
+    .then((results) => setCurrentItem(results.data[2]))
+    .catch((err) => console.log(err))
+  }, [])
 
-  if(Object.keys(currentItem).length < 1) {
+  if (Object.keys(currentItem).length < 1) {
     return (
       // could use a loading spinner
       <div>
@@ -72,8 +74,9 @@ const App = () => {
         id={currentItem.id}
         setCurrentItem={setCurrentItem}
       />
-      <Related setItem={setCurrentItem} />
+      <Related setItem={setCurrentItem} current={currentItem}/>
       <Questions itemId={currentItem.id} />
+
       <RatingsAndReviews itemId={currentItem.id}/>
     </div>
   );

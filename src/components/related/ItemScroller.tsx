@@ -1,30 +1,32 @@
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Button } from '@mui/material';
 import Item from "./Item.tsx";
-import { useState, useEffect } from 'react';
-import Request from './Request.ts';
+import { useEffect, useState } from 'react';
+import Slider from './Slider.tsx';
+import OutfitAdd from './outfitAdd.tsx';
+const ItemScroller = ({ setCurrent, current, title, items, type }) => {
 
-function ItemScroller({ title }) {
-  const [data, setData] = useState([{}]);
+  const [ outfit, setOutfit ] = useState([]);
 
-  useEffect(() => {
-    Request.get().then((res) => {
-      setData(res.data);
-    })
-  }, [])
+  // useEffect(() => {
+  //   console.log(outfit);
+  // }, [outfit])
 
   return (
-    <div style={{height: 'justify-content'}}>
+    <div style={{height: 'justify-content', width: '80%'}}>
       <Typography>{ title }</Typography>
       <br/>
-      <Stack direction={'row'} spacing={2}>
+      <Slider>
         {
-          data.map((item, index) => {
-            return <Item item={item} key={index}/>
+          type === 1 ? <></> : <OutfitAdd setOutfit={setOutfit} current={current} outfit={outfit}></OutfitAdd>
+        }
+        {
+          ( type === 1 ? items : outfit).map((item, index) => {
+            return <Item setCurrent={setCurrent} type={type} current={current} item={item} key={index} setOutfit={setOutfit} outfit={outfit}></Item>
           })
         }
-      </Stack>
+        </Slider>
     </div>
   )
-}
+};
 
 export default ItemScroller;
