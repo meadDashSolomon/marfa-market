@@ -24,6 +24,7 @@ const defaultStyle = {
 const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
   const [styles, setStyles] = useState([]);
 
+  // Hook to set style based on current item
   useEffect(() => {
     let id = currentItem.id;
     if (id !== 0) {
@@ -46,6 +47,7 @@ const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
     }
   }, [currentItem]);
 
+  // Event handler for setting style when clicking styles
   const handleStyleClick = (style) => {
     if (selectedStyle !== style) {
       setSelectedStyle(style);

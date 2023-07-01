@@ -4,10 +4,12 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import { useState } from 'react';
 
 const ProductOverview = ({description, slogan}) => {
+  // conditionally render modal components when showModal states are toggled true
   const [showFbModal, setShowFbModal] = useState(false);
   const [showTwitterModal, setShowTwitterModal] = useState(false);
   const [showPinterestModal, setShowPinterestModal] = useState(false);
 
+// ------------*** EVENT HANDLER FUNCS FOR TOGGLING MODAL STATES ON CLICK ***--------------------------------------
 const toggleFbModal = () => {
   setShowFbModal(!showFbModal);
 };
@@ -34,6 +36,7 @@ const ShareFbModal = () => {
 };
 
 
+// -----------------------*** MODAL COMPONENTS ***------------------------------------------------------
 const ShareTwitterModal = () => {
   return (
     <div className="twitterModal">
@@ -89,6 +92,7 @@ const SharePinterestModal = () => {
           <PinterestIcon />
         </div>
       </div>
+      {/* conditionally render modal components when showModal states are true */}
       {showFbModal && <ShareFbModal />}
       {showTwitterModal && <ShareTwitterModal />}
       {showPinterestModal && <SharePinterestModal />}
