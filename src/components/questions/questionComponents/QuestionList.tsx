@@ -31,8 +31,8 @@ export default function QuestionList(props:QuestionListProps) {
         return b.question_helpfulness - a.question_helpfulness
     }
     
-    const getQuestionsFromServer = () => { //gets questions every time the page loads
-        axios.request(getQuestions(props.itemId,1,numQuestions))
+    const getQuestionsFromServer = async () => { //gets questions every time the page loads
+        await axios.request(getQuestions(props.itemId,1,numQuestions))
         .then((response) => {
           for( const el of response.data.results) {
             if(!listOfQuestions.includes(el)) {
