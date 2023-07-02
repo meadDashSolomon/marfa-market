@@ -6,7 +6,7 @@ import Typography from '@mui/joy/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Ratings = ({setShownReviews, allReviews, productRatings}) => {
-  console.log(productRatings)
+  // console.log(productRatings)
   const [averageRating, setAverageRating] = useState(0);
   const [selectedRatings, setSelectedRatings] = useState([])
   const [totalReviews, setTotalReviews] = useState(0);

@@ -7,7 +7,7 @@ import AnswerModal from "../answerComponents/AnswerModal";
 
 
 type QuestionListEntryProps = {
-    searchQuery:string;
+    searchQuery?:string;
     key:number,
     question:{
         question_id:number,
