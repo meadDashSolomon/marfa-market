@@ -1,10 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { useState } from "react";
 import { Box } from '@mui/material'
 import Review from "./Review";
 
-const ReviewsList = ({ reviews }) => {
+interface ReviewsList {
+  reviews: object []
+}
+
+const ReviewsList = ({ reviews }: ReviewsList) => {
   // Display 2 reviews initially
   return (
     <Box sx={{
