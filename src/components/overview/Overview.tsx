@@ -52,6 +52,7 @@ const Overview = ({
             itemArray={itemArray}
             selectedStyle={selectedStyle}
             id={currentItem.id}
+            currentItem={currentItem}
           />
           <StyleSelector
             currentItem={currentItem}

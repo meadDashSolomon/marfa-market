@@ -3,10 +3,11 @@ import { useEffect, useState, useRef } from "react";
 import { Rating as Star} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef }) => {
+const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef, currentItem }) => {
   // state for number of reviews
   const [totalReviews, SetTotalReviews] = useState(0);
   const [ stars, setStars ] = useState(0);
+  // state for
 
   // check for selected style
   const originalPrice = selectedStyle ?
@@ -73,8 +74,8 @@ const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef }) => {
       </div>
       {itemArray.length > 0 && (
         <>
-          <p className="category">{itemArray[0].category}</p>
-          <h1>{itemArray[0].name}</h1>
+          <p className="category">{currentItem.category}</p>
+          <h1>{currentItem.name}</h1>
           {/* check if product is on sale */}
           {salePrice ? (
             <>

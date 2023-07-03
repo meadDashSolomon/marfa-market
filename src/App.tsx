@@ -55,7 +55,7 @@ const App = () => {
     .catch((err) => console.log(err))
   }, [])
 
-  if (Object.keys(currentItem).length < 1) {
+  if(Object.keys(currentItem).length < 1) {
     return (
       // could use a loading spinner
       <div>

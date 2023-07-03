@@ -3,6 +3,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import { useState, useEffect } from 'react';
 
 const ImgGallery = ({ selectedStyle }) => {
@@ -103,7 +104,7 @@ const ImgGallery = ({ selectedStyle }) => {
 
   const handleZoomClick = () => {
     if (isExpanded) {
-      setZoomLevel(prevZoomLevel => prevZoomLevel === 1 ? 2.5 : 1);
+      setZoomLevel(prevZoomLevel => prevZoomLevel === 1 ? 1.5 : 1);
     }
   };
 
@@ -130,11 +131,11 @@ const ImgGallery = ({ selectedStyle }) => {
           <div className="mainPicWrapper"
               // conditional styles for isFullscreen
                style={{
-                 width: isFullscreen ? '100vw' : 'auto',
-                 height: isFullscreen ? '100vh' : 'auto',
+                 width: isFullscreen ? '80vw' : 'auto',
+                 height: isFullscreen ? '80vh' : 'auto',
                }}>
             {/* conditinal classes for isExpanded (crosshair cursor) and zoomLevel */}
-            <img className={`mainPic ${isExpanded ? 'mainPicExpanded' : ''} ${zoomLevel === 2.5 ? 'mainPicZoomed' : ''}`}
+            <img className={`mainPic ${isExpanded ? 'mainPicExpanded' : ''} ${zoomLevel === 1.5 ? 'mainPicZoomed' : ''}`}
                  src={mainPicURL}
                  alt="main picture of currently selected style"
                  // transform scale based on zoomLevel

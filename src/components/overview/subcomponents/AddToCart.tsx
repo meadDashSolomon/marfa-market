@@ -18,6 +18,7 @@ const AddToCart = ({skus}) => {
     if (selectedSize === "Select a Size") {
       setShowSizeWarning(true);
     }
+    // else, add to cart
   }
 
   //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
@@ -26,8 +27,7 @@ const AddToCart = ({skus}) => {
   })
 
 
-  // -------------------------- HOOKS -------------------------------------------------------
-
+  // -------------------------- HOOKS ------------------------------------
   // create array of available sizes
   useEffect(() => {
     let sizes = [];
@@ -55,6 +55,7 @@ const AddToCart = ({skus}) => {
 
   // create array of available qty's
   useEffect(() => {
+    // turn off show size warning when selectedSize ∆s
     if (showSizeWarning === true) {
       setShowSizeWarning(false);
     }

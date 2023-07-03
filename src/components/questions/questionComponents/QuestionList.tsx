@@ -31,8 +31,8 @@ export default function QuestionList(props:QuestionListProps) {
         return b.question_helpfulness - a.question_helpfulness
     }
     
-    const getQuestionsFromServer = async () => { //gets questions every time the page loads
-        await axios.request(getQuestions(props.itemId,1,20))
+    const getQuestionsFromServer = () => { //gets questions every time the page loads
+        axios.request(getQuestions(props.itemId,1,20))
         .then((response) => {
           for( const el of response.data.results) {
             if(!listOfQuestions.includes(el)) {
@@ -111,6 +111,7 @@ export default function QuestionList(props:QuestionListProps) {
                 className = "Questions QuestionsList Buttons"
                 direction={'row'}
             >
+            {}
             <Button
                 onClick={moreQuestionsOnClick}
             >MORE ANSWERED QUESTIONS</Button>
