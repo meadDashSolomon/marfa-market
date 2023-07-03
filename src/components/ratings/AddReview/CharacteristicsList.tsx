@@ -14,7 +14,6 @@ import { useState } from 'react'
 const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues, setFormData, formData }) => {
 
   const handleChange = (event, char) => {
-    console.log('this ish th avlues: ', Number(event.target.value))
     setFormData({
       ...formData,
       characteristics: {
@@ -23,8 +22,6 @@ const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues
     })
     setSelectedValues({ ...selectedValues, [productRatings.characteristics[char].id]: Number(event.target.value)});
   };
-
-  console.log(selectedValues)
 
   return (
     <>
@@ -42,7 +39,6 @@ const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues
             }}
           >
             {Object.entries(characteristics[char]).map((descriptor, index) => (
-              // console.log(char)
               <FormControlLabel
                 key={index}
                 value={descriptor[0]}
