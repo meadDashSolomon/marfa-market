@@ -1,4 +1,4 @@
-import { TextField, Box, Card, Fade, FormControl, FormLabel, Button, Modal } from "@mui/material";
+import { TextField, Card, Fade, FormControl, FormLabel, Button, Modal } from "@mui/material";
 import { CardContent, Typography, Divider } from "@mui/joy";
 import axios from "axios";
 import postQuestion from "../requests/postQuestion";
@@ -43,7 +43,6 @@ export default function QuestionModal (props:QuestionModalProps) {
     }
 
     return (
-        <Box>
             <Modal
                 className = {'Questions QuestionModal'}
                 open={props.questionModal}
@@ -105,6 +104,5 @@ export default function QuestionModal (props:QuestionModalProps) {
                     </Card>
                 </Fade>
             </Modal>
-        </Box>
     )
 }
