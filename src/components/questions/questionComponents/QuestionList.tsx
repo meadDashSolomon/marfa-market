@@ -95,7 +95,7 @@ export default function QuestionList(props:QuestionListProps) {
     },[questionModal])
     useEffect(() => {
         getQuestionsFromServer();
-      },[]);
+      },[props.itemId]);
     const moreQuestionsOnClick = () => {//displays more questions
         setNumQuestions(numQuestions + 2);
     };
