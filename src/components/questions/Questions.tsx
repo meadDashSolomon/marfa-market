@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import QuestionList from "./questionComponents/QuestionList";
 import SearchBar from "./SearchBar";
 import { Box, Stack, Typography } from "@mui/material";
