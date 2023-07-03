@@ -23,22 +23,6 @@ export default function AnswerList(props:AnswerListProps) {
     const loadMoreAnswers = () => numOfAnswersShowing += 2;
     let numOfAnswersShowing = 2;
     
-    const getAnswersFromServer = () => {
-        axios.request(getAnswers(props.questionID))
-        .then((response) => {
-            console.log('this is what we got back in answer',response.data.results);
-            for(const el of response.data.results) {
-                if(!listOfAnswers.includes(el)) {
-                    listOfAnswers.push(el);
-                }
-            }
-            setAnswers(listOfAnswers);
-        }).catch((error)=> console.log('ERROR IN GET ANSWERS',error));
-    };//end of getAnswersFromServer
-
-
-
-
     // const listOfAnswers = Object.keys(props.questionID);
     const mappingAnswers = () => {
         listOfAnswers.sort()
@@ -52,8 +36,17 @@ export default function AnswerList(props:AnswerListProps) {
     }
     useEffect(()=> {
         console.log('useEffect for answers ran');
-        getAnswersFromServer();
-    },[])
+        axios.request(getAnswers(props.questionID))
+        .then((response) => {
+            console.log('this is what we got back in answer',response.data.results);
+            for(const el of response.data.results) {
+                if(!listOfAnswers.includes(el)) {
+                    listOfAnswers.push(el);
+                }
+            }
+            setAnswers(listOfAnswers);
+        }).catch((error)=> console.log('ERROR IN GET ANSWERS',error));
+    },[props.questionID])
     return (
         <Card className = "Questions AnswerList">
             <Card>{mappingAnswers()}</Card>
