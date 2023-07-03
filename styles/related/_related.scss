@@ -16,3 +16,21 @@
   margin: auto;
   color: $color-2;
 }
+
+.slider-container .slider-element{
+  display: flex;
+  width: calc(100% - 4em);
+  height: 301px;
+  // justify-content: center;
+  flex-direction: row;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.slider-element {
+  overflow: scroll;
+  scroll-behavior: smooth;
+  // justify-content: left;
+}
+

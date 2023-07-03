@@ -1,14 +1,19 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { Box } from "@mui/material";
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { useState, useRef } from "react";
 import { Menu, MenuItem } from "@mui/joy";
 import { Stack } from '@mui/material'
 
-const ReviewPhotos = ({photos}) => {
-  console.log(photos)
+interface ReviewPhotoProps {
+  photos: Photo[]
+}
+
+interface Photo {
+  id: number,
+  url: string
+}
+
+const ReviewPhotos = ({ photos }: ReviewPhotoProps) => {
   const buttonRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -46,13 +51,6 @@ const ReviewPhotos = ({photos}) => {
       </Box>
       }
     </Box>
-    //   <Box>
-    //   { photos.length < 1 ? (null) :
-    //     <div>
-    //       Hello
-    //     </div>
-    //   }
-    //  </Box>
     );
 }
 

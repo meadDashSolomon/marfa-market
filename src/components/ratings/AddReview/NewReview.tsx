@@ -9,12 +9,10 @@ import { Typography, FormControl, FormLabel, Radio } from '@mui/joy';
 import PhotosModal from './PhotosModal';
 import characteristics from './Characteristics';
 import CharacteristicsList from './CharacteristicsList';
-import RequestHandler from '../RequestHandler';
+import requestHandler from '../RequestHandler';
 import InputFields from './InputFields';
 
 const NewReview = ({ setIsWriting, isWriting, productRatings, itemId, fetchReviews, reviewParams }) => {
-
-  console.log('item id in new review', itemId)
 
   const [selectedValues, setSelectedValues] = useState({})
   const [addingPhotos, setAddingPhotos] = useState(false)
@@ -25,8 +23,6 @@ const NewReview = ({ setIsWriting, isWriting, productRatings, itemId, fetchRevie
   const handleClose = () => {
     setIsWriting(false);
   }
-
-  console.log('these shoud be the form data', formData)
 
   const style = {
     position: 'absolute',
@@ -64,9 +60,6 @@ const NewReview = ({ setIsWriting, isWriting, productRatings, itemId, fetchRevie
       ...formData,
       [event.target.name]: event.target.value
     });
-    console.log(event.target.name)
-    console.log(event.target.value)
-    console.log(formData)
   }
 
   const handleRatingChange = (event, newValue) => {
@@ -77,18 +70,18 @@ const NewReview = ({ setIsWriting, isWriting, productRatings, itemId, fetchRevie
   }
 
   useEffect(() => {
-    setFormData({
+    setFormData((formData) => ({
       ...formData,
       recommend: checked
-    })
+    }))
   }, [checked])
 
   useEffect(() => {
-    setFormData({
+    setFormData((formData) => ({
       ...formData,
       product_id: itemId
-    })
-  }, [])
+    }))
+  }, [itemId])
 
   return (
     <Box>

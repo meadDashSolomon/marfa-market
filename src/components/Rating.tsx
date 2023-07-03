@@ -1,4 +1,4 @@
-import { Rating as Star} from '@mui/material';
+import { Rating as Star } from '@mui/material';
 import { useState, useEffect } from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import Request from './related/Request';
