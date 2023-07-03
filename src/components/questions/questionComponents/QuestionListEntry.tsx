@@ -46,9 +46,10 @@ export default function QuestionListEntry(props:QuestionListEntryProps) {
     return (
         <Card className = "Questions QuestionList QuestionListEntry">
             <Card>{renderAnswerModal()}</Card>
-            <Typography level="h4"><strong>Q:</strong>{props.question.question_body}</Typography>
-            <small>{format(new Date(props.question.question_date),"PPP")}</small>
-            <p>Helpful?<a onClick={helpfulPostRequest}>  YES  </a><small>  {props.question.question_helpfulness}  </small> | <Button onClick={()=>{setAnswerModal(true)}}>Add Answer</Button></p>
+            <Typography level = {"h4"}><strong>Q:</strong>{props.question.question_body}</Typography>
+            <Typography level = {"subtitle1"}>{props.question.asker_name}</Typography>
+            <Typography level = "subtitle2">{format(new Date(props.question.question_date),"PPP")}</Typography>
+            <p>Helpful?<Button onClick={helpfulPostRequest}>  YES  </Button><small>  {props.question.question_helpfulness}  </small> | <Button onClick={()=>{setAnswerModal(true)}}>Add Answer</Button></p>
             <AnswerList questionID = {props.question.question_id}/>
         </Card>
     )
