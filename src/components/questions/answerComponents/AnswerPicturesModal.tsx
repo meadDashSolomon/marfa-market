@@ -1,5 +1,5 @@
 import { CardContent, Modal, Typography } from "@mui/joy";
-import { Box, Card, Fade, Button } from "@mui/material";
+import { Card, Fade, Button } from "@mui/material";
 // import {useState} from "react"
 // import axios from "axios";
 
@@ -9,13 +9,17 @@ type AnswerPicturesModalProps = {
     setPictuesModal: (value:boolean) => void;
 }
 
-export default function AnswerPicturesModal (props:AnswerPicturesModalProps) {
 
+export default function AnswerPicturesModal (props:AnswerPicturesModalProps) {
+    const handleClose = () => {
+        props.setPictuesModal(false);
+    }
+    
     return (
-        <Box>
             <Modal
                 className = {'Questions AnswersModal'}
                 open={props.picturesModal}
+                onClose={handleClose}
             >
                 <Fade>
                     <Card variant="outlined">
@@ -31,6 +35,5 @@ export default function AnswerPicturesModal (props:AnswerPicturesModalProps) {
                     </Card>
                 </Fade>
             </Modal>
-        </Box>
     )
 }
