@@ -179,7 +179,7 @@ const Ratings = ({
                 size="small"
               ></Slider>
             </Box>
-          );
+          )
         })}
       </Stack>
     </Box>

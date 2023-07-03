@@ -10,7 +10,7 @@ type QuestionListProps = {
         reported:boolean,
         answers:object[]
     }[]
-} 
+}
 
 export default function QuestionList(props:QuestionListProps) {
     // console.log(props.questions)

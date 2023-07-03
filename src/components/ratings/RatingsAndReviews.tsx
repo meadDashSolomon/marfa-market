@@ -9,8 +9,6 @@ interface RatingsAndReviewsProps {
   itemId: number;
 }
 
-
-
 export default function RatingsAndReviews({ itemId }: RatingsAndReviewsProps) {
   const reviewParams = useMemo(() => {
     return {

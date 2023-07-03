@@ -1,5 +1,5 @@
 import { Card } from "@mui/material";
-import AnswerList from "./AnswerList";
+import AnswerList from "./answerComponents/AnswerList";
 import { format } from "date-fns"
 
 type QuestionListEntryProps = {
@@ -17,7 +17,7 @@ type QuestionListEntryProps = {
 export default function QuestionListEntry(props:QuestionListEntryProps) {
     // console.log(props.question.question_id);
 
-    
+
 
     return (
         <Card className = 'Questions QuestionListEntry'>

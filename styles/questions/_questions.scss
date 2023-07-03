@@ -1,38 +1,100 @@
 .Questions{
+    background-color: $color-1;
     display: flex;
     flex-Direction: column;
-    justify-Content: left;
-    background-color: #f3f3f3;
+
+    justify-Content: center;
     color: rgb(0, 0, 0);
-    margin: 1.5%;
+    margin: auto;
+    width: 80%;
+    // height: 100lh;
+    height: 80%;
+
+    overflow-y: auto;
+
+    //component dimensions
+    max-width: 100%;
+    max-height: 50%;
     &.Header{
-        display: flex;
+        background-color: pink;
         flex-direction: row;
-        margin-left: 50px;
+        justify-content: left;
+        margin-left: 15px;
     }
 
     &.SearchBar {
-        display: flex;
-        flex-direction: row;
-        flex-direction: row;
-        justify-content: center;
         background-color: #e6b3b3;
-        &.input{
-            
+        flex-direction: row;
+        justify-content: left;
+        float: inline-start;
+        width: 100%;
+        &.Bar {
+            background-color: #784747;
+            min-width: 80%;
         }
     }
     &.QuestionList {
         background-color: aqua;
+        max-height:inherit;
+        width: 95%;
         border: 5px;
+        margin: auto;
+        overflow-y: auto;
+
+        &.Buttons {
+            display: flex;
+        }
+        &.QuestionListEntry {
+            width: 100%;
+            background-color: rgb(214, 119, 255);
+            border: 5px solid;
+            display: flex;
+            padding: 1%;
+        }
     }
-    &.QuestionListEntry {
+    &.AnswerList {
+        width: 95%;
+        background-color: indianred;
+    }
+    &.AnswerListEntry {
+        width: 95%;
+        background-color: rgb(171, 252, 171);
+    }
+
+    &.AnswersModal {
+        background-color: rgb(249, 255, 60); 
+        justify-content: center;     
         display: flex;
-        padding: 5%;
+        position: absolute;  
+        &.modal {
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            padding: 5%;
+            max-height: 70%;
+            overflow-y: auto;
+            margin: left 35% right 35%;
+            width: 70%;
+        }
     }
-
-    &.Answers{
+    &.QuestionModal {
+        justify-content: center;
+        color:brown;
+        display: flex;
+        position: absolute;
         
-    }
+        
+        &.modal {
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            padding: 5%;
+            max-height: 70%;
+            overflow-y: auto;
+            margin: left 35% right 35%;
+            width: 70%;
+        }
 
+    }
 }
 
