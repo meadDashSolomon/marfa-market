@@ -26,13 +26,13 @@ export default function QuestionList(props:QuestionListProps) {
     const listOfQuestions:questionsType[] = [];
     const[questions,setQuestions] = useState<questionsType[]>([]);
     const[questionModal, setQuestionModal] = useState<boolean>(false); //tracks if this is visable
-    const[numQuestions, setNumQuestions] = useState<number>(10); //tracks number of questions
+    const[numQuestions, setNumQuestions] = useState<number>(1); //tracks number of questions
     const questionsSort = (a:questionsType, b:questionsType) => {
         return b.question_helpfulness - a.question_helpfulness
     }
     
     const getQuestionsFromServer = async () => { //gets questions every time the page loads
-        await axios.request(getQuestions(props.itemId,1,numQuestions))
+        await axios.request(getQuestions(props.itemId,1,20))
         .then((response) => {
           for( const el of response.data.results) {
             if(!listOfQuestions.includes(el)) {
@@ -56,7 +56,7 @@ export default function QuestionList(props:QuestionListProps) {
                 >No Questions At This time</Typography>
              </Card>)
         } else if (props.searchQuery.length >= 3) {//if there is a searchQuery [need to highlight every occurance of that word (use split set style and join probably)]
-            return questions.sort(questionsSort).map((question) => {
+            return questions.sort(questionsSort).slice(numQuestions).map((question) => {
                 if (!question.reported && question.question_body.includes(props.searchQuery)) {
                     return (<QuestionListEntry
                         searchQuery={props.searchQuery}
@@ -66,7 +66,7 @@ export default function QuestionList(props:QuestionListProps) {
                 }
             })
         } else {// if there is no searchQuery
-            return questions.sort(questionsSort).map((question) => {
+            return questions.sort(questionsSort).slice(numQuestions).map((question) => {
                 if (!question.reported) {
                     return (
                         <QuestionListEntry
@@ -77,7 +77,7 @@ export default function QuestionList(props:QuestionListProps) {
                 }
             })
         }
-    },[props.searchQuery, questions]); 
+    },[props.searchQuery, questions, numQuestions]); 
 
     const renderQuestionModal = () => {//conditional rendering of QuestionModal
         if(questionModal) {

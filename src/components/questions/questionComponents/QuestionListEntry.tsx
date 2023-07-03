@@ -2,7 +2,7 @@ import { Button, Card } from "@mui/material";
 import AnswerList from "../answerComponents/AnswerList";
 import { format } from "date-fns"
 import { Typography } from "@mui/joy";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AnswerModal from "../answerComponents/AnswerModal";
 
 
@@ -31,7 +31,7 @@ export default function QuestionListEntry(props:QuestionListEntryProps) {
             console.log('no stop that')
         }
     };
-    const renderAnswerModal = () => { //conditial rendering of AnswerModal
+    const renderAnswerModal = useCallback(() => { //conditial rendering of AnswerModal
         if(answerModal) {
             return (
                 <AnswerModal
@@ -41,7 +41,7 @@ export default function QuestionListEntry(props:QuestionListEntryProps) {
                 />
             );
         }
-    };
+    },[answerModal, props.question.question_id]);
 
     return (
         <Card className = "Questions QuestionList QuestionListEntry">
