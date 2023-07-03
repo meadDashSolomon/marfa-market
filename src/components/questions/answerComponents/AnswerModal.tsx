@@ -67,14 +67,14 @@ export default function AnswerModal (props:AnswerModalProps) {
     return (
         <Box>
             <Modal
-                className = {'Questions AnswersModal'}
+                className = {'Questions Modal'}
                 open={props.answerModal}
                 onClose={handleClose}
             >
                 <Fade in={props.answerModal}>
                     <Card
                         variant="outlined"
-                        className="Questions AnswerModal modal"
+                        className="Questions Modal"
                     >
                         <Typography
                             level="h2"

@@ -48,24 +48,15 @@
         background-color: rgb(171, 252, 171);
     }
 
-    &.AnswersModal {
-        &.modal {
+
+        &.Modal {
             box-sizing: border-box;
             padding: 5%;
             max-height: 70%;
-            overflow-y: scroll;
+            overflow-y: auto;
             width: 70%;
         }
-    }
-    &.QuestionModal {
-        // background-color: rgb(249, 255, 60); 
-        // display: flex;
-        &.modal {
-            box-sizing: border-box;
-            padding: 5%;
-            max-height: 70%;
-            width: 70%;
-        }
-    }
+
+    
 }
 
