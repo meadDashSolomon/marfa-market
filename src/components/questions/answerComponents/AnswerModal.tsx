@@ -1,7 +1,7 @@
 import { TextField, Box, Card, Fade, FormControl, FormLabel, Button, Stack } from "@mui/material";
 import { CardContent, Modal, Typography, Divider } from "@mui/joy";
 import AnswerPicturesModal from "./AnswerPicturesModal";
-import {useState} from "react"
+import {useCallback, useState} from "react"
 import axios from "axios";
 import postAnswer from "../requests/postAnswer";
 
@@ -46,7 +46,7 @@ export default function AnswerModal (props:AnswerModalProps) {
     const handleClose = () => {// closes modal not the problem
         props.setAnswerModal(false);
     }
-    const conditionalPictures = () => {// will show your pictures if you uploaded any
+    const conditionalPictures = useCallback(() => {// will show your pictures if you uploaded any
         if(pictures.length > 0) {
             pictures.map((picture) => {
                 return (
@@ -63,7 +63,7 @@ export default function AnswerModal (props:AnswerModalProps) {
         } else {
             return (<Typography>No Pictures Yet</Typography>)
         }
-    }
+    },[pictures])
     return (
         <Modal
             className = {'Questions Modal'}
