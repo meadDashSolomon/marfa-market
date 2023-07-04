@@ -39,6 +39,7 @@ const NewReview = ({
   const [photos, setPhotos] = useState([]);
   const [formData, setFormData] = useState({});
   const [checked, setChecked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleClose = () => {
     setIsWriting(false);
@@ -63,7 +64,6 @@ const NewReview = ({
     required: [
       "rating",
       "characteristics",
-      "recommend",
       "body",
       "name",
       "email",
@@ -82,12 +82,16 @@ const NewReview = ({
   };
 
   const handleSubmit = (event) => {
+
+    const invalidSubmissions = new Set();
+
     event.preventDefault();
     let validSubmission = true;
     console.log(formData);
     validation.required.forEach((section) => {
       if (!formData[section]) {
         validSubmission = false;
+        invalidSubmissions.add(section)
       }
     })
     for (const section in formData) {
@@ -95,10 +99,11 @@ const NewReview = ({
         const validator = validation[section]
         if (!validator(formData[section])) {
           validSubmission = false;
+          invalidSubmissions.add(section)
         }
       }
     }
-
+    console.log(invalidSubmissions)
     if (validSubmission) {
       axios
         .post(
@@ -120,7 +125,10 @@ const NewReview = ({
         });
     } else {
       // return error
-      console.log("error");
+      console.log(`Enter a valid: ${[...invalidSubmissions].join(', ')}`)
+      setErrorMessage(() => {
+        return `Enter a valid: ${[...invalidSubmissions].join(', ')}`
+      })
     }
   };
 
