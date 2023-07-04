@@ -65,84 +65,83 @@ export default function AnswerModal (props:AnswerModalProps) {
         }
     }
     return (
-        <Box>
-            <Modal
-                className = {'Questions Modal'}
-                open={props.answerModal}
-                onClose={handleClose}
-            >
-                <Fade in={props.answerModal}>
-                    <Card
-                        variant="outlined"
+        <Modal
+            className = {'Questions Modal'}
+            open={props.answerModal}
+            onClose={handleClose}
+        >
+            <Fade in={props.answerModal}>
+                <Card
+                    variant="outlined"
                         className="Questions Modal"
-                    >
-                        <Typography
+                >
+                    <Typography
                             level="h2"
                             fontSize="x1"
-                        >Submit your Answer</Typography>
-                        <Typography>this will be the subtitle saying what item</Typography>
-                        <Divider inset="none"/>
-                        <CardContent>
-                            <FormControl>
-                                <FormLabel>userName *</FormLabel>
-                                <TextField 
-                                    required
-                                    defaultValue={' '}
-                                    placeholder="Example: jack543!"
-                                    onChange={(e) => {
-                                        setUsername(e.target.value)
-                                    }}/>
-                                <Typography>For privacy reasons, do not use your full name or email</Typography>
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Email *</FormLabel>
-                                <TextField 
-                                    multiline={true}
-                                    required
-                                    defaultValue={' '}
-                                    inputProps={{maxLength:1000}}
-                                    onChange={(e)=> {
-                                        setEmail(e.target.value);
-                                    }}/>
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Answer *</FormLabel>
-                                <TextField 
-                                    multiline={true}
-                                    required
-                                    defaultValue={' '}
-                                    inputProps={{maxLength:1000}}
-                                    onChange={(e)=> {
-                                        setAnswer(e.target.value)
-                                    }}/>
-                            </FormControl>
-                                <Card >
-                                    <Stack direction={'row'}>{conditionalPictures()}</Stack>
-                                </Card>
-                                <Button 
-                                    onClick={() =>{
-                                        console.log('OPENING PICTURES MODAL IN ANSWERS')
-                                        setPicturesModal(true)
-                                    }}
-                                >Pictures</Button>
-                                <AnswerPicturesModal
-                                    picturesModal={picturesModal}
-                                    setPictuesModal={setPicturesModal}
-                                    setPictures={setPictures}
-                                />
-                            <Button
-                                type="submit"
-                                onClick={() => {
-                                    if(validateForm()) {
-                                        postRequest()
-                                        props.setAnswerModal(false);
-                                    }
-                                }}
-                            >Submit</Button>
-                        </CardContent>
-                    </Card>
-                </Fade>
-            </Modal>
-        </Box>
+                    >Submit your Answer</Typography>
+                    <Typography>this will be the subtitle saying what item</Typography>
+                    <Divider inset="none"/>
+                    <CardContent>
+                        <FormControl>
+                            <FormLabel>userName *</FormLabel>
+                            <TextField 
+                                required
+                                defaultValue={''}
+                                placeholder="Example: jack543!"
+                                onChange={(e) => {
+                                    setUsername(e.target.value)
+                                }}/>
+                            <Typography>For privacy reasons, do not use your full name or email</Typography>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Email *</FormLabel>
+                            <TextField 
+                                multiline={true}
+                                required
+                                defaultValue={''}
+                                inputProps={{maxLength:1000}}
+                                onChange={(e)=> {
+                                    setEmail(e.target.value);
+                                }}/>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Answer *</FormLabel>
+                            <TextField 
+                                multiline={true}
+                                required
+                                defaultValue={''}
+                                inputProps={{maxLength:1000}}
+                                onChange={(e)=> {
+                                    setAnswer(e.target.value)
+                                }}/>
+                        </FormControl>
+                        <Card >
+                            <Stack direction={'row'}>{conditionalPictures()}</Stack>
+                        </Card>
+                        <Button 
+                            onClick={() =>{
+                                console.log('OPENING PICTURES MODAL IN ANSWERS')
+                                setPicturesModal(true)
+                            }}
+                        >Pictures</Button>
+                        <AnswerPicturesModal
+                            pictures={pictures}
+                            picturesModal={picturesModal}
+                            setPictuesModal={setPicturesModal}
+                            setPictures={setPictures}
+                        />
+                        <Button
+                            type="submit"
+                            onClick={() => {
+                                if(validateForm()) {
+                                    postRequest()
+                                    props.setAnswerModal(false);
+                                }
+                            }}
+                        >Submit</Button>
+                    </CardContent>
+                </Card>
+            </Fade>
+        </Modal>
     )
 }
