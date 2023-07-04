@@ -68,7 +68,11 @@ const NewReview = ({
       "name",
       "email",
     ],
-    characteristics: "",
+    characteristics: (chars) => {
+      console.log(chars)
+      console.log(Object.keys(productRatings).length)
+      return Object.keys(chars).length === Object.keys(productRatings).length || false
+    },
     body: (value) => (value.length >= 50 && value.length <= 1000) || false,
     name: (value) => (value.length >= 2 && value.length <= 60) || false,
     email: (value) => {
@@ -79,16 +83,19 @@ const NewReview = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validSubmission = true;
+    let validSubmission = true;
     console.log(formData);
-    for (const validator in validators) {
-      // check if characteristics, overall rating, review body, nickname, email,
-
-      const formSection = formData[validator];
-      if (formSection !== undefined && validator(formSection)) {
-        console.log("yes");
-      } else {
-        console.log("no");
+    validation.required.forEach((section) => {
+      if (!formData[section]) {
+        validSubmission = false;
+      }
+    })
+    for (const section in formData) {
+      if (validation[section]) {
+        const validator = validation[section]
+        if (!validator(formData[section])) {
+          validSubmission = false;
+        }
       }
     }
 
