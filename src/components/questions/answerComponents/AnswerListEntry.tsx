@@ -12,7 +12,7 @@ type AnswerListEntryProps = {
         answerer_name: string,
         helpfulness: number,
         photos: []
-    }
+    };
 }
 
 export default function AnswerListEntry(props: AnswerListEntryProps) {
