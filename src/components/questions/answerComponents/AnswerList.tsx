@@ -7,12 +7,14 @@ import getAnswers from "../requests/getAnswers";
 type AnswerListProps = {questionID:number};
 
 type listOfAnswersProps = {
-    answers:{answer_id: number,
-    body: string,
-    date: string,
-    answerer_name: string,
-    helpfulness: number,
-    photos: []}[]
+    answers:{
+        answer_id: number,
+        body: string,
+        date: string,
+        answerer_name: string,
+        helpfulness: number,
+        photos: string[]
+    }[]
 }
 
 export default function AnswerList(props:AnswerListProps) {
@@ -35,7 +37,6 @@ export default function AnswerList(props:AnswerListProps) {
         })
     }
     useEffect(()=> {
-        console.log('useEffect for answers ran');
         axios.request(getAnswers(props.questionID))
         .then((response) => {
             console.log('this is what we got back in answer',response.data.results);
@@ -44,6 +45,7 @@ export default function AnswerList(props:AnswerListProps) {
                     listOfAnswers.push(el);
                 }
             }
+            console.log(listOfAnswers)
             setAnswers(listOfAnswers);
         }).catch((error)=> console.log('ERROR IN GET ANSWERS',error));
     },[props.questionID])
