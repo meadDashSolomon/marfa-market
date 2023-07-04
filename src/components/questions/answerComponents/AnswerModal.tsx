@@ -1,4 +1,4 @@
-import { TextField, Box, Card, Fade, FormControl, FormLabel, Button, Stack } from "@mui/material";
+import { TextField, Card, Fade, FormControl, FormLabel, Button, Stack } from "@mui/material";
 import { CardContent, Modal, Typography, Divider } from "@mui/joy";
 import AnswerPicturesModal from "./AnswerPicturesModal";
 import {useCallback, useState} from "react"
