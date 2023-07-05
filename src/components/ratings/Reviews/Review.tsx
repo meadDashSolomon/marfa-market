@@ -143,21 +143,25 @@ const Review = ({ review }: ReviewProps) => {
             >
               Helpful?{" "}
               <Link
+                // onMouseEnter={()}
+                // onMouseExit
                 onClick={handleHelpfulClick}
-                color="inherit"
+                color="#25252D"
+                fontSize={'11px'}
                 href="#"
                 underline="always"
-                variant="body3"
+                variant="body2"
               >
                 Yes
               </Link>{" "}
               ({review.helpfulness}) |{" "}
               <Link
                 onClick={handleReportClick}
-                color="inherit"
+                color="#25252D"
+                fontSize={'11px'}
                 href="#"
                 underline="always"
-                variant="body3"
+                variant="body2"
               >
                 Report
               </Link>

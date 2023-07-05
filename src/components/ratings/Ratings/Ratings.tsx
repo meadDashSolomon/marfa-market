@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import LinearProgress from '@mui/joy/LinearProgress';
 import {
-  LinearProgress,
   Rating,
   Slider,
   Stack,
@@ -130,30 +130,39 @@ const Ratings = ({
       </Typography>
       {availableRatings.map((rating, index) => {
         return (
-          <Stack direction="column" key={index}>
-            <Rating
-              readOnly={true}
-              value={rating}
-              sx={{ fontSize: "16px", color: "#525252", paddingBottom: "7px" }}
-            />
-            <LinearProgress
-              variant="determinate"
-              sx={{
-                backgroundColor: "#ebebeb",
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: "#525252",
-                },
-              }}
-              color="secondary"
-              value={getReviewPercentage(rating)}
-              onClick={() => handleRatingClick(rating)}
-            />
-            <Divider
-              sx={{
-                my: "20px",
-              }}
-            />
-          </Stack>
+          <Box>
+            <Box border={"1px solid #e8e4e4"} onClick={() => handleRatingClick(rating)} borderRadius={"10px"} padding={"10px"}
+            sx={{
+              'transition': 'background-color 0.15s ease-in-out',
+              ':hover': {
+                'backgroundColor': "#fafafa"}
+                }}>
+              <Stack direction="column" key={index}>
+                <Rating
+                  readOnly={true}
+                  value={rating}
+                  sx={{ fontSize: "16px", color: "#525252", paddingBottom: "7px" }}
+                />
+                <LinearProgress
+                  determinate
+                  variant="outlined"
+                  color={'neutral'}
+                  sx={{
+                    backgroundColor: "#ebebeb",
+                    // "& .MuiLinearProgress-bar": {
+                    //   backgroundColor: "green",
+                    // },
+                  }}
+                  value={getReviewPercentage(rating)}
+                />
+              </Stack>
+            </Box>
+          <Divider
+          sx={{
+            my: "20px",
+          }}
+          />
+          </Box>
         );
       })}
       {/* <Divider sx={{
