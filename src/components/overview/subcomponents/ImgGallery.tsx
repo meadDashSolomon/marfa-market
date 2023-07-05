@@ -153,6 +153,7 @@ const ImgGallery = ({ selectedStyle }) => {
                 onClick={handleFullscreenClick}
               />
             )}
+
             <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
             {itemStylePhotos.length > 7 && (
               <>
@@ -201,8 +202,6 @@ const ImgGallery = ({ selectedStyle }) => {
       )}
     </div>
   )
-
-
 }
 
 
