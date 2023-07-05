@@ -191,19 +191,18 @@
   }
 
   .styleThumbnail {
-    width: 100px;
-    height: 100px;
+    width: 8vw;
+    height: 8vw;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid black;
-    width: clamp(5px, 8vw, 110px);
   }
 
   .styleThumbnails {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
-   width: clamp(20px, 32vw, 440px);
+    width: 33.33vw;
   }
 
   .styleText {
