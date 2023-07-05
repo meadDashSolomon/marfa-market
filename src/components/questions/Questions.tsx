@@ -30,7 +30,7 @@ export default function Questions(props: QuestionsProps) {
   const[questions,setQuestions] = useState<questionsType[]>([]);
   
   useEffect(() => {
-    axios.request(getQuestions(props.itemId,1,1000))
+    axios.request(getQuestions(props.itemId))
     .then((response) => {
       for( const el of response.data.results) {
         if(!listOfQuestions.includes(el)) {
