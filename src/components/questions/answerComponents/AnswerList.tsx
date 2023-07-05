@@ -37,17 +37,7 @@ export default function AnswerList(props:AnswerListProps) {
         })
     }
     useEffect(()=> {
-        axios.request(getAnswers(props.questionID))
-        .then((response) => {
-            console.log('this is what we got back in answer',response.data.results);
-            for(const el of response.data.results) {
-                if(!listOfAnswers.includes(el)) {
-                    listOfAnswers.push(el);
-                }
-            }
-            console.log(listOfAnswers)
-            setAnswers(listOfAnswers);
-        }).catch((error)=> console.log('ERROR IN GET ANSWERS',error));
+        
     },[props.questionID])
     return (
         <Card className = "Questions AnswerList">

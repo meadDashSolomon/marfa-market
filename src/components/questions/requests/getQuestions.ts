@@ -6,7 +6,7 @@ export default function getQuestions (productNum = 37314) {
     params: {
         product_id: `${productNum}`,
         page: 1,
-        count: Math.pow(10, 10)
+        count: 10000
     },
     headers: {
       Authorization: import.meta.env.VITE_AUTH_TOKEN
