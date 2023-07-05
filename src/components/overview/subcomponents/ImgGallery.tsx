@@ -142,14 +142,28 @@ const ImgGallery = ({ selectedStyle }) => {
                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
                  onClick={handleMainPicClick}
                  />
-            <FullscreenIcon className='fullscreenIcon'
-                            style={{ position: 'absolute', top: '10px', right: '100px', color: 'white', zIndex: '2', }}
-                            onClick={handleFullscreenClick} />
-                        <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
+            {isExpanded ? (
+              <FullscreenExitIcon
+                className='exitFullscreenIcon'
+                onClick={handleFullscreenClick}
+              />
+            ) : (
+              <FullscreenIcon
+                className='fullscreenIcon'
+                onClick={handleFullscreenClick}
+              />
+            )}
+            <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
             {itemStylePhotos.length > 7 && (
               <>
                 <KeyboardArrowUpIcon className='thumbnailUpArrow' onClick={handleUpClick} />
               </>
+            )}
+            {selectedImageIndex > 0 && (
+              <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
+            )}
+            {selectedImageIndex < itemStylePhotos.length -1 && (
+              <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
             )}
               {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
                 return (
@@ -181,12 +195,6 @@ const ImgGallery = ({ selectedStyle }) => {
               )}
             </div>
           </div>
-          {selectedImageIndex > 0 && (
-            <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
-          )}
-          {selectedImageIndex < itemStylePhotos.length -1 && (
-            <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
-          )}
         </>
       ) : (
         <p>No photos available.</p>
