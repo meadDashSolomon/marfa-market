@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import Review from "./Review";
+import Review from './Review'
 
 interface ReviewsList {
   reviews: object []

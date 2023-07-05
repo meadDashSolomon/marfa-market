@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import ReviewsList from "./ReviewsList";
-import AddMoreReviewsButton from "./AddMoreReviewsButton";
-import MoreReviewsButton from "./MoreReviewsButton";
+import AddMoreReviewsButton from "./ReviewButtons/AddMoreReviewsButton";
+import MoreReviewsButton from "./ReviewButtons/MoreReviewsButton";
 import NewReview from "./AddReview/NewReview";
 import { Box, FormControl, MenuItem, Select } from "@mui/material";
 import { Typography } from "@mui/joy";
-import { ReviewsParams, ReviewParams } from "./Interfaces"
+import { ReviewsParams } from "../Interfaces";
 
 
 
