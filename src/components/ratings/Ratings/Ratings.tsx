@@ -8,12 +8,13 @@ import {
   Divider,
 } from "@mui/material";
 import Typography from "@mui/joy/Typography";
-import { RatingsProps } from "./Interfaces";
+import { RatingsProps } from "../Interfaces";
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Ratings = ({
   setShownReviews,
   shownReviews,
+  allReviews,
   productRatings,
 }: RatingsProps) => {
   const [averageRating, setAverageRating] = useState(0);
@@ -43,11 +44,15 @@ const Ratings = ({
 
   useEffect(() => {
     // get the total reviews and sumReviews
-
-    const filteredReviews = shownReviews.filter((review) => {
-      return selectedRatings.includes(review.rating);
-    });
-    setShownReviews(filteredReviews);
+    console.log(selectedRatings)
+    if (selectedRatings.length < 1) {
+      setShownReviews(allReviews)
+    } else {
+      const filteredReviews = allReviews.filter((review) => {
+        return selectedRatings.includes(review.rating);
+      });
+      setShownReviews(filteredReviews);
+    }
   }, [selectedRatings]);
 
   const getReviewPercentage = (starNumber: number) => {

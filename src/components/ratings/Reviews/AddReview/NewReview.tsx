@@ -125,7 +125,7 @@ const NewReview = ({
         });
     } else {
       // return error
-      console.log(`Enter a valid: ${[...invalidSubmissions].join(', ')}`)
+      // console.log(`Enter a valid: ${[...invalidSubmissions].join(', ')}`)
       setErrorMessage(() => {
         return `Enter a valid: ${[...invalidSubmissions].join(', ')}`
       })
