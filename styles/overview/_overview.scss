@@ -7,7 +7,7 @@
 
   .topContainer {
     display: flex;
-    margin-bottom: 200px;
+    margin-bottom: 160px;
   }
 
   .topRightContainer {
@@ -25,6 +25,7 @@
   }
 
   .mainPicWrapper {
+    display: flex;
     position: relative;
     left: 10px;
     width: 100%;
@@ -62,9 +63,10 @@
   }
 
   .fullscreenIcon {
+    position: absolute;
+    right: 10%;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: white;
   }
 
   .thumbnails {
@@ -74,17 +76,20 @@
     top: 0;
     left: 0;
     display: flex;
+    flex: auto;
     flex-direction: column;
     z-index: 1;
     background-color: transparent;
     gap: 1vh;
+    width: 100%;
   }
 
   .thumbnail {
-    width: 23%;
+    width: 8%;
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
   }
+
 
   .smallIcon {
     width: 30px;
@@ -126,7 +131,7 @@
 
   .mainPicArrowLeft {
     position: absolute;
-    top: 18%;
+    top: 50%;
     left: 15%;
     z-index: 1;
     border: 2px solid black;
@@ -136,7 +141,7 @@
 
   .mainPicArrowRight {
     position: absolute;
-    top: 18%;
+    top: 50%;
     right: 10%;
     z-index: 1;
     border: 2px solid black;
@@ -154,18 +159,34 @@
     right: 0vw;
   }
 
+  // Procuct name
+  .productName {
+    display: flex;
+    flex: auto;
+  }
 
   .category {
     font-size: 120%;
     margin-bottom: -3.5%;
+    display: flex;
+    flex: auto;
   }
 
   .price {
     margin-top: 0;
+    display: flex;
+    flex: auto;
+  }
+
+  .originalPrice {
+    display: flex;
+    flex: auto;
+    margin-top: -2%;
   }
 
   .styleText {
     display: flex;
+    flex: auto;
     gap: 2%;
   }
 
@@ -175,21 +196,40 @@
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid black;
+    width: clamp(5px, 8vw, 110px);
   }
 
   .styleThumbnails {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
-   width: clamp(200px, 33vw, 450px);
+   width: clamp(20px, 32vw, 440px);
+  }
+
+  .styleText {
+    display: flex;
+    flex: initial
   }
 
   .styleArrow {
     font-weight: bold;
+    display: flex;
+    flex: initial;
+  }
+
+  .selectedArrow {
+    display: flex;
+    flex: initial;
   }
 
   .styleSelectorContainer {
     flex: auto;
+  }
+
+  .productInfoContainer {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
   }
 
   .productOverviewContainer {
@@ -254,8 +294,30 @@
     color: #f39c12;
   }
 
+  .reviews {
+    display: flex;
+    flex: auto;
+    padding-top: 10px;
+    margin-bottom: -10px;
+  }
+
+  .MuiRating-decimal {
+    display: flex;
+    align-items: center;
+    flex: auto;
+  }
+
+  .MuiRating-root {
+    padding-right: 10px;
+    display: flex;
+    flex: initial;
+  }
+
   .reviewsLink {
     text-decoration: underline;
+    display: flex;
+    flex: auto;
+    align-items: center;
   }
 
   .reviewsLink:hover {
@@ -264,6 +326,27 @@
 
   .addToCartBtns {
     display: flex;
+    flex: initial;
+  }
+
+  .addToCartContatiner {
+    display: flex;
+    flex: auto;
+  }
+
+  .selectors {
+    display: flex;
+    flex: initial;
+  }
+
+  .sizeSelector {
+    display: flex;
+    flex: initial;
+  }
+
+  .quantitySelector {
+    display: flex;
+    flex: initial;
   }
 
   .share {

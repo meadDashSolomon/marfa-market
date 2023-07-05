@@ -75,7 +75,7 @@ const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef, currentItem }) 
       {itemArray.length > 0 && (
         <>
           <p className="category">{currentItem.category}</p>
-          <h1>{currentItem.name}</h1>
+          <h1 className="productName">{currentItem.name}</h1>
           {/* check if product is on sale */}
           {salePrice ? (
             <>
