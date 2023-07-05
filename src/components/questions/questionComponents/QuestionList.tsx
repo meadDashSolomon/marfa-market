@@ -80,7 +80,15 @@ export default function QuestionList(props:QuestionListProps) {
             );
         }
     }; 
-
+    const renderingMoreQuestions = () => {
+        if(props.questions.length > props.listOfQuestions.length) {
+            return (
+                <Button
+                onClick={moreQuestionsOnClick}
+            >MORE ANSWERED QUESTIONS</Button>
+            )
+        }
+    }
     
     const moreQuestionsOnClick = () => {//displays more questions
         props.setNumQuestions(props.numQuestions + 2);
@@ -94,10 +102,8 @@ export default function QuestionList(props:QuestionListProps) {
                 className = "Questions QuestionsList Buttons"
                 direction={'row'}
             >
-            {}
-            <Button
-                onClick={moreQuestionsOnClick}
-            >MORE ANSWERED QUESTIONS</Button>
+            {renderingMoreQuestions()}
+            
             <Button
                 onClick={()=> {
                     setQuestionModal(true);
