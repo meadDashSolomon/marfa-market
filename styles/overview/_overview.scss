@@ -380,12 +380,34 @@
   .share {
     display: flex;
     justify-content: space-between;
-    width: 100px; /* adjust as needed */
+    width: 100px;
+    border: 1px solid black;
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    border-radius: 4px;
   }
 
   .icon {
     cursor: pointer;
   }
+
+  .icon.fb {
+    color: #4267B2;
+}
+
+.icon.twitter {
+    color: #38A1F2;
+    border-left: 1px dotted black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: 1px dotted black;
+}
+
+.icon.pinterest {
+    color: #E73E3A;
+}
 
   .fbModal,
   .twitterModal,
@@ -408,6 +430,7 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     background-color: #fefefe;

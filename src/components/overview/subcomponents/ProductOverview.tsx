@@ -82,13 +82,13 @@ const SharePinterestModal = () => {
         </div>
       </div>
       <div className="share">
-        <div className="icon" onClick={toggleFbModal}>
+        <div className="icon fb" onClick={toggleFbModal}>
           <FacebookIcon />
         </div>
-        <div className="icon" onClick={toggleTwitterModal}>
+        <div className="icon twitter" onClick={toggleTwitterModal}>
           <TwitterIcon />
         </div>
-        <div className="icon" onClick={togglePinterestModal}>
+        <div className="icon pinterest" onClick={togglePinterestModal}>
           <PinterestIcon />
         </div>
       </div>
