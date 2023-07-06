@@ -142,59 +142,66 @@ const ImgGallery = ({ selectedStyle }) => {
                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
                  onClick={handleMainPicClick}
                  />
-            <FullscreenIcon className='fullscreenIcon'
-                            style={{ position: 'absolute', top: '10px', right: '100px', color: 'white', zIndex: '2', }}
-                            onClick={handleFullscreenClick} />
-          </div>
-          <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
+            {isExpanded ? (
+              <FullscreenExitIcon
+                className='exitFullscreenIcon'
+                onClick={handleFullscreenClick}
+              />
+            ) : (
+              <FullscreenIcon
+                className='fullscreenIcon'
+                onClick={handleFullscreenClick}
+              />
+            )}
+
+            <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
             {itemStylePhotos.length > 7 && (
               <>
                 <KeyboardArrowUpIcon className='thumbnailUpArrow' onClick={handleUpClick} />
               </>
             )}
-            {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
-              return (
-                // conditional class names
-                <img
-                  className={
-                    // its a thumbnail
-                    // is it the selected thumbnail?
-                    // is the mainPic expanded?
-                    // is the small thumbnail selected?
-                    `thumbnail
-                    ${index + firstImageIndex === selectedImageIndex ?
-                       'selectedThumbnail' : ''}
-                     ${isExpanded ?
-                       'smallIcon' : ''}
-                     ${index === selectedImageIndex && isExpanded ?
-                       'selectedIconExpanded' : ''}`}
-                  key={index}
-                  src={photo.thumbnail_url}
-                  alt={`Thumbnail ${index + 1}`}
-                  onClick={() => handleThumbnailClick(photo.url, index)}
-                />
-              )
-            })}
-            {itemStylePhotos.length > 7 && (
-              <>
-                <KeyboardArrowDownIcon className='thumbnailDownArrow' onClick={handleDownClick}/>
-              </>
+            {selectedImageIndex > 0 && (
+              <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
             )}
+            {selectedImageIndex < itemStylePhotos.length -1 && (
+              <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
+            )}
+              {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
+                return (
+                  // conditional class names
+                  <img
+                    className={
+                      // its a thumbnail
+                      // is it the selected thumbnail?
+                      // is the mainPic expanded?
+                      // is the small thumbnail selected?
+                      `thumbnail
+                      ${index + firstImageIndex === selectedImageIndex ?
+                        'selectedThumbnail' : ''}
+                      ${isExpanded ?
+                        'smallIcon' : ''}
+                      ${index === selectedImageIndex && isExpanded ?
+                        'selectedIconExpanded' : ''}`}
+                    key={index}
+                    src={photo.thumbnail_url}
+                    alt={`Thumbnail ${index + 1}`}
+                    onClick={() => handleThumbnailClick(photo.url, index)}
+                  />
+                )
+              })}
+              {itemStylePhotos.length > 7 && (
+                <>
+                  <KeyboardArrowDownIcon className='thumbnailDownArrow' onClick={handleDownClick}/>
+                </>
+              )}
+            </div>
           </div>
-          {selectedImageIndex > 0 && (
-            <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
-          )}
-          {selectedImageIndex < itemStylePhotos.length -1 && (
-            <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
-          )}
         </>
       ) : (
         <p>No photos available.</p>
       )}
     </div>
   )
-
-
 }
 
 

@@ -3,7 +3,7 @@ import { Typography } from "@mui/joy";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckIcon from "@mui/icons-material/Check";
 import { format } from "date-fns";
-import requestHandler from "./RequestHandler";
+import requestHandler from "../RequestHandler";
 // import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import ReviewPhotos from "./ReviewPhotos";
 

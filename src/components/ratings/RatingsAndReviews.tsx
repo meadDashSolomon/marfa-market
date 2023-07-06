@@ -1,5 +1,5 @@
-import Ratings from "./Ratings";
-import Reviews from "./Reviews";
+import Ratings from "./Ratings/Ratings";
+import Reviews from "./Reviews/Reviews";
 import { useEffect, useMemo, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { Divider, Typography } from "@mui/joy";
@@ -18,6 +18,8 @@ export default function RatingsAndReviews({ itemId }: RatingsAndReviewsProps) {
       product_id: itemId,
     };
   }, [itemId]);
+
+  console.log(itemId)
 
   const metaParams = useMemo(() => {
     return {
@@ -101,6 +103,7 @@ export default function RatingsAndReviews({ itemId }: RatingsAndReviewsProps) {
       >
         <Ratings
           shownReviews={shownReviews}
+          allReviews={allReviews}
           setShownReviews={setShownReviews}
           productRatings={productRatings}
         />

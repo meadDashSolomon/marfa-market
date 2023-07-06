@@ -1,25 +1,26 @@
 import { Box, Button } from "@mui/material";
-import { AddMoreReviewsButtonProps } from "./Interfaces";
+import { MoreReviewsButton } from "../Interfaces";
 
 
-const AddMoreReviewsButton = ({ setIsWriting }: AddMoreReviewsButtonProps) => {
+const MoreReviewsButton = ({ setNumReviews }: MoreReviewsButton) => {
   const handleClick = () => {
-    setIsWriting(true);
+    setNumReviews((num) => num + 2);
   };
+
   return (
     <Box>
       <Button
         onClick={handleClick}
-        variant="outlined"
         sx={{
           color: "#525252",
           borderColor: "#e8e4e4",
         }}
+        variant="outlined"
       >
-        Add A Review
+        More Reviews
       </Button>
     </Box>
   );
 };
 
-export default AddMoreReviewsButton;
+export default MoreReviewsButton;
