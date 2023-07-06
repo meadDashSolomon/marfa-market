@@ -1,7 +1,5 @@
 import { Card, Typography } from "@mui/joy";
 import AnswerListEntry from "./AnswerListEntry";
-
-
 type AnswerListProps = {
     answers:{
         answer_id: number;
@@ -23,13 +21,7 @@ type AnswerListProps = {
     }[];
     searchQuery?:string
 };
-
 export default function AnswerList(props:AnswerListProps) {
-    
-    
-
-    
-    // const listOfAnswers = Object.keys(props.questionID);
     const mappingAnswers = () => {
         if(props.answers.length > 0){
             return props.answers.map(answer => {
@@ -49,7 +41,6 @@ export default function AnswerList(props:AnswerListProps) {
         }
         
     }
-
     return (
         <><Card className = "Questions AnswerList">{mappingAnswers()}</Card></>
     )

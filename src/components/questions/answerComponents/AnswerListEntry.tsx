@@ -22,7 +22,7 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
 
     const displayUserName = () => {
         // if the userName of the Seller is the same as the userName of the answerer but it in bold 
-        return props.answer.answer_id ? <strong>{props.answer.answerer_name}</strong>: props.answer.answerer_name;
+        return props.answer.answerer_name === 'Seller' ? <strong>{props.answer.answerer_name}</strong>: props.answer.answerer_name;
     }
 
     const mappedImages = () => { //refactor to somewhat match what the overview pictures do
