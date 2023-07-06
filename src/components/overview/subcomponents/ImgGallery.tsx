@@ -142,7 +142,7 @@ const ImgGallery = ({ selectedStyle }) => {
                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
                  onClick={handleMainPicClick}
                  />
-            {isExpanded ? (
+            {(isExpanded && zoomLevel === 1) ? (
               <FullscreenExitIcon
                 className='exitFullscreenIcon'
                 onClick={handleFullscreenClick}
