@@ -25,7 +25,7 @@ export default function Questions(props: QuestionsProps) {
   const[questionSort, setQuestionSort] = useState<string>('helpfulness');
   
   
-  //getting the questions
+  //getting the questions [and caching]
   const questionsCache:questionsType[] = [];
   const[questions,setQuestions] = useState<questionsType[]>([]);
   
@@ -35,13 +35,13 @@ export default function Questions(props: QuestionsProps) {
       for( const el of response.data.results) {
         if(!questionsCache.includes(el)) {
             questionsCache.push(el)
-            questionsCache.sort(
-              (a: {question_helpfulness:number},
-               b: {question_helpfulness: number}):number => {
-                return b.question_helpfulness - a.question_helpfulness
-              });
         }
       }
+      questionsCache.sort(
+        (a: {question_helpfulness:number},
+         b: {question_helpfulness: number}):number => {
+          return b.question_helpfulness - a.question_helpfulness
+        });
       setQuestions(questionsCache);
     }).catch((error)=> console.log('ERROR IN GET QUESTIONS ',error));
   },[props.itemId]);
