@@ -45,14 +45,15 @@ const Review = ({ review }: ReviewProps) => {
         variant="outlined"
         sx={{
           boxShadow: "1px 1px 6px #e8e4e4",
+          display: 'flex'
         }}
       >
         <CardContent
           sx={{
             display: "flex",
+            flex: 1,
             flexDirection: "column",
-            minWidth: "400px",
-            // maxWidth: "700px",
+            minWidth: "400px"
           }}
         >
           <Stack

@@ -76,7 +76,7 @@ const Reviews = ({
           />
         ) : null}
       </Box>
-      <Box>
+      <Box sx={{ display: 'flex' }}>
         <ReviewsList reviews={displayedReviews} />
       </Box>
       <Box
