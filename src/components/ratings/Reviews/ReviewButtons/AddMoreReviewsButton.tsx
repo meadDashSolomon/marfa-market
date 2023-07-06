@@ -1,4 +1,5 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
+import { Button } from "@mui/joy";
 import { AddMoreReviewsButtonProps } from "../../Interfaces";
 
 
@@ -9,6 +10,7 @@ const AddMoreReviewsButton = ({ setIsWriting }: AddMoreReviewsButtonProps) => {
   return (
     <Box>
       <Button
+        color="neutral"
         onClick={handleClick}
         variant="outlined"
         sx={{

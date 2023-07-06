@@ -35,6 +35,7 @@ const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues
             color: "#25252D"
             }}>{char}:</FormLabel>
             <RadioGroup
+            color='neutral'
             onChange={(event) => handleChange(event, char)}
             sx={{
               display: 'flex',
@@ -78,7 +79,7 @@ const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues
                 <FormControlLabel
                   key={index}
                   value={descriptor[0]}
-                  control={<Radio />}
+                  control={<Radio color='neutral' />}
                 />
               </Box>
             ))}

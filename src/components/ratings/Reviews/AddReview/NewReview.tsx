@@ -12,18 +12,12 @@ import {
   Divider,
   CardContent,
   Rating,
-  Button,
-  TextField,
   Stack,
   Checkbox,
-  RadioGroup,
-  FormControlLabel,
 } from "@mui/material";
-import { Typography, FormControl, FormLabel, Radio, Tooltip } from "@mui/joy";
+import { Typography, Tooltip, Button } from "@mui/joy";
 import PhotosModal from "./PhotosModal";
-import characteristics from "./Characteristics";
 import CharacteristicsList from "./CharacteristicsList";
-import requestHandler from "../RequestHandler";
 import InputFields from "./InputFields";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
@@ -130,8 +124,6 @@ const NewReview = ({
           console.error("There was an error:", error.response.data);
         });
     } else {
-      // return error
-      // console.log(`Enter a valid: ${[...invalidSubmissions].join(', ')}`)
       setErrorMessage(() => {
         return `Enter a valid: ${[...invalidSubmissions].join(', ')}`
       })
@@ -289,6 +281,7 @@ const NewReview = ({
                   }}
                 >
                   <Button
+                    color="neutral"
                     sx={{
                       flex: 1,
                       borderColor: "#e8e4e4",
@@ -300,6 +293,7 @@ const NewReview = ({
                     Submit
                   </Button>
                   <Button
+                    color="neutral"
                     sx={{
                       flex: 1,
                       borderColor: "#e8e4e4",
