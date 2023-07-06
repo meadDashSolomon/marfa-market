@@ -4,7 +4,7 @@ import { Rating, Stack, Slider, Box, Divider } from "@mui/material";
 import Typography from "@mui/joy/Typography";
 import { RatingsProps } from "../Interfaces";
 import characteristics from "../Reviews/AddReview/Characteristics";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import IconButton from '@mui/joy/IconButton';
 
 const Ratings = ({
   setShownReviews,
@@ -84,17 +84,11 @@ const Ratings = ({
     return <Typography>Loading...</Typography>;
   }
 
-  const arrowIcon = (props) => {
-    console.log('what are the props: ', props.ownerState)
-    return (
-      <span {...props.ownerState} >
-        <ArrowDropDownIcon/>
-      </span>
-    )
-  };
-
   return (
-    <Box>
+    <Box sx={{
+        flex: 1,
+        flexBasis: '70%'
+      }}>
       <Box
         sx={{
           display: "flex",
@@ -210,7 +204,6 @@ const Ratings = ({
                     position: 'absolute'
                   }
                 }}
-                // slots={{ thumb: arrowIcon }}
                 size="small"
               ></Slider>
               <Stack

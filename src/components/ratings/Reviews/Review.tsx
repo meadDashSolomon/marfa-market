@@ -52,7 +52,7 @@ const Review = ({ review }: ReviewProps) => {
             display: "flex",
             flexDirection: "column",
             minWidth: "400px",
-            maxWidth: "700px",
+            // maxWidth: "700px",
           }}
         >
           <Stack
@@ -70,13 +70,13 @@ const Review = ({ review }: ReviewProps) => {
               }}
             ></Rating>
             <Stack direction="row" alignItems="center">
-              <CheckCircleIcon
-                fontSize="16px"
-                sx={{
-                  color: "#525252",
-                  marginRight: "4px",
-                }}
-              />
+                <CheckCircleIcon
+                  sx={{
+                    fontSize: "16px",
+                    color: "#525252",
+                    marginRight: "4px",
+                  }}
+                />
               <Typography
                 level="body3"
                 textColor="#25252D"
@@ -116,26 +116,28 @@ const Review = ({ review }: ReviewProps) => {
             >
               {review.body}
             </Typography>
-            {review.recommend ? (
-              <Stack direction="row" spacing="8px">
-                <CheckIcon fontSize="small" />
-                <Typography level="body2" textColor="#25252D">
-                  I recommend this product
-                </Typography>
-              </Stack>
-            ) : null}
-            {!review.response === null ? (
-              <Box>
-                <Typography
-                  sx={{
-                    backgroundColor: "text.secondary",
-                  }}
-                >
-                  Hello
-                </Typography>
-              </Box>
-            ) : null}
-            <ReviewPhotos photos={review.photos} />
+            <Stack direction={'row'} spacing={1.5} alignItems={'center'}>
+              {review.recommend ? (
+                <Stack direction="row" spacing="8px">
+                  <CheckIcon fontSize="small" />
+                  <Typography level="body2" textColor="#25252D">
+                    I recommend this product
+                  </Typography>
+                </Stack>
+              ) : null}
+              {!review.response === null ? (
+                <Box>
+                  <Typography
+                    sx={{
+                      backgroundColor: "text.secondary",
+                    }}
+                  >
+                    Hello
+                  </Typography>
+                </Box>
+              ) : null}
+              <ReviewPhotos photos={review.photos} />
+            </Stack>
             <Typography
               level="body3"
               textColor="#25252D"
