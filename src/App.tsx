@@ -12,7 +12,10 @@ type item = {
   description: string,
   category: string,
   default_price: string,
-  features: [],
+  features: {
+    feature: string;
+    value: string;
+  }[];
 }
 
 const defaultItem = {
@@ -26,22 +29,18 @@ const defaultItem = {
 };
 
 const App = () => {
-  const [currentItem, setCurrentItem] = useState(defaultItem);
-  const [allItems, setAllItems] = useState([]);
+  const [currentItem, setCurrentItem] = useState<item>(defaultItem);
+  const [allItems, setAllItems] = useState<item[]>([]);
 
   const endpoint = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
-  const config = {
-    headers: {
-      Authorization: import.meta.env.VITE_AUTH_TOKEN,
-    },
-  };
+  const config = {headers: {Authorization: import.meta.env.VITE_AUTH_TOKEN}};
 
   useEffect(() => {
     // console.log(import.meta.env.VITE_.substr())
     axios
       .get(endpoint + "products", config)
       .then((results) => {
-        let data = results.data[0];
+        const data = results.data[0];
         setCurrentItem(data);
         // console.log('CURRENT ITEM SET', results.data[0], currentItem)
         setAllItems(results.data);
@@ -53,7 +52,7 @@ const App = () => {
     axios.get(endpoint + 'products', config)
     .then((results) => setCurrentItem(results.data[2]))
     .catch((err) => console.log(err))
-  }, [])
+  },[])
 
   if(Object.keys(currentItem).length < 1) {
     return (
