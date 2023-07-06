@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { MoreReviewsButton } from "../Interfaces";
+import { MoreReviewsButton } from "../../Interfaces";
 
 
 const MoreReviewsButton = ({ setNumReviews }: MoreReviewsButton) => {

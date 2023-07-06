@@ -7,9 +7,9 @@ import FormLabel from '@mui/joy/FormLabel';
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Typography } from '@mui/joy';
+import { Typography, Divider } from '@mui/joy';
 import characteristics from './Characteristics';
-import { useState } from 'react'
+import { Stack } from '@mui/material'
 
 const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues, setFormData, formData }) => {
 
@@ -26,35 +26,69 @@ const CharacteristicsList = ({ productRatings, selectedValues, setSelectedValues
   return (
     <>
       {Object.keys(productRatings.characteristics).map((char, index) => (
-        <Box key={index}>
-          <FormLabel>{char}:</FormLabel>
+        <Stack key={index} justifyContent={'center'}>
+          <FormLabel sx={{
+            marginBottom: '15px',
+            alignSelf: 'center',
+            marginTop: '10px',
+            marginRight: '22px',
+            color: "#25252D"
+            }}>{char}:</FormLabel>
             <RadioGroup
             onChange={(event) => handleChange(event, char)}
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              justifyContent: 'space-between',
+              justifyContent: 'space-around',
               alignItems: 'end',
-              maxWidth: "670px"
+              maxWidth: "auto",
+              position: "relative"
             }}
           >
             {Object.entries(characteristics[char]).map((descriptor, index) => (
-              <FormControlLabel
-                key={index}
-                value={descriptor[0]}
-                control={<Radio />}
-                label={
-                  index === 0 || index === 4 ? (
-                    <Typography textColor="#25252D" level="body3">
-                      {descriptor[1]}
-                    </Typography>
-                  ) : ("")
-                }
-                labelPlacement="top"
-              />
+              <Box>
+                {index === 0 ?
+                <Typography sx={{
+                  position: "absolute",
+                  top: '-50%',
+                  left: '7.825%',
+                  transform: 'translate(-50%, -50%)',
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap',
+                  color: "#25252D"
+                  }}
+                  level='body3'
+                  >
+                  {descriptor[1]}
+                </Typography> : null}
+                {index === 4 ?
+                <Typography sx={{
+                  position: "absolute",
+                  top: '-50%',
+                  left: '87.755%',
+                  transform: 'translate(-50%, -50%)',
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap',
+                  color: "#25252D"
+                  }}
+                  level='body3'
+                  >
+                  {descriptor[1]}
+                </Typography> : null}
+                <FormControlLabel
+                  key={index}
+                  value={descriptor[0]}
+                  control={<Radio />}
+                />
+              </Box>
             ))}
           </RadioGroup>
-        </Box>
+          <Divider
+          sx={{
+            marginY: '20px'
+          }}
+          />
+        </Stack>
       ))}
     </>
   );
