@@ -26,23 +26,23 @@ export default function Questions(props: QuestionsProps) {
   
   
   //getting the questions
-  const listOfQuestions:questionsType[] = [];
+  const questionsCache:questionsType[] = [];
   const[questions,setQuestions] = useState<questionsType[]>([]);
   
   useEffect(() => {
     axios.request(getQuestions(props.itemId))
     .then((response) => {
       for( const el of response.data.results) {
-        if(!listOfQuestions.includes(el)) {
-            listOfQuestions.push(el)
-            listOfQuestions.sort(
+        if(!questionsCache.includes(el)) {
+            questionsCache.push(el)
+            questionsCache.sort(
               (a: {question_helpfulness:number},
                b: {question_helpfulness: number}):number => {
                 return b.question_helpfulness - a.question_helpfulness
               });
         }
       }
-      setQuestions(listOfQuestions);
+      setQuestions(questionsCache);
     }).catch((error)=> console.log('ERROR IN GET QUESTIONS ',error));
   },[props.itemId]);
   //how many questions are being mapped
@@ -63,7 +63,7 @@ export default function Questions(props: QuestionsProps) {
         <QuestionList
         numQuestions={numQuestions}
         setNumQuestions={setNumQuestions}
-        listOfQuestions={listOfQuestions}
+        questionsCache={questionsCache}
         questions={questions.slice(0,numQuestions)}
         itemId = {props.itemId}
         searchQuery = {searchQuery}

@@ -19,7 +19,7 @@ type QuestionListProps = {
         reported:boolean,
         answers:object[]
     }[]
-    listOfQuestions: {
+    questionsCache: {
         question_id:number,
         question_body:string,
         question_date:string,
@@ -81,7 +81,7 @@ export default function QuestionList(props:QuestionListProps) {
         }
     }; 
     const renderingMoreQuestions = () => {
-        if(props.questions.length > props.listOfQuestions.length) {
+        if(props.questions.length > props.questionsCache.length) {
             return (
                 <Button
                 onClick={moreQuestionsOnClick}
