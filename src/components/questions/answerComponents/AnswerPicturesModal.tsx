@@ -30,7 +30,7 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
           onClick={() => {
             picturesArray.splice(picturesArray.indexOf(picture), 1);
           }}
-        />
+          />
       );
     });
   }, [picturesArray]);

@@ -62,6 +62,21 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
     }
   };
 
+  const[reportedStatus, setReportedStatus] = useState<string>('Report');
+  const reportAnswer = () => {
+    if(reportedStatus === "Report") {
+      setReportedStatus("Reported");
+      reportRequest()
+    }
+  }
+  const reportRequest = () => {
+    axios
+    .request(reportAnswer(props.answer.answer_id))
+    .then(()=> {
+      console.log("Report request sent")
+    })
+    .catch(error=>console.log("error in reportRequest",error))
+  }
   return (
     <Card className="Questions AnswerListEntry">
       <Typography level="h5">
@@ -78,7 +93,9 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
         >
           yes
         </Button>
-        {props.answer.helpfulness} | <Button>report</Button>
+        {props.answer.helpfulness} | <Button
+        onClick={reportAnswer}
+        >report</Button>
       </Typography>
       <Stack direction={"row"}>{mappedImages()}</Stack>
     </Card>

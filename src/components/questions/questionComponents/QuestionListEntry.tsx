@@ -7,6 +7,7 @@ import AnswerModal from "../answerComponents/AnswerModal";
 import helpfulQuestion from "../requests/helpfulQuestion";
 import axios from "axios";
 import getAnswers from "../requests/getAnswers";
+import reportQuestion from "../requests/reportQuestion";
 
 type QuestionListEntryProps = {
   searchQuery?: string;
@@ -81,20 +82,17 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
   //Helpful Button Components
   const [helpful, setHelpful] = useState<string>("Helpful?");
   const helpfulFunction = () => {
-    // need to finish
     if (helpful !== "Helpful") {
       setHelpful("Helpful");
       helpfulRequest();
-    } else {
-      console.log("no stop that");
     }
   };
   const helpfulRequest = () => {
     // sends that a question was helpful
     axios
       .request(helpfulQuestion(props.question.question_id))
-      .then((response) => {
-        console.log(response.status);
+      .then(() => {
+        console.log('status sent');
       })
       .catch((error) => console.log("error in helpful request", error));
   };
@@ -111,6 +109,23 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
       );
     }
   };
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //report
+  const[reportedStatus,setReportedStatus] = useState<string>('Report');
+  const reportFunc = () => {
+    if(reportedStatus === 'Report') {
+      setReportedStatus('Reported');
+      reportRequest()
+    }
+  };
+  const reportRequest = () => {
+    axios.request(reportQuestion(props.question.question_id))
+    .then(()=> {
+      console.log("status sent");
+    })
+    .catch(error => console.log("error in report question", error))
+  }
+
 
   return (
     <Card className="Questions QuestionList QuestionListEntry">
@@ -133,6 +148,9 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
           }}
         >
           Add Answer
+        </Button>
+        <Button onClick={reportFunc}>
+          {reportedStatus}
         </Button>
       </Typography>
       <AnswerList
