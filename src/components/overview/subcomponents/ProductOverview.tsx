@@ -68,27 +68,24 @@ const SharePinterestModal = () => {
         <p>{description}</p>
       </div>
       <div className="overviewCenter">
-        <div className="">
-          <img src="" alt="" />
+        <div className="line1">
           <p>GMO Free</p>
         </div>
-        <div className="">
-          <img src="" alt="" />
+        <div className="line2">
           <p>All the GMOs</p>
         </div>
         <div className="">
-          <img src="" alt="" />
           <a href='https://www.youtube.com/watch?v=KBsUODDDODU' target='_blank'>Now I'm Gonna Starve</a>
         </div>
       </div>
       <div className="share">
-        <div className="icon" onClick={toggleFbModal}>
+        <div className="icon fb" onClick={toggleFbModal}>
           <FacebookIcon />
         </div>
-        <div className="icon" onClick={toggleTwitterModal}>
+        <div className="icon twitter" onClick={toggleTwitterModal}>
           <TwitterIcon />
         </div>
-        <div className="icon" onClick={togglePinterestModal}>
+        <div className="icon pinterest" onClick={togglePinterestModal}>
           <PinterestIcon />
         </div>
       </div>

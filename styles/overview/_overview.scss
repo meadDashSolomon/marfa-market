@@ -3,17 +3,24 @@
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    width: 80vw;
+    display: flex;
+  }
+
+  .centeringContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10vw;
   }
 
   .topContainer {
     display: flex;
-    margin-bottom: 160px;
+    margin-bottom: 13vw;
   }
 
   .topRightContainer {
     display: flex;
     flex-direction: column;
-    padding-right: 10px;
     flex: auto;
   }
 
@@ -27,12 +34,14 @@
   .mainPicWrapper {
     display: flex;
     position: relative;
+    background-color: white;
     left: 10px;
     width: 100%;
     padding-bottom: 100%;
     border: 5px solid #ffffff;
     margin-right: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2), 2px 2px 2px 2px rgba(0,0,0,0.19);
+    z-index: 2;
   }
 
   .mainPic {
@@ -76,7 +85,7 @@
     position: absolute;
     right: 10%;
     top: 2%;
-    border: 10px solid red;
+    border: 10px solid black;
     border-radius: 5px;
     box-shadow: 0px 0px 0px 13px rgba(152, 136, 68, 0.5);
     z-index: 4;
@@ -94,11 +103,10 @@
     z-index: 1;
     background-color: transparent;
     gap: 1vh;
-    width: 100%;
   }
 
   .thumbnail {
-    width: 8%;
+    width: 3vw;
     height: auto;
     object-fit: contain;
     z-index: 4;
@@ -124,7 +132,7 @@
 
   .thumbnailDownArrow {
     position: absolute;
-    bottom: -11%;
+    bottom: -14%;
     left: -4%;
     margin-left: 10%;
     margin-bottom: 5%;
@@ -135,7 +143,7 @@
 
   .thumbnailUpArrow {
     position: absolute;
-    top: -10%;
+    top: -15%;
     left: -4%;
     margin-left: 10%;
     border: 2px solid black;
@@ -146,8 +154,8 @@
   .mainPicArrowLeft {
     position: absolute;
     top: 50%;
-    left: 15%;
-    z-index: 3;
+    left: 11%;
+    z-index: 4;
     border: 2px solid black;
     border-radius: 5px;
     background-color: white;
@@ -156,8 +164,8 @@
   .mainPicArrowRight {
     position: absolute;
     top: 50%;
-    right: 10%;
-    z-index: 3;
+    right: 11%;
+    z-index: 4;
     border: 2px solid black;
     border-radius: 5px;
     background-color: white;
@@ -211,8 +219,8 @@
   }
 
   .styleThumbnail {
-    width: 8vw;
-    height: 8vw;
+    width: 6.4vw;
+    height: 6.4vw;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid black;
@@ -222,7 +230,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
-    width: 33.33vw;
+    width: 26.6vw;
+    z-index: 1;
   }
 
   .styleText {
@@ -268,6 +277,12 @@
   .overviewCenter {
     padding-right: 15px;
     padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .line2 {
+    margin-top: -1vh;
   }
 
   .selectedThumbnail {
@@ -371,12 +386,34 @@
   .share {
     display: flex;
     justify-content: space-between;
-    width: 100px; /* adjust as needed */
+    width: 100px;
+    border: 1px solid black;
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    border-radius: 4px;
   }
 
   .icon {
     cursor: pointer;
   }
+
+  .icon.fb {
+    color: #4267B2;
+}
+
+.icon.twitter {
+    color: #38A1F2;
+    border-left: 1px dotted black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: 1px dotted black;
+}
+
+.icon.pinterest {
+    color: #E73E3A;
+}
 
   .fbModal,
   .twitterModal,
@@ -399,6 +436,7 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     background-color: #fefefe;
