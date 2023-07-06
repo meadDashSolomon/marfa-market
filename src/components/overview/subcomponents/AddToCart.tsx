@@ -10,6 +10,7 @@ const AddToCart = ({skus}) => {
   const [selectedQuantity, setSelectedQuantity] = useState("");
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const [starFilled, setStarFilled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
 
   // define func to handle add to cart btn click
@@ -17,8 +18,9 @@ const AddToCart = ({skus}) => {
     // if no size selected, show size warning
     if (selectedSize === "Select a Size") {
       setShowSizeWarning(true);
+    } else {
+      setShowModal(true);
     }
-    // else, add to cart
   }
 
   //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
@@ -142,6 +144,33 @@ const AddToCart = ({skus}) => {
           {starFilled ? <FaStar /> : <FaRegStar />}
         </button>
       </div>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Checkout</h2>
+            <p>Selected Size: {selectedSize}</p>
+            <p>Selected Quantity: {selectedQuantity}</p>
+
+            <form className='form'>
+              <label>
+                Name:
+                <input type="text" name="name" />
+              </label>
+              <label>
+                Email:
+                <input type="text" name="email" />
+              </label>
+              <label>
+                Address:
+                <input type="text" name="Address" />
+              </label>
+            </form>
+
+            <button>Next</button>
+            <button onClick={() => setShowModal(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
