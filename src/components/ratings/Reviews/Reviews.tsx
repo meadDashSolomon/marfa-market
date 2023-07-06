@@ -45,9 +45,8 @@ const Reviews = ({
   return (
     <Box
       sx={{
-        flexBasis: "685px",
         flexShrink: 1,
-        flexGrow: 0,
+        flexGrow: 1,
       }}
     >
       <Typography level="body1" sx={{ display: "inline" }}>
@@ -77,7 +76,7 @@ const Reviews = ({
           />
         ) : null}
       </Box>
-      <Box>
+      <Box sx={{ display: 'flex' }}>
         <ReviewsList reviews={displayedReviews} />
       </Box>
       <Box
