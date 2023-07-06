@@ -59,10 +59,6 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
       .request(getAnswers(props.question.question_id))
       .then((response) => {
         if (response.data.results.length > 0)
-          console.log(
-            "this is what we got back in answer",
-            response.data.results
-          );
         for (const el of response.data.results) {
           if (el.answerer_name === "Seller") {
             answersFromSeller.push(el);
@@ -72,7 +68,6 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
         }
         answersFromSeller.sort((a, b) => b.helpfulness - a.helpfulness);
         listOfAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
-        console.log(answersFromSeller.concat(listOfAnswers));
         setAnswers(answersFromSeller.concat(listOfAnswers));
       })
       .catch((error) => console.log("ERROR IN GET ANSWERS", error));
@@ -91,9 +86,9 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
     // sends that a question was helpful
     axios
       .request(helpfulQuestion(props.question.question_id))
-      .then(() => {
-        console.log('status sent');
-      })
+      // .then(() => {
+      //   console.log('status sent');
+      // })
       .catch((error) => console.log("error in helpful request", error));
   };
   const renderMoreAnswersButton = () => {
@@ -120,9 +115,9 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
   };
   const reportRequest = () => {
     axios.request(reportQuestion(props.question.question_id))
-    .then(()=> {
-      console.log("status sent");
-    })
+    // .then(()=> {
+    //   console.log("status sent");
+    // })
     .catch(error => console.log("error in report question", error))
   }
 

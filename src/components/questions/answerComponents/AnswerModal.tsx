@@ -36,9 +36,10 @@ export default function AnswerModal(props: AnswerModalProps) {
   };
   const postRequest = () => {//axios post request
     axios.request(postAnswer(props.question_id, answer, userName, email, pictures))
-      .then((response) => {
-        console.log(response.data);
-      }).catch((error) => console.log('Error in AnswerModal post request', error))
+      // .then((response) => {
+      //   console.log(response.data);
+      // })
+      .catch((error) => console.log('Error in AnswerModal post request', error))
   }
   //this the the end of form validation and post
 
@@ -54,9 +55,9 @@ export default function AnswerModal(props: AnswerModalProps) {
             key={pictures.indexOf(picture)}
             src={picture}
             style={{ maxHeight: '100px' }}
-            onClick={() => {
-              alert("This should make the image bigger but I'm coming back to that")
-            }}
+            // onClick={() => {
+            //   alert("This should make the image bigger but I'm coming back to that")
+            // }}
           />
         )
       })

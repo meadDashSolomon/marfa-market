@@ -22,7 +22,7 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
   );
 
   const mapCurrentPictures = useCallback(() => {
-    console.log("I RENDERED PICTURES");
+    // console.log("I RENDERED PICTURES");
     return picturesArray.map((picture) => {
       return (
         <img

@@ -7,7 +7,6 @@ type SearchBarProps = {
 }
 
 export default function SearchBar(props: SearchBarProps) {
-  console.log("CHANGE SETQUESTIONSORT TYPE FROM ANY WHEN DEFINED");
 
   const searchFunc = (query: string) => {
     if (query.length >= 3) {
@@ -23,7 +22,6 @@ export default function SearchBar(props: SearchBarProps) {
         defaultValue={props.searchQuery}
         placeholder="Have a question? Search for answers…"
         onChange={(e) => {
-          console.log('SEARCH ONCHANGE RAN ', e.target.value)
           searchFunc(e.target.value);
         }}
       />

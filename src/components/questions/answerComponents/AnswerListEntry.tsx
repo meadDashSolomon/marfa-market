@@ -44,9 +44,9 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
             key={props.answer.photos.indexOf(photo)}
             src={photo}
             style={{ maxHeight: "200px" }}
-            onClick={() => {
-              alert("this needs to be added but should expand the image");
-            }}
+            // onClick={() => {
+            //   alert("this needs to be added but should expand the image");
+            // }}
           />
         );
       }
@@ -56,7 +56,7 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
     if (helpful === "Helpful?") {
       axios
         .request(helpfulAnswer(props.answer.answer_id))
-        .then((response) => console.log(response.status, response.statusText));
+        // .then((response) => console.log(response.status, response.statusText));
       setHelpful("Helpful");
     } else {
       console.log("This was already triggered");
@@ -73,9 +73,9 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
   const reportRequest = () => {
     axios
     .request(reportAnswer(props.answer.answer_id))
-    .then(()=> {
-      console.log("Report request sent")
-    })
+    // .then(()=> {
+    //   console.log("Report request sent")
+    // })
     .catch(error=>console.log("error in reportRequest",error))
   }
   return (

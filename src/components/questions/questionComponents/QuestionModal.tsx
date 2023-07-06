@@ -37,9 +37,10 @@ export default function QuestionModal(props: QuestionModalProps) {
 
     const postRequest = () => {//axios post request
         axios.request(postQuestion(props.productId, nickName, question, email))
-            .then(response => {
-                console.log(response.status)
-            }).catch(error => console.log('error in questions post request', error))
+            // .then(response => {
+            //     console.log(response.status)
+            // })
+            .catch(error => console.log('error in questions post request', error))
     }
 
     return (
