@@ -277,6 +277,12 @@
   .overviewCenter {
     padding-right: 15px;
     padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .line2 {
+    margin-top: -1vh;
   }
 
   .selectedThumbnail {
