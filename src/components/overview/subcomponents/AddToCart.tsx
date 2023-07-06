@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react';
 import { FaStar, FaRegStar } from "react-icons/fa";
-
-const AddToCart = ({skus}) => {
-  const [availableSizes, setAvailableSizes] = useState([]);
-  const [selectedSize, setSelectedSize] = useState("Select a Size");
+type AddToCartProps = {
+  skus: {
+    [value:string]: {
+      quantity: number
+      size: string;
+    }
+  }
+}
+const AddToCart = ({skus}:AddToCartProps) => {
+  const [availableSizes, setAvailableSizes] = useState<(number | string)[]>([]);
+  const [selectedSize, setSelectedSize] = useState<string>("Select a Size");
   // state to find quantity based on selectedSize
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState([]);
-  const [selectedQuantity, setSelectedQuantity] = useState("");
-  const [showSizeWarning, setShowSizeWarning] = useState(false);
-  const [starFilled, setStarFilled] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<{quantity: number,size: string} | undefined>(undefined);
+  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState<number[]>([]);
+  const [selectedQuantity, setSelectedQuantity] = useState<string>("");
+  const [showSizeWarning, setShowSizeWarning] = useState<boolean>(false);
+  const [starFilled, setStarFilled] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
 
   // define func to handle add to cart btn click
@@ -32,7 +39,7 @@ const AddToCart = ({skus}) => {
   // -------------------------- HOOKS ------------------------------------
   // create array of available sizes
   useEffect(() => {
-    let sizes = [];
+    const sizes:(number | string)[]= [];
     Object.values(skus).forEach((sku) => {
       // only list sizes currently in stock
       if (sku.quantity > 0) {
@@ -45,7 +52,7 @@ const AddToCart = ({skus}) => {
   // find available quantities based on size's sku
   useEffect(() => {
     if (selectedSize === "Select a Size") {
-      setSelectedItem(null);
+      setSelectedItem(undefined);
     } else {
       // find item in skus object that's size property matches selected size
       const item = Object.values(skus).find((sku) => {
@@ -68,7 +75,7 @@ const AddToCart = ({skus}) => {
     // create range of available quantities array
     const quantities = [];
     // iterate available quantity number of times
-    for (var i = 0; i < availableQuantity; i++) {
+    for (let i = 0; i < availableQuantity; i++) {
       // push index plus one to array
       quantities.push(i+1);
   }

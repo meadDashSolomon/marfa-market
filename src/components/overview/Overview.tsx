@@ -42,7 +42,12 @@ type style = {
     thumbnail_url: string;
     url: string;
   }[];
-  skus: object
+  skus: {
+    [value:string]:{
+      quantity:number;
+      size: string;
+    }
+  }
 }
 const defaultStyle = {
   style_id: 1,

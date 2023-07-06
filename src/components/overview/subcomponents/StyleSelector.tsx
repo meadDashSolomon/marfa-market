@@ -25,8 +25,13 @@ type StyleSelectorProps = {
       thumbnail_url: string;
       url: string;
     }[];
-    skus: object
-  };
+    skus: {
+      [value:string]:{
+        quantity:number;
+        size: string;
+      }
+    }
+  }
   setSelectedStyle: (value: style) => void;
 }
 
