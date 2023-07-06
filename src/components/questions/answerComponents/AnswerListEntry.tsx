@@ -11,7 +11,7 @@ type AnswerListEntryProps = {
         date: string,
         answerer_name: string,
         helpfulness: number,
-        photos: []
+        photos: string[]
     };
 }
 

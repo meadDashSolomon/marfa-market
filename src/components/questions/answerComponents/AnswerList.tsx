@@ -1,50 +1,56 @@
-import { Button, Card } from "@mui/joy";
+import { Card, Typography } from "@mui/joy";
 import AnswerListEntry from "./AnswerListEntry";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import getAnswers from "../requests/getAnswers";
 
-type AnswerListProps = {questionID:number};
 
-type listOfAnswersProps = {
+type AnswerListProps = {
     answers:{
-        answer_id: number,
-        body: string,
-        date: string,
-        answerer_name: string,
-        helpfulness: number,
-        photos: string[]
-    }[]
-}
+        answer_id: number;
+        body: string;
+        date: string;
+        answerer_name: string;
+        helpfulness: number;
+        photos: string[];
+    }[];
+    numAnswers: number;
+    setNumAnswers:(value:number)=> void;
+    listOfAnswers:{
+        answer_id: number;
+        body: string;
+        date: string;
+        answerer_name: string;
+        helpfulness: number;
+        photos: string[];
+    }[];
+    searchQuery?:string
+};
 
 export default function AnswerList(props:AnswerListProps) {
-    const listOfAnswers:listOfAnswersProps[] = [];
-    const[answers, setAnswers] = useState<listOfAnswersProps[]>([]);
     
     
-    const loadMoreAnswers = () => numOfAnswersShowing += 2;
-    let numOfAnswersShowing = 2;
+
     
     // const listOfAnswers = Object.keys(props.questionID);
     const mappingAnswers = () => {
-        listOfAnswers.sort()
-        return answers.slice(numOfAnswersShowing).map(answer => {
+        if(props.answers.length > 0){
+            return props.answers.map(answer => {
+                return (
+                <AnswerListEntry
+                    key = {props.answers.indexOf(answer)}
+                    answer = {answer}
+                />)
+            })
+        } else {
             return (
-            <AnswerListEntry
-                key = {answers.indexOf(answer)}
-                answer = {answer}
-            />)
-        })
-    }
-    useEffect(()=> {
+                <><Typography sx = {{
+                    justifyContent: "center",
+                    textAlign: "center"
+                }} level="h1">No Answers At This time</Typography></>
+            )
+        }
         
-    },[props.questionID])
+    }
+
     return (
-        <Card className = "Questions AnswerList">
-            <Card>{mappingAnswers()}</Card>
-            <Button
-                onClick={loadMoreAnswers}
-            >LOAD MORE ANSWERS</Button>
-        </Card>
+        <><Card className = "Questions AnswerList">{mappingAnswers()}</Card></>
     )
 }
