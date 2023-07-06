@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
-import {
-  LinearProgress,
-  Rating,
-  Slider,
-  Stack,
-  Box,
-  Divider,
-} from "@mui/material";
+import LinearProgress from "@mui/joy/LinearProgress";
+import { Rating, Stack, Slider, Box, Divider } from "@mui/material";
 import Typography from "@mui/joy/Typography";
 import { RatingsProps } from "../Interfaces";
-// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import characteristics from "../Reviews/AddReview/Characteristics";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Ratings = ({
   setShownReviews,
@@ -44,9 +39,9 @@ const Ratings = ({
 
   useEffect(() => {
     // get the total reviews and sumReviews
-    console.log(selectedRatings)
+    console.log(selectedRatings);
     if (selectedRatings.length < 1) {
-      setShownReviews(allReviews)
+      setShownReviews(allReviews);
     } else {
       const filteredReviews = allReviews.filter((review) => {
         return selectedRatings.includes(review.rating);
@@ -89,11 +84,14 @@ const Ratings = ({
     return <Typography>Loading...</Typography>;
   }
 
-  // const arrowIcon = (props) => {
-  //   return (
-  //     <ArrowDropDownIcon {...props}/>
-  //   )
-  // };
+  const arrowIcon = (props) => {
+    console.log('what are the props: ', props.ownerState)
+    return (
+      <span {...props.ownerState} >
+        <ArrowDropDownIcon/>
+      </span>
+    )
+  };
 
   return (
     <Box>
@@ -130,30 +128,51 @@ const Ratings = ({
       </Typography>
       {availableRatings.map((rating, index) => {
         return (
-          <Stack direction="column" key={index}>
-            <Rating
-              readOnly={true}
-              value={rating}
-              sx={{ fontSize: "16px", color: "#525252", paddingBottom: "7px" }}
-            />
-            <LinearProgress
-              variant="determinate"
+          <Box>
+            <Box
+              border={"1px solid #e8e4e4"}
+              onClick={() => handleRatingClick(rating)}
+              borderRadius={"5px"}
+              padding={"10px"}
               sx={{
-                backgroundColor: "#ebebeb",
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: "#525252",
+                transition: "background-color 0.15s ease-in-out",
+                ":hover": {
+                  backgroundColor: "#fafafa",
                 },
               }}
-              color="secondary"
-              value={getReviewPercentage(rating)}
-              onClick={() => handleRatingClick(rating)}
-            />
+            >
+              <Stack direction="column" key={index}>
+                <Rating
+                  readOnly={true}
+                  value={rating}
+                  sx={{
+                    fontSize: "16px",
+                    color: "#525252",
+                    paddingBottom: "7px",
+                  }}
+                />
+                <LinearProgress
+                  determinate
+                  variant="outlined"
+                  sx={{
+                    color: "#24242c",
+                    borderColor: "#E8E4E4",
+                    backgroundColor: "#ebebeb",
+                    "& .MuiLinearProgress-bar": {
+                      backgroundColor: "green",
+                      color: "red",
+                    },
+                  }}
+                  value={getReviewPercentage(rating)}
+                />
+              </Stack>
+            </Box>
             <Divider
               sx={{
                 my: "20px",
               }}
             />
-          </Stack>
+          </Box>
         );
       })}
       {/* <Divider sx={{
@@ -177,14 +196,46 @@ const Ratings = ({
                 disabled={true}
                 defaultValue={Number(item[1].value)}
                 max={5}
-                // components={
-                //   { Thumb: arrowIcon }
-                // }
-                // ThumbComponent={arrowIcon}
+                sx={{
+                  marginTop: '10px',
+                  '.MuiSlider-thumb': {
+                    height: 0,
+                    width: 0,
+                    backgroundColor: 'transparent',
+                    borderLeft: '6px solid transparent',
+                    borderRight:'6px solid transparent',
+                    borderBottom: '10px solid #bdbdbd',
+                    borderRadius: 0,
+                    transform: 'rotate(180deg) translateY(16px) translateX(6px)',
+                    position: 'absolute'
+                  }
+                }}
+                // slots={{ thumb: arrowIcon }}
                 size="small"
               ></Slider>
+              <Stack
+                key={index}
+                direction={"row"}
+                justifyContent={"space-between"}
+                sx={{ marginBottom: "8px" }}
+              >
+                {Object.entries(characteristics[item[0]]).map(
+                  (descriptor, index) => {
+                    return index === 0 || index === 4 ? (
+                      <Typography key={index} textColor="#25252D" level="body4">
+                        {descriptor[1]}
+                      </Typography>
+                    ) : null;
+                  }
+                )}
+              </Stack>
+              <Divider
+                sx={{
+                  marginBottom: "12px"
+                }}
+              />
             </Box>
-          )
+          );
         })}
       </Stack>
     </Box>
