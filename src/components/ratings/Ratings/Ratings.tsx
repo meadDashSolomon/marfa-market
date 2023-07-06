@@ -202,11 +202,11 @@ const Ratings = ({
                     height: 0,
                     width: 0,
                     backgroundColor: 'transparent',
-                    borderLeft: '8px solid transparent',
-                    borderRight:'8px solid transparent',
-                    borderBottom: '12px solid #bdbdbd',
+                    borderLeft: '6px solid transparent',
+                    borderRight:'6px solid transparent',
+                    borderBottom: '10px solid #bdbdbd',
                     borderRadius: 0,
-                    transform: 'rotate(180deg) translateY(20px) translateX(8px)',
+                    transform: 'rotate(180deg) translateY(16px) translateX(6px)',
                     position: 'absolute'
                   }
                 }}

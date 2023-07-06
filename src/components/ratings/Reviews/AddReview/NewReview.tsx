@@ -19,12 +19,13 @@ import {
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
-import { Typography, FormControl, FormLabel, Radio } from "@mui/joy";
+import { Typography, FormControl, FormLabel, Radio, Tooltip } from "@mui/joy";
 import PhotosModal from "./PhotosModal";
 import characteristics from "./Characteristics";
 import CharacteristicsList from "./CharacteristicsList";
 import requestHandler from "../RequestHandler";
 import InputFields from "./InputFields";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const NewReview = ({
   setIsWriting,
@@ -46,16 +47,21 @@ const NewReview = ({
   };
 
   const style = {
+    display: 'flex',
+    flexDirection: 'column',
     position: "absolute",
     top: "50%",
     left: "50%",
-    maxHeight: "max-content",
-    maxWidth: "100%",
-    width: "650px",
+    maxHeight: "85vh",
+    // maxWidth: "100%",
+    marginBottom: '10px',
+    width: '45%',
+    // height: '800px',
     mx: "auto",
     transform: "translate(-50%, -50%)",
     p: 2,
     bgcolor: "background.paper",
+    overflowY: 'scroll'
   };
 
   console.log(productRatings)
@@ -162,7 +168,7 @@ const NewReview = ({
 
   return (
     <Box>
-      <Modal open={isWriting} onClose={handleClose}>
+      <Modal open={isWriting} onClose={handleClose} sx={{ display: 'flex' }}>
         <Fade in={isWriting}>
           <form onSubmit={handleSubmit}>
             <Card variant="outlined" sx={style}>
@@ -183,7 +189,7 @@ const NewReview = ({
                 <Rating
                   onChange={handleRatingChange}
                   sx={{
-                    fontSize: "25px",
+                    fontSize: "27px",
                     color: "#525252",
                   }}
                 ></Rating>
@@ -191,7 +197,6 @@ const NewReview = ({
                   Click to rate
                 </Typography>
                 <Divider sx={{ marginY: "10px" }} />
-                {/* { name, required, multiline, styles, handleFormChange, rows } */}
                 <Stack direction="row" sx={{ marginY: "10px" }} spacing="30px">
                   <InputFields
                     name={"Name"}
@@ -215,7 +220,7 @@ const NewReview = ({
                 <InputFields
                   name={"Product Review"}
                   multiline={true}
-                  rows={6}
+                  rows={3}
                   styles={{ marginY: "10px" }}
                   handleFormChange={handleFormChange}
                 />
@@ -226,12 +231,17 @@ const NewReview = ({
                   formData={formData}
                   setFormData={setFormData}
                 />
-                <Stack direction="row" alignItems="center" marginTop="8px">
-                  <Checkbox
-                    checked={checked}
-                    onChange={() => setChecked(!checked)}
-                  />
-                  <Typography> Do you recommend this product? *</Typography>
+                <Stack direction="row" alignItems="center" marginTop="8px" spacing={3} justifyContent={'start'}>
+                  <Stack direction={'row'} alignItems="center">
+                    <Checkbox
+                      checked={checked}
+                      onChange={() => setChecked(!checked)}
+                    />
+                    <Typography> Do you recommend this product? *</Typography>
+                  </Stack>
+                  <Tooltip title={'Add a Photo'}>
+                    <AddAPhotoIcon onClick={() => setAddingPhotos(true)}/>
+                  </Tooltip>
                 </Stack>
                 <Stack direction="row" spacing="20px" overflow="auto">
                   {formData.photos && formData.photos.length > 0
@@ -255,17 +265,7 @@ const NewReview = ({
                       })
                     : null}
                 </Stack>
-                <Button
-                  onClick={() => setAddingPhotos(true)}
-                  variant="outlined"
-                  sx={{
-                    borderColor: "#e8e4e4",
-                    color: "#525252",
-                    marginTop: "12px",
-                  }}
-                >
-                  Add Photo
-                </Button>
+
                 <Box>
                   {addingPhotos ? (
                     <PhotosModal
@@ -306,6 +306,7 @@ const NewReview = ({
                       color: "#525252",
                     }}
                     variant="outlined"
+                    onClick={handleClose}
                   >
                     Cancel
                   </Button>
