@@ -132,7 +132,7 @@ const ImgGallery = ({ selectedStyle }) => {
               // conditional styles for isFullscreen
                style={{
                  width: isFullscreen ? '80vw' : 'auto',
-                 height: isFullscreen ? '80vh' : 'auto',
+                //  height: isFullscreen ? '80vh' : 'auto',
                }}>
             {/* conditinal classes for isExpanded (crosshair cursor) and zoomLevel */}
             <img className={`mainPic ${isExpanded ? 'mainPicExpanded' : ''} ${zoomLevel === 1.5 ? 'mainPicZoomed' : ''}`}
@@ -154,18 +154,19 @@ const ImgGallery = ({ selectedStyle }) => {
               />
             )}
 
-            <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
-            {itemStylePhotos.length > 7 && (
-              <>
-                <KeyboardArrowUpIcon className='thumbnailUpArrow' onClick={handleUpClick} />
-              </>
-            )}
             {selectedImageIndex > 0 && (
               <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
             )}
             {selectedImageIndex < itemStylePhotos.length -1 && (
               <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
             )}
+
+            <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
+              {itemStylePhotos.length > 7 && (
+                <>
+                  <KeyboardArrowUpIcon className='thumbnailUpArrow' onClick={handleUpClick} />
+                </>
+              )}
               {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
                 return (
                   // conditional class names

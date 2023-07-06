@@ -34,12 +34,14 @@
   .mainPicWrapper {
     display: flex;
     position: relative;
+    background-color: white;
     left: 10px;
     width: 100%;
     padding-bottom: 100%;
     border: 5px solid #ffffff;
     margin-right: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2), 2px 2px 2px 2px rgba(0,0,0,0.19);
+    z-index: 2;
   }
 
   .mainPic {
@@ -152,7 +154,7 @@
   .mainPicArrowLeft {
     position: absolute;
     top: 50%;
-    left: 110%;
+    left: 11%;
     z-index: 4;
     border: 2px solid black;
     border-radius: 5px;
@@ -162,7 +164,7 @@
   .mainPicArrowRight {
     position: absolute;
     top: 50%;
-    left: 1050%;
+    right: 11%;
     z-index: 4;
     border: 2px solid black;
     border-radius: 5px;
@@ -229,6 +231,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
     width: 26.6vw;
+    z-index: 1;
   }
 
   .styleText {
