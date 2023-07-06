@@ -154,7 +154,7 @@ const Review = ({ review }: ReviewProps) => {
               >
                 Yes
               </Link>{" "}
-              ({review.helpfulness}) |{" "}
+              ({review.helpfulness}) | {" "}
               <Link
                 onClick={handleReportClick}
                 color="#25252D"
