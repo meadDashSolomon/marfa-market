@@ -36,7 +36,7 @@ export default function QuestionList(props:QuestionListProps) {
     const mappingQuestions = useCallback(() => {//either maps the questions array or displays "no questions"
         if(props.questions.length === 0){//if there are no questions [complete]
              return (
-             <Card>
+             <>
                 <Typography
                     sx = {{
                         justifyContent: "center",
@@ -44,7 +44,7 @@ export default function QuestionList(props:QuestionListProps) {
                     }}
                     level="h1"
                 >No Questions At This time</Typography>
-             </Card>)
+             </>)
         } else if (props.searchQuery.length >= 3) {//if there is a searchQuery [need to highlight every occurance of that word (use split set style and join probably)]
             return props.questions.map((question) => {
                 if (!question.reported && question.question_body.includes(props.searchQuery)) {
