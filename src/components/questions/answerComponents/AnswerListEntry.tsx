@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import { format } from "date-fns";
 import { useState } from "react";
 import axios from "axios";
+import reportAnswer from "../requests/reportAnswer";
 
 type AnswerListEntryProps = {
   answer: {
@@ -63,7 +64,7 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
   };
 
   const[reportedStatus, setReportedStatus] = useState<string>('Report');
-  const reportAnswer = () => {
+  const reportAnswerEntry = () => {
     if(reportedStatus === "Report") {
       setReportedStatus("Reported");
       reportRequest()
@@ -94,7 +95,7 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
           yes
         </Button>
         {props.answer.helpfulness} | <Button
-        onClick={reportAnswer}
+        onClick={reportAnswerEntry}
         >report</Button>
       </Typography>
       <Stack direction={"row"}>{mappedImages()}</Stack>

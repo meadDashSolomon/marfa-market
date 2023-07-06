@@ -134,8 +134,8 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
         <strong>Q:</strong>
         {props.question.question_body}
       </Typography>
-      <Typography level="subtitle1">{props.question.asker_name}</Typography>
-      <Typography level="subtitle2">
+      <Typography level="body2"> {props.question.asker_name}  </Typography>
+      <Typography level="body2">
         {format(new Date(props.question.question_date), "PPP")}
       </Typography>
       <Typography>
