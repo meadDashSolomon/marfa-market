@@ -108,7 +108,7 @@ export default function QuestionList(props: QuestionListProps) {
   return (
     <Box className={"Questions QuestionList"}>
       <Card>{mappingQuestions()}</Card>
-      <Card>{renderQuestionModal()}</Card>
+      <Box>{renderQuestionModal()}</Box>
       <Stack className="Questions QuestionsList Buttons" direction={"row"}>
         {renderingMoreQuestions()}
 

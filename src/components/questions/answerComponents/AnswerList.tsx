@@ -1,5 +1,6 @@
 import { Card, Typography } from "@mui/joy";
 import AnswerListEntry from "./AnswerListEntry";
+import { Box } from "@mui/material";
 type AnswerListProps = {
   answers: {
     answer_id: number;
@@ -34,7 +35,7 @@ export default function AnswerList(props: AnswerListProps) {
       });
     } else {
       return (
-        <>
+        <Box>
           <Typography
             sx={{
               justifyContent: "center",
@@ -44,7 +45,7 @@ export default function AnswerList(props: AnswerListProps) {
           >
             No Answers At This time
           </Typography>
-        </>
+        </Box>
       );
     }
   };

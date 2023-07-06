@@ -52,7 +52,7 @@ export default function Questions(props: QuestionsProps) {
 
   return (
     <Box className={'Questions'}>
-      <Typography variant="h6" className="Questions Header">QUESTIONS & ANSWERS</Typography>
+      <Typography variant="h4" className="Questions Header">QUESTIONS & ANSWERS</Typography>
       <Divider />
       <Stack>
         <SearchBar
