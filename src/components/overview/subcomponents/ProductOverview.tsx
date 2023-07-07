@@ -3,7 +3,12 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import { useState } from 'react';
 
-const ProductOverview = ({description, slogan}) => {
+type ProductOverviewProps = {
+  description: string;
+  slogan: string;
+}
+
+const ProductOverview = ({description, slogan}:ProductOverviewProps) => {
   // conditionally render modal components when showModal states are toggled true
   const [showFbModal, setShowFbModal] = useState(false);
   const [showTwitterModal, setShowTwitterModal] = useState(false);
