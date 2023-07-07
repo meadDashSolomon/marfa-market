@@ -25,7 +25,7 @@ Table of Contents:
   ii. npm run dev  // This project runs on vite
 
 
-4. Git Workflow
+3. Git Workflow
 
 This is our frontend capstone for HackReactor's bootcamp
 **Start with the main branch**
