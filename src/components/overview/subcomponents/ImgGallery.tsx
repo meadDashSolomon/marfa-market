@@ -124,6 +124,19 @@ const ImgGallery = ({ selectedStyle }) => {
     }
   }
 
+  const handleMouseMove = (event) => {
+    if (isExpanded && zoomLevel === 1.5) {
+      requestAnimationFrame(() => {
+        const { left, top, width, height } = event.target.getBoundingClientRect();
+        const x = ((event.clientX - left) / width) * 100;
+        const y = ((event.clientY - top) / height) * 100;
+        // Divide the percentage by a factor to reduce the speed of the panning effect
+        const factor = 4; // Adjust this value as needed
+        event.target.style.transform = `translate(-${x/factor}%, -${y/factor}%) scale(${zoomLevel})`;
+      });
+    }
+  };
+
   return (
     <div className="imgContainer">
       {itemStylePhotos.length > 0 ? (
@@ -141,6 +154,7 @@ const ImgGallery = ({ selectedStyle }) => {
                  // transform scale based on zoomLevel
                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
                  onClick={handleMainPicClick}
+                 onMouseMove={handleMouseMove}
                  />
             {(isExpanded && zoomLevel === 1) ? (
               <FullscreenExitIcon
