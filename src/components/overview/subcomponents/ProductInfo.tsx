@@ -1,9 +1,50 @@
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Rating as Star} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef, currentItem }) => {
+type style = {
+  style_id: number;
+  name: string;
+  original_price: string;
+  sale_price:string;
+  "default?": boolean;
+  photos: {
+    thumbnail_url: string;
+    url: string;
+  }[];
+  skus: object
+};
+type ProductInfoType = {
+  currentItem: {
+    id: number,
+    name: string,
+    slogan: string,
+    description: string,
+    category: string,
+    default_price: string,
+    features: {
+      feature: string;
+      value: string;
+    }[];
+  };
+  itemArray: {
+    id: number,
+    name: string,
+    slogan: string,
+    description: string,
+    category: string,
+    default_price: string,
+    features: {
+      feature: string;
+      value: string;
+    }[];
+  }[];
+  selectedStyle: style;
+  id: number;
+}
+
+const ProductInfo = ({ itemArray, selectedStyle, id, currentItem }:ProductInfoType) => {
   // state for number of reviews
   const [totalReviews, SetTotalReviews] = useState(0);
   const [ stars, setStars ] = useState(0);
@@ -36,7 +77,7 @@ const ProductInfo = ({ itemArray, selectedStyle, id, reviewsRef, currentItem }) 
         }
       )
       .then((response) => {
-          let ratingsObject = response.data.ratings;
+          const ratingsObject = response.data.ratings;
           let numberOfReviews = 0;
           for (const rating in ratingsObject) {
             numberOfReviews += parseInt(ratingsObject[rating]);

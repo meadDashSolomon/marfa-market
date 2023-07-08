@@ -3,18 +3,52 @@ import ProductOverview from "./subcomponents/ProductOverview";
 import ImgGallery from "./subcomponents/ImgGallery";
 import StyleSelector from "./subcomponents/StyleSelector";
 import AddToCart from "./subcomponents/AddToCart";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 type OverviewProps = {
-  itemArray: object[] | string;
-  description: string;
-  slogan: string;
-  id: number;
-  currentItem: object;
-  setCurrentItem: Function;
+  itemArray: {
+    id: number;
+    name: string;
+    slogan: string;
+    description: string;
+    category: string;
+    default_price: string;
+    features: {
+      feature: string;
+      value: string;
+    }[];
+  }[] | string;
+  currentItem: {
+    id: number,
+    name: string,
+    slogan: string,
+    description: string,
+    category: string,
+    default_price: string,
+    features: {
+      feature: string;
+      value: string;
+    }[];
+  };
 };
 
+type style = {
+  style_id: number;
+  name: string;
+  original_price: string;
+  sale_price:string;
+  "default?": boolean;
+  photos: {
+    thumbnail_url: string;
+    url: string;
+  }[];
+  skus: {
+    [value:string]:{
+      quantity:number;
+      size: string;
+    }
+  }
+}
 const defaultStyle = {
   style_id: 1,
   name: "Loading . . .",
@@ -24,8 +58,8 @@ const defaultStyle = {
   photos: [
     {
       thumbnail_url: "",
-      url: "",
-    },
+      url: ""
+    }
   ],
   skus: {},
 };
@@ -33,15 +67,8 @@ const defaultStyle = {
 const Overview = ({
   itemArray,
   currentItem,
-  setCurrentItem,
-  description,
-  slogan,
-  id,
 }: OverviewProps) => {
-  const [skus, setSkus] = useState([]);
-  const [itemStylePhotos, setItemSylePhotos] = useState([]);
-  const [styles, setStyles] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState(defaultStyle);
+  const [selectedStyle, setSelectedStyle] = useState<style>(defaultStyle);
 
   return (
     <div className="container">

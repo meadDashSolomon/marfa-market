@@ -1,32 +1,59 @@
 import { useEffect, useState } from "react";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import axios from "axios";
-const defaultStyle = {
-  product_id: "1",
-  results: [
-    {
-      style_id: 1,
-      name: "Loading . . . ",
-      original_price: "0",
-      sale_price: "0",
-      "default?": false,
-      photos: [
-        {
-          thumbnail_url: "",
-          url: "",
-        },
-      ],
-      skus: {},
-    },
-  ],
+
+type StyleSelectorProps = {
+  currentItem:{
+    id: number,
+    name: string,
+    slogan: string,
+    description: string,
+    category: string,
+    default_price: string,
+    features: {
+      feature: string;
+      value: string;
+    }[];
+  };
+  selectedStyle:{
+    style_id: number;
+    name: string;
+    original_price: string;
+    sale_price:string;
+    "default?": boolean;
+    photos: {
+      thumbnail_url: string;
+      url: string;
+    }[];
+    skus: {
+      [value:string]:{
+        quantity:number;
+        size: string;
+      }
+    }
+  }
+  setSelectedStyle: (value: style) => void;
+}
+
+type style = {
+  style_id: number;
+  name: string;
+  original_price: string;
+  sale_price:string;
+  "default?": boolean;
+  photos: {
+    thumbnail_url: string;
+    url: string;
+  }[];
+  skus: object
 };
 
-const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
+const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }:StyleSelectorProps) => {
   const [styles, setStyles] = useState([]);
 
   // Hook to set style based on current item
   useEffect(() => {
-    let id = currentItem.id;
+    const id = currentItem.id;
     if (id !== 0) {
       axios
         .get(
@@ -48,7 +75,7 @@ const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
   }, [currentItem]);
 
   // Event handler for setting style when clicking styles
-  const handleStyleClick = (style) => {
+  const handleStyleClick = (style:style) => {
     if (selectedStyle !== style) {
       setSelectedStyle(style);
     }
@@ -61,7 +88,7 @@ const StyleSelector = ({ currentItem, selectedStyle, setSelectedStyle }) => {
         <p className="selectedStyle">{selectedStyle.name}</p>
       </div>
       <div className="styleThumbnails">
-        {styles.map((style, index) => {
+        {styles.map((style: style, index) => {
           return (
             <div style={{position: 'relative'}} key={index}>
               <img

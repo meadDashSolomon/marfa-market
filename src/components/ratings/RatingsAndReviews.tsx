@@ -73,33 +73,38 @@ export default function RatingsAndReviews({ itemId }: RatingsAndReviewsProps) {
       sx={{
         display: "flex",
         flexDirection: "column",
+        alignItems: 'start',
         justifyContent: "center",
-        width: "auto",
-        mx: "80px",
+        // width: "auto",
+        mx: "15%",
       }}
     >
-      <Typography
-        level="h3"
-        sx={{
-          display: "flex",
-          marginBottom: "7px",
-        }}
-      >
-        Ratings & Reviews
-      </Typography>
+      <Box sx={{alignSelf: 'start', flex: 1}}>
+        <Typography
+          level="h3"
+          sx={{
+            display: "flex",
+            marginBottom: "7px",
+          }}
+        >
+          Ratings & Reviews
+        </Typography>
+
+      </Box>
       <Divider
-        inset="none"
-        sx={{
-          marginBottom: "5px",
-          maxWidth: "974px",
-          minWidth: "650px",
-        }}
-      />
+          inset="none"
+          sx={{
+            marginBottom: "5px",
+            width: 'auto'
+            // alignSelf: 'center'
+          }}
+        />
       <Stack
         direction="row"
         justifyContent="start"
         alignItems="start"
         spacing="50px"
+        sx={{ flex: 1 }}
       >
         <Ratings
           shownReviews={shownReviews}
