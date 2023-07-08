@@ -1,4 +1,4 @@
-Atlier - Fashion E-commerce Site
+## Atlier - Fashion E-commerce Site
 
 FEC is a Hack Reactor front-end project that simulates the product page of a typical e-commerce webpage. The user can view the product information, taken from a sample API, and interact with the products styles, images, related products, ratings, reviews, and more.
 
@@ -6,42 +6,42 @@ Given a business document and visual design, we worked as a group of four softwa
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)
 
-Table of Contents:
+## Table of Contents:
   1. Description
   2. Installation
   3. Git Workflow
 
-1. Description
+# Description
   This website features 4 primary components. Please see this demo (https://recordit.co/vJcuuTUKPF) of the prototype for the website and the description below.
 
   First, an image gallery displays available styles of clothing and information relevant to purchasing each product. The main portion of this component is a large image of the selected product with thumbnail overlays of alternate pictures that can be clicked to update the main image accordingly. In addition, sers can select various products to see what they look like, sizes and quantities available, and add them to their cart.
-  ![Overview Screenshot](https://file%252B.vscode-resource.vscode-cdn.net/Users/mead93/Desktop/coding/hackReactor-frontend-capstone/imgs/Screenshot%25202023-07-08%2520at%25209.54.36%2520AM.png?version%253D1688828081164)
+  ![Overview Screenshot](<imgs/Screenshot 2023-07-08 at 9.54.36 AM.png>)
 
   Second, a related products section built with MUI shows a list of products with features that are similar to the selected product in the image gallery. These related products are interactable and will dynamically update the image gallery and related products when clicked. Similarly, there is a subcomponent that allows users to save multiple products to build an outfit.
-  ![Related Products Screenshot](https://file%252B.vscode-resource.vscode-cdn.net/Users/mead93/Desktop/coding/hackReactor-frontend-capstone/imgs/Screenshot%25202023-07-08%2520at%25209.55.43%2520AM.png?version%253D1688828179080)
+  ![Related Products Screenshot](<imgs/Screenshot 2023-07-08 at 9.55.43 AM.png>)
 
   Third, a questions and answers component allows for the additon of questions that can be answered by buyers or sellers. Moreover, the section is searchable to quickly find potential questions of interest.
-![Q/A Screenshot](https://file%252B.vscode-resource.vscode-cdn.net/Users/mead93/Desktop/coding/hackReactor-frontend-capstone/imgs/Screenshot%25202023-07-08%2520at%25209.55.53%2520AM.png?version%253D1688828201818)
+  ![Q/A Screenshot](<imgs/Screenshot 2023-07-08 at 9.55.53 AM.png>)
 
   Fourth, the final component is a ratings and review section. This section includes all reviews, the total number of review per product, and 5 outlined stars that are filled in to the nearest quarter star to represent the average review score for that product. Finally, this section allows users to add reviews that include uploaded images and filter the existing reviews by several metrics like helpfulness.
   ![Ratings and Reviews Screenshot](<imgs/Screenshot 2023-07-08 at 9.56.07 AM.png>)
 
 
-2. Installation Requirements
+# Installation Requirements
   This project utilizes Vite, React, Axios
 
   From within the root directory:
-    i. Run the following command in the terminal to install all necessary packages.
-      $ npm install
+    1. Run the following command in the terminal to install all necessary packages.
+      `$ npm install`
 
-   ii. Start server
-      $ npm run dev
+   2. Start server
+      `$ npm run dev`
 
-   iii. Add your personal GitHub token
+   3. Add your personal GitHub token
 
-   iv. Look at the page on localhost:5173
+   4. Look at the page on localhost:5173
 
-3. Git Workflow
+# Git Workflow
 
 This is our frontend capstone for HackReactor's bootcamp
 **Start with the main branch**
