@@ -14,7 +14,7 @@ Given a business document and visual design, we worked as a group of four softwa
 # Description
   This website features 4 primary components. Please see this demo (https://recordit.co/vJcuuTUKPF) of the prototype for the website and the description below.
 
-  First, an image gallery displays available styles of clothing and information relevant to purchasing each product. The main portion of this component is a large image of the selected product with thumbnail overlays of alternate pictures that can be clicked to update the main image accordingly. In addition, sers can select various products to see what they look like, sizes and quantities available, and add them to their cart.
+  First, an image gallery displays available styles of clothing and information relevant to purchasing each product. The main portion of this component is a large image of the selected product with thumbnail overlays of alternate pictures that can be clicked to update the main image accordingly. In addition, users can select various products to see what they look like, sizes and quantities available, and add them to their cart.
   ![Overview Screenshot](<imgs/Screenshot 2023-07-08 at 9.54.36 AM.png>)
 
   Second, a related products section built with MUI shows a list of products with features that are similar to the selected product in the image gallery. These related products are interactable and will dynamically update the image gallery and related products when clicked. Similarly, there is a subcomponent that allows users to save multiple products to build an outfit.
