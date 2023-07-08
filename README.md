@@ -28,13 +28,14 @@ Given a business document and visual design, we worked as a group of four softwa
 
 
 # Installation Requirements
-  This project utilizes Vite, React, Axios
+  This project utilizes Vite, React, and Axios.
 
-  From within the root directory:
-    1. Run the following command in the terminal to install all necessary packages.
+  From within the root directory:\
+
+  1. Run the following command in the terminal to install all necessary packages.\
       `$ npm install`
 
-   2. Start server
+   2. Start server\
       `$ npm run dev`
 
    3. Add your personal GitHub token
