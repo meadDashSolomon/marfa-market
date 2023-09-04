@@ -5,7 +5,7 @@
     color: $text-color;
     margin: auto;
     width: 80%;
-    max-height: 100lh;
+    max-height: 100vh;
     height: fit-content;
     margin-top: 2.5%;
     overflow-y: auto;
@@ -48,7 +48,6 @@
         width: 96%;
         // background-color: rgb(178, 213, 178);
     }
-
 
         &.Modal {
             box-sizing: border-box;
