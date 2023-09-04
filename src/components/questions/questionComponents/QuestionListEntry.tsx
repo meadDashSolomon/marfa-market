@@ -59,13 +59,13 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
       .request(getAnswers(props.question.question_id))
       .then((response) => {
         if (response.data.results.length > 0)
-        for (const el of response.data.results) {
-          if (el.answerer_name === "Seller") {
-            answersFromSeller.push(el);
-          } else if (!listOfAnswers.includes(el)) {
-            listOfAnswers.push(el);
+          for (const el of response.data.results) {
+            if (el.answerer_name === "Seller") {
+              answersFromSeller.push(el);
+            } else if (!listOfAnswers.includes(el)) {
+              listOfAnswers.push(el);
+            }
           }
-        }
         answersFromSeller.sort((a, b) => b.helpfulness - a.helpfulness);
         listOfAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
         setAnswers(answersFromSeller.concat(listOfAnswers));
@@ -106,24 +106,25 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
   };
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //report
-  const[reportedStatus,setReportedStatus] = useState<string>('Report');
+  const [reportedStatus, setReportedStatus] = useState<string>('Report');
   const reportFunc = () => {
-    if(reportedStatus === 'Report') {
+    if (reportedStatus === 'Report') {
       setReportedStatus('Reported');
       reportRequest()
     }
   };
   const reportRequest = () => {
     axios.request(reportQuestion(props.question.question_id))
-    // .then(()=> {
-    //   console.log("status sent");
-    // })
-    .catch(error => console.log("error in report question", error))
+      // .then(()=> {
+      //   console.log("status sent");
+      // })
+      .catch(error => console.log("error in report question", error))
   }
 
 
   return (
     <Card className="Questions QuestionList QuestionListEntry">
+
       <Card>{renderAnswerModal()}</Card>
       <Typography level="h4">
         <strong>Q:</strong>
