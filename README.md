@@ -1,6 +1,6 @@
-## Atlier - Fashion E-commerce Site
+## Atelier - Fashion E-commerce Site
 
-FEC is a Hack Reactor front-end project that simulates the product page of a typical e-commerce webpage. The user can view the product information, taken from a sample API, and interact with the products styles, images, related products, ratings, reviews, and more.
+FEC is a Hack Reactor front-end project that simulates the product page of a typical e-commerce webpage. The user can view the product information, taken from a sample API, and interact with the product's styles, images, related products, ratings, reviews, and more.
 
 Given a business document and visual design, we worked as a group of four software engineering students to build out this front-end project.
 
@@ -14,16 +14,16 @@ Given a business document and visual design, we worked as a group of four softwa
 # Description
   This website features 4 primary components. Please see this demo (https://recordit.co/vJcuuTUKPF) of the prototype for the website and the description below.
 
-  First, an image gallery displays available styles of clothing and information relevant to purchasing each product. The main portion of this component is a large image of the selected product with thumbnail overlays of alternate pictures that can be clicked to update the main image accordingly. In addition, users can select various products to see what they look like, sizes and quantities available, and add them to their cart.
+  First, an image gallery displays available styles of clothing and information relevant to purchasing each product. The main portion of this component is a large image of the selected product with thumbnail overlays of alternate pictures that can be clicked to update the main image accordingly. In addition, users can select various products to see what they look like, sizes, and quantities available, and add them to their cart.
   ![Overview Screenshot](<imgs/Screenshot 2023-07-08 at 9.54.36 AM.png>)
 
   Second, a related products section built with MUI shows a list of products with features that are similar to the selected product in the image gallery. These related products are interactable and will dynamically update the image gallery and related products when clicked. Similarly, there is a subcomponent that allows users to save multiple products to build an outfit.
   ![Related Products Screenshot](<imgs/Screenshot 2023-07-08 at 9.55.43 AM.png>)
 
-  Third, a questions and answers component allows for the additon of questions that can be answered by buyers or sellers. Moreover, the section is searchable to quickly find potential questions of interest.
+  Third, a questions and answers component allows for the addition of questions that can be answered by buyers or sellers. Moreover, the section is searchable to quickly find potential questions of interest.
   ![Q/A Screenshot](<imgs/Screenshot 2023-07-08 at 9.55.53 AM.png>)
 
-  Fourth, the final component is a ratings and review section. This section includes all reviews, the total number of review per product, and 5 outlined stars that are filled in to the nearest quarter star to represent the average review score for that product. Finally, this section allows users to add reviews that include uploaded images and filter the existing reviews by several metrics like helpfulness.
+  Fourth, the final component is a ratings and review section. This section includes all reviews, the total number of reviews per product, and 5 outlined stars that are filled into the nearest quarter star to represent the average review score for that product. Finally, this section allows users to add reviews that include uploaded images and filter the existing reviews by several metrics like helpfulness.
   ![Ratings and Reviews Screenshot](<imgs/Screenshot 2023-07-08 at 9.56.07 AM.png>)
 
 
@@ -46,7 +46,7 @@ Given a business document and visual design, we worked as a group of four softwa
 
 This is our frontend capstone for HackReactor's bootcamp
 **Start with the main branch**
-**Create a new-branch**
+**Create a new branch**
 **Update, add, commit, and push changes**
 
 ```
@@ -61,7 +61,7 @@ git push -u origin new-feature
 
 
 ## Setup
-Clone to local machine
+Clone to the local machine
 ```sh
 git clone git@github.com:TeamPatrickStar/hackReactor-frontend-capstone.git
 ```
@@ -98,14 +98,14 @@ From Git create a pull request to merge the branches
 
 ### Example Workflow
 * git clone git@github.com:TeamPatrickStar/hackReactor-frontend-capstone.git
-* git checkout -b newcomponent
+* git checkout -b <newcomponent>
 * newcomponent.js << console.log('hello world')
 * git add newcomponent.js
 * git commit -m "new component created"
-* git push -u origin newcomponent
+* git push -u origin <newcomponent>
 * -- go to Git --
-* create new pull request master << newcomponent
-* resolve merge conflicts
+* Create new pull request master << <newcomponent>
+* Resolve merge conflicts
 
 
 
