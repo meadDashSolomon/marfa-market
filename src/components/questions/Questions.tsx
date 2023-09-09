@@ -9,7 +9,7 @@ import getQuestions from "./requests/getQuestions"
 type QuestionsProps = {
   itemId: number
 }
-type questionsType = {
+interface questionsType {
   question_id: number,
   question_body: string,
   question_date: string,
