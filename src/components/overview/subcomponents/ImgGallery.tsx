@@ -1,13 +1,13 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import { useState, useEffect } from 'react';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import { useState, useEffect } from "react";
 
 const ImgGallery = ({ selectedStyle }) => {
-  const [itemStylePhotos, setItemSylePhotos] = useState([{url: ''}]);
+  const [itemStylePhotos, setItemSylePhotos] = useState([{ url: "" }]);
   const [mainPicURL, setMainPicURL] = useState("");
   // keep track of which image is selected for mainPicUrl, scrolling thumnails, and highlighting thumbnails
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -29,7 +29,7 @@ const ImgGallery = ({ selectedStyle }) => {
       setMainPicURL(selectedStyle.photos[selectedImageIndex].url);
     } else {
       // if not, then don't load anything
-      setMainPicURL('');
+      setMainPicURL("");
     }
   }, [selectedStyle, selectedImageIndex]);
 
@@ -45,17 +45,19 @@ const ImgGallery = ({ selectedStyle }) => {
       }
       return newIndex;
     });
-  }
+  };
 
   const handlePrevClick = () => {
     setSelectedImageIndex((prevSelectedImageIndex) => {
-      const newIndex = (prevSelectedImageIndex - 1 + itemStylePhotos.length) % itemStylePhotos.length;
+      const newIndex =
+        (prevSelectedImageIndex - 1 + itemStylePhotos.length) %
+        itemStylePhotos.length;
       if (newIndex < firstImageIndex) {
         setFirstImageIndex(firstImageIndex + 1);
       }
       return newIndex;
     });
-  }
+  };
 
   const handleFullscreenClick = () => {
     setIsFullscreen(!isFullscreen);
@@ -81,7 +83,7 @@ const ImgGallery = ({ selectedStyle }) => {
       if (prevFirstImageIndex <= 0) {
         return 0;
       }
-      return prevFirstImageIndex -1;
+      return prevFirstImageIndex - 1;
     });
   };
 
@@ -100,39 +102,42 @@ const ImgGallery = ({ selectedStyle }) => {
     setMainPicURL(url);
     // highlighting and scrolling
     setSelectedImageIndex(index);
-  }
+  };
 
   const handleZoomClick = () => {
     if (isExpanded) {
-      setZoomLevel(prevZoomLevel => prevZoomLevel === 1 ? 1.5 : 1);
+      setZoomLevel((prevZoomLevel) => (prevZoomLevel === 1 ? 1.5 : 1));
     }
   };
 
   const updateArrowKeyClasses = () => {
-    const leftArrow = document.querySelector('.mainPicArrowLeft');
-    const rightArrow = document.querySelector('.mainPicArrowRight');
-    const mainPic = document.querySelector('.mainPic');
+    const leftArrow = document.querySelector(".mainPicArrowLeft");
+    const rightArrow = document.querySelector(".mainPicArrowRight");
+    const mainPic = document.querySelector(".mainPic");
 
     if (isFullscreen) {
-      mainPic.classList.remove('mainPicFullscreen');
-      leftArrow.classList.remove('mainPicArrowLeftFullscreen');
-      rightArrow.classList.remove('mainPicArrowRightFullscreen');
+      mainPic.classList.remove("mainPicFullscreen");
+      leftArrow.classList.remove("mainPicArrowLeftFullscreen");
+      rightArrow.classList.remove("mainPicArrowRightFullscreen");
     } else {
-      mainPic.classList.add('mainPicFullscreen')
-      leftArrow.classList.add('mainPicArrowLeftFullscreen');
-      rightArrow.classList.add('mainPicArrowRightFullscreen');
+      mainPic.classList.add("mainPicFullscreen");
+      leftArrow.classList.add("mainPicArrowLeftFullscreen");
+      rightArrow.classList.add("mainPicArrowRightFullscreen");
     }
-  }
+  };
 
   const handleMouseMove = (event) => {
     if (isExpanded && zoomLevel === 1.5) {
       requestAnimationFrame(() => {
-        const { left, top, width, height } = event.target.getBoundingClientRect();
-        const x = ((event.clientX - left) / width) * 100;
-        const y = ((event.clientY - top) / height) * 100;
+        const { left, top, width, height } =
+          event.target.getBoundingClientRect();
+        const x = ((event.clientX - left) / width) * 200;
+        const y = ((event.clientY - top) / height) * 200;
         // Divide the percentage by a factor to reduce the speed of the panning effect
         const factor = 4; // Adjust this value as needed
-        event.target.style.transform = `translate(-${x/factor}%, -${y/factor}%) scale(${zoomLevel})`;
+        event.target.style.transform = `translate(-${x / factor}%, -${
+          y / factor
+        }%) scale(${zoomLevel})`;
       });
     }
   };
@@ -141,72 +146,104 @@ const ImgGallery = ({ selectedStyle }) => {
     <div className="imgContainer">
       {itemStylePhotos.length > 0 ? (
         <>
-          <div className="mainPicWrapper"
-              // conditional styles for isFullscreen
-               style={{
-                 width: isFullscreen ? '80vw' : 'auto',
-                //  height: isFullscreen ? '80vh' : 'auto',
-               }}>
+          <div
+            className="mainPicWrapper"
+            // conditional styles for isFullscreen
+            style={{
+              width: isFullscreen ? "80vw" : "auto",
+              //  height: isFullscreen ? '80vh' : 'auto',
+            }}>
             {/* conditinal classes for isExpanded (crosshair cursor) and zoomLevel */}
-            <img className={`mainPic ${isExpanded ? 'mainPicExpanded' : ''} ${zoomLevel === 1.5 ? 'mainPicZoomed' : ''}`}
-                 src={mainPicURL}
-                 alt="main picture of currently selected style"
-                 // transform scale based on zoomLevel
-                 style={{ width: '100%', height: '100%', objectFit: 'contain', transform: `scale(${zoomLevel})` }}
-                 onClick={handleMainPicClick}
-                 onMouseMove={handleMouseMove}
-                 />
-            {(isExpanded && zoomLevel === 1) ? (
+            <img
+              className={`mainPic ${isExpanded ? "mainPicExpanded" : ""} ${
+                zoomLevel === 1.5 ? "mainPicZoomed" : ""
+              }`}
+              src={mainPicURL}
+              alt="main picture of currently selected style"
+              // transform scale based on zoomLevel
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                transform: `scale(${zoomLevel})`,
+              }}
+              onClick={handleMainPicClick}
+              onMouseMove={handleMouseMove}
+            />
+            {isExpanded && zoomLevel === 1 ? (
               <FullscreenExitIcon
-                className='exitFullscreenIcon'
+                className="exitFullscreenIcon"
                 onClick={handleFullscreenClick}
               />
             ) : (
               <FullscreenIcon
-                className='fullscreenIcon'
+                className="fullscreenIcon"
                 onClick={handleFullscreenClick}
               />
             )}
 
             {selectedImageIndex > 0 && (
-              <KeyboardArrowLeftIcon className='mainPicArrowLeft' onClick={handlePrevClick} />
+              <KeyboardArrowLeftIcon
+                className="mainPicArrowLeft"
+                onClick={handlePrevClick}
+              />
             )}
-            {selectedImageIndex < itemStylePhotos.length -1 && (
-              <KeyboardArrowRightIcon className='mainPicArrowRight' onClick={handleNextClick} />
+            {selectedImageIndex < itemStylePhotos.length - 1 && (
+              <KeyboardArrowRightIcon
+                className="mainPicArrowRight"
+                onClick={handleNextClick}
+              />
             )}
 
-            <div className={`thumbnails ${isExpanded ? 'thumbnailsExpanded' : ''}`}>
+            <div
+              className={`thumbnails ${
+                isExpanded ? "thumbnailsExpanded" : ""
+              }`}>
               {itemStylePhotos.length > 7 && (
                 <>
-                  <KeyboardArrowUpIcon className='thumbnailUpArrow' onClick={handleUpClick} />
+                  <KeyboardArrowUpIcon
+                    className="thumbnailUpArrow"
+                    onClick={handleUpClick}
+                  />
                 </>
               )}
-              {itemStylePhotos.slice(firstImageIndex, firstImageIndex + 7).map((photo, index) => {
-                return (
-                  // conditional class names
-                  <img
-                    className={
-                      // its a thumbnail
-                      // is it the selected thumbnail?
-                      // is the mainPic expanded?
-                      // is the small thumbnail selected?
-                      `thumbnail
-                      ${index + firstImageIndex === selectedImageIndex ?
-                        'selectedThumbnail' : ''}
-                      ${isExpanded ?
-                        'smallIcon' : ''}
-                      ${index === selectedImageIndex && isExpanded ?
-                        'selectedIconExpanded' : ''}`}
-                    key={index}
-                    src={photo.thumbnail_url}
-                    alt={`Thumbnail ${index + 1}`}
-                    onClick={() => handleThumbnailClick(photo.url, index)}
-                  />
-                )
-              })}
+              {itemStylePhotos
+                .slice(firstImageIndex, firstImageIndex + 7)
+                .map((photo, index) => {
+                  return (
+                    // conditional class names
+                    <img
+                      className={
+                        // its a thumbnail
+                        // is it the selected thumbnail?
+                        // is the mainPic expanded?
+                        // is the small thumbnail selected?
+                        `thumbnail
+                      ${
+                        index + firstImageIndex === selectedImageIndex
+                          ? "selectedThumbnail"
+                          : ""
+                      }
+                      ${isExpanded ? "smallIcon" : ""}
+                      ${
+                        index === selectedImageIndex && isExpanded
+                          ? "selectedIconExpanded"
+                          : ""
+                      }`
+                      }
+                      key={index}
+                      src={photo.thumbnail_url}
+                      alt={`Thumbnail ${index + 1}`}
+                      onClick={() => handleThumbnailClick(photo.url, index)}
+                    />
+                  );
+                })}
               {itemStylePhotos.length > 7 && (
                 <>
-                  <KeyboardArrowDownIcon className='thumbnailDownArrow' onClick={handleDownClick}/>
+                  <KeyboardArrowDownIcon
+                    className="thumbnailDownArrow"
+                    onClick={handleDownClick}
+                  />
                 </>
               )}
             </div>
@@ -216,8 +253,7 @@ const ImgGallery = ({ selectedStyle }) => {
         <p>No photos available.</p>
       )}
     </div>
-  )
-}
-
+  );
+};
 
 export default ImgGallery;

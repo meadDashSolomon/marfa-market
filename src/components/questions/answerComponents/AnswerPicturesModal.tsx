@@ -22,7 +22,6 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
   );
 
   const mapCurrentPictures = useCallback(() => {
-    // console.log("I RENDERED PICTURES");
     return picturesArray.map((picture) => {
       return (
         <img
@@ -30,7 +29,7 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
           onClick={() => {
             picturesArray.splice(picturesArray.indexOf(picture), 1);
           }}
-          />
+        />
       );
     });
   }, [picturesArray]);
@@ -39,11 +38,14 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
     <Modal
       className={"Questions Modal"}
       open={props.picturesModal}
-      onClose={handleClose}
-    >
+      onClose={handleClose}>
       <Fade in={props.picturesModal}>
-        <Card variant="outlined" className={"Questions Modal"}>
-          <Typography level="h2" fontSize="x1">
+        <Card
+          variant="outlined"
+          className={"Questions Modal"}>
+          <Typography
+            level="h2"
+            fontSize="x1">
             Please Input your Pictures
           </Typography>
           <CardContent>
@@ -60,12 +62,9 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
                   if (picturesArray.length > 4) {
                     alert("You can have a maximum of 5 pictures");
                   } else if (validPicture.test(pictureUrl)) {
-                    // console.log('the picture url was added to the array');
                     picturesArray.push(pictureUrl);
-                    // console.log('THIS IS THE PICTURES ARRAY', picturesArray)
                   }
-                }}
-              >
+                }}>
                 Add Picture
               </Button>
             </FormControl>
@@ -75,8 +74,7 @@ export default function AnswerPicturesModal(props: AnswerPicturesModalProps) {
               onClick={() => {
                 props.setPictures(picturesArray);
                 props.setPictuesModal(false);
-              }}
-            >
+              }}>
               Submit
             </Button>
           </CardContent>

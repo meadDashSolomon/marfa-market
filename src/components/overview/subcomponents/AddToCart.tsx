@@ -1,24 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 type AddToCartProps = {
   skus: {
-    [value:string]: {
-      quantity: number
+    [value: string]: {
+      quantity: number;
       size: string;
-    }
-  }
-}
-const AddToCart = ({skus}:AddToCartProps) => {
+    };
+  };
+};
+
+const AddToCart = ({ skus }: AddToCartProps) => {
   const [availableSizes, setAvailableSizes] = useState<(number | string)[]>([]);
   const [selectedSize, setSelectedSize] = useState<string>("Select a Size");
   // state to find quantity based on selectedSize
-  const [selectedItem, setSelectedItem] = useState<{quantity: number,size: string} | undefined>(undefined);
-  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState<number[]>([]);
+  const [selectedItem, setSelectedItem] = useState<
+    { quantity: number; size: string } | undefined
+  >(undefined);
+  const [availableQuantitiesArray, setAvailableQuantitiesArray] = useState<
+    number[]
+  >([]);
   const [selectedQuantity, setSelectedQuantity] = useState<string>("");
   const [showSizeWarning, setShowSizeWarning] = useState<boolean>(false);
   const [starFilled, setStarFilled] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-
 
   // define func to handle add to cart btn click
   const handleAddToCart = () => {
@@ -28,18 +32,19 @@ const AddToCart = ({skus}:AddToCartProps) => {
     } else {
       setShowModal(true);
     }
-  }
+  };
 
   //  helper function that checks if all sizes out of stock for conditionally rendering Add To Cart button
   const allOutOfStock = Object.values(skus).every((sku) => {
     return sku.quantity === 0;
-  })
+  });
 
-
-  // -------------------------- HOOKS ------------------------------------
+  /**
+   * Hooks
+   */
   // create array of available sizes
   useEffect(() => {
-    const sizes:(number | string)[]= [];
+    const sizes: (number | string)[] = [];
     Object.values(skus).forEach((sku) => {
       // only list sizes currently in stock
       if (sku.quantity > 0) {
@@ -57,10 +62,10 @@ const AddToCart = ({skus}:AddToCartProps) => {
       // find item in skus object that's size property matches selected size
       const item = Object.values(skus).find((sku) => {
         return sku.size === selectedSize;
-      })
+      });
       setSelectedItem(item);
     }
-  }, [selectedSize, skus])
+  }, [selectedSize, skus]);
 
   // create array of available qty's
   useEffect(() => {
@@ -69,24 +74,23 @@ const AddToCart = ({skus}:AddToCartProps) => {
       setShowSizeWarning(false);
     }
 
-  if (selectedItem) {
-    // create variable set to the lesser of total quantity and 15
-    const availableQuantity = Math.min(selectedItem.quantity, 15)
-    // create range of available quantities array
-    const quantities = [];
-    // iterate available quantity number of times
-    for (let i = 0; i < availableQuantity; i++) {
-      // push index plus one to array
-      quantities.push(i+1);
-  }
-  setAvailableQuantitiesArray(quantities);
-  }
+    if (selectedItem) {
+      // create variable set to the lesser of total quantity and 15
+      const availableQuantity = Math.min(selectedItem.quantity, 15);
+      // create range of available quantities array
+      const quantities = [];
+      // iterate available quantity number of times
+      for (let i = 0; i < availableQuantity; i++) {
+        // push index plus one to array
+        quantities.push(i + 1);
+      }
+      setAvailableQuantitiesArray(quantities);
+    }
+  }, [selectedSize]);
 
-  }, [selectedSize])
-
-
-
-  {/* --------------------SIZE SELECTOR-------------------- */}
+  /**
+   * Size Selector
+   */
   return (
     <div className="addToCartContainer">
       {/* if showSizeWarning is true (ie selectedSize equals "Select a Size", then render a warning element */}
@@ -99,30 +103,35 @@ const AddToCart = ({skus}:AddToCartProps) => {
             const size = e.target.value;
             setSelectedSize(size);
           }}
-          disabled={allOutOfStock}
-        >
+          disabled={allOutOfStock}>
           {/* disable "Select a Size" option after a size is selected */}
-          <option disabled={selectedSize !== "Select a Size"}>Select a Size</option>
+          <option disabled={selectedSize !== "Select a Size"}>
+            Select a Size
+          </option>
           {/* is allOutOfStock? */}
           {allOutOfStock ? (
             // if yes, then only value is "OUT OF STOCK"
             <option value="OUT OF STOCK">OUT OF STOCK</option>
           ) : (
-                // else, map available sizes
-                availableSizes.map((size, index) => {
-                  return <option key={index} value={size}>{size}</option>
-                })
-              )}
+            // else, map available sizes
+            availableSizes.map((size, index) => {
+              return (
+                <option
+                  key={index}
+                  value={size}>
+                  {size}
+                </option>
+              );
+            })
+          )}
         </select>
-
 
         {/* --------------------QUANTITY SELECTOR-------------------- */}
         <select
           className="quantitySelector"
           value={selectedQuantity}
           onChange={(e) => setSelectedQuantity(e.target.value)}
-          disabled={!selectedItem}
-        >
+          disabled={!selectedItem}>
           {/* did user select an item? */}
           {!selectedItem ? (
             // if no, then only option is "-"
@@ -130,7 +139,11 @@ const AddToCart = ({skus}:AddToCartProps) => {
           ) : (
             // if yes, then map available qty's
             availableQuantitiesArray.map((quantity, index) => (
-              <option key={index} value={quantity}>{quantity}</option>
+              <option
+                key={index}
+                value={quantity}>
+                {quantity}
+              </option>
             ))
           )}
         </select>
@@ -139,15 +152,13 @@ const AddToCart = ({skus}:AddToCartProps) => {
         <button
           className="addToCartButton"
           onClick={handleAddToCart}
-          style={{display: allOutOfStock ? 'none': 'block'}}
-        >
+          style={{ display: allOutOfStock ? "none" : "block" }}>
           Add to Cart
         </button>
 
         <button
           className="starButton"
-          onClick={() => setStarFilled(!starFilled)}
-        >
+          onClick={() => setStarFilled(!starFilled)}>
           {starFilled ? <FaStar /> : <FaRegStar />}
         </button>
       </div>
@@ -158,18 +169,27 @@ const AddToCart = ({skus}:AddToCartProps) => {
             <p>Selected Size: {selectedSize}</p>
             <p>Selected Quantity: {selectedQuantity}</p>
 
-            <form className='form'>
+            <form className="form">
               <label>
                 Name:
-                <input type="text" name="name" />
+                <input
+                  type="text"
+                  name="name"
+                />
               </label>
               <label>
                 Email:
-                <input type="text" name="email" />
+                <input
+                  type="text"
+                  name="email"
+                />
               </label>
               <label>
                 Address:
-                <input type="text" name="Address" />
+                <input
+                  type="text"
+                  name="Address"
+                />
               </label>
             </form>
 
@@ -179,7 +199,7 @@ const AddToCart = ({skus}:AddToCartProps) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default AddToCart;

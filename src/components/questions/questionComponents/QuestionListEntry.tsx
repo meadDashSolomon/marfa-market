@@ -86,9 +86,6 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
     // sends that a question was helpful
     axios
       .request(helpfulQuestion(props.question.question_id))
-      // .then(() => {
-      //   console.log('status sent');
-      // })
       .catch((error) => console.log("error in helpful request", error));
   };
   const renderMoreAnswersButton = () => {
@@ -97,8 +94,7 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
         <Button
           onClick={() => {
             setNumAnswers(numAnswers + 2);
-          }}
-        >
+          }}>
           LOAD MORE ANSWERS
         </Button>
       );
@@ -106,31 +102,27 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
   };
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //report
-  const [reportedStatus, setReportedStatus] = useState<string>('Report');
+  const [reportedStatus, setReportedStatus] = useState<string>("Report");
   const reportFunc = () => {
-    if (reportedStatus === 'Report') {
-      setReportedStatus('Reported');
-      reportRequest()
+    if (reportedStatus === "Report") {
+      setReportedStatus("Reported");
+      reportRequest();
     }
   };
   const reportRequest = () => {
-    axios.request(reportQuestion(props.question.question_id))
-      // .then(()=> {
-      //   console.log("status sent");
-      // })
-      .catch(error => console.log("error in report question", error))
-  }
-
+    axios
+      .request(reportQuestion(props.question.question_id))
+      .catch((error) => console.log("error in report question", error));
+  };
 
   return (
     <Card className="Questions QuestionList QuestionListEntry">
-
       <Card>{renderAnswerModal()}</Card>
       <Typography level="h4">
         <strong>Q:</strong>
         {props.question.question_body}
       </Typography>
-      <Typography level="body2"> {props.question.asker_name}  </Typography>
+      <Typography level="body2"> {props.question.asker_name} </Typography>
       <Typography level="body2">
         {format(new Date(props.question.question_date), "PPP")}
       </Typography>
@@ -141,13 +133,10 @@ export default function QuestionListEntry(props: QuestionListEntryProps) {
         <Button
           onClick={() => {
             setAnswerModal(true);
-          }}
-        >
+          }}>
           Add Answer
         </Button>
-        <Button onClick={reportFunc}>
-          {reportedStatus}
-        </Button>
+        <Button onClick={reportFunc}>{reportedStatus}</Button>
       </Typography>
       <AnswerList
         answers={answers.slice(0, numAnswers)}

@@ -36,7 +36,6 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
   };
 
   const mappedImages = () => {
-    //refactor to somewhat match what the overview pictures do
     return props.answer.photos.map((photo) => {
       if (validPhotoUrl.test(photo)) {
         return (
@@ -44,9 +43,6 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
             key={props.answer.photos.indexOf(photo)}
             src={photo}
             style={{ maxHeight: "200px" }}
-            // onClick={() => {
-            //   alert("this needs to be added but should expand the image");
-            // }}
           />
         );
       }
@@ -54,30 +50,25 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
   };
   const answerHelpful = () => {
     if (helpful === "Helpful?") {
-      axios
-        .request(helpfulAnswer(props.answer.answer_id))
-        // .then((response) => console.log(response.status, response.statusText));
+      axios.request(helpfulAnswer(props.answer.answer_id));
       setHelpful("Helpful");
     } else {
       console.log("This was already triggered");
     }
   };
 
-  const[reportedStatus, setReportedStatus] = useState<string>('Report');
+  const [reportedStatus, setReportedStatus] = useState<string>("Report");
   const reportAnswerEntry = () => {
-    if(reportedStatus === "Report") {
+    if (reportedStatus === "Report") {
       setReportedStatus("Reported");
-      reportRequest()
+      reportRequest();
     }
-  }
+  };
   const reportRequest = () => {
     axios
-    .request(reportAnswer(props.answer.answer_id))
-    // .then(()=> {
-    //   console.log("Report request sent")
-    // })
-    .catch(error=>console.log("error in reportRequest",error))
-  }
+      .request(reportAnswer(props.answer.answer_id))
+      .catch((error) => console.log("error in reportRequest", error));
+  };
   return (
     <Card className="Questions AnswerListEntry">
       <Typography level="h5">
@@ -90,13 +81,11 @@ export default function AnswerListEntry(props: AnswerListEntryProps) {
         <Button
           onClick={() => {
             answerHelpful();
-          }}
-        >
+          }}>
           yes
         </Button>
-        {props.answer.helpfulness} | <Button
-        onClick={reportAnswerEntry}
-        >report</Button>
+        {props.answer.helpfulness} |{" "}
+        <Button onClick={reportAnswerEntry}>report</Button>
       </Typography>
       <Stack direction={"row"}>{mappedImages()}</Stack>
     </Card>

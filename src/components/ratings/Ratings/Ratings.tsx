@@ -4,7 +4,6 @@ import { Rating, Stack, Slider, Box, Divider } from "@mui/material";
 import Typography from "@mui/joy/Typography";
 import { RatingsProps } from "../Interfaces";
 import characteristics from "../Reviews/AddReview/Characteristics";
-import IconButton from '@mui/joy/IconButton';
 
 const Ratings = ({
   setShownReviews,
@@ -39,7 +38,6 @@ const Ratings = ({
 
   useEffect(() => {
     // get the total reviews and sumReviews
-    console.log(selectedRatings);
     if (selectedRatings.length < 1) {
       setShownReviews(allReviews);
     } else {
@@ -85,15 +83,15 @@ const Ratings = ({
   }
 
   return (
-    <Box sx={{
+    <Box
+      sx={{
         flex: 1,
-        flexBasis: '70%'
+        flexBasis: "70%",
       }}>
       <Box
         sx={{
           display: "flex",
-        }}
-      >
+        }}>
         <Typography level="h1">{averageRating}</Typography>
         <Rating
           value={averageRating}
@@ -116,13 +114,12 @@ const Ratings = ({
           width: "100%",
           fontWeight: 550,
           marginBottom: "10px",
-        }}
-      >
+        }}>
         {getRecommendedPercentage()}% of reviews recommend this product
       </Typography>
       {availableRatings.map((rating, index) => {
         return (
-          <Box>
+          <Box key={rating}>
             <Box
               border={"1px solid #e8e4e4"}
               onClick={() => handleRatingClick(rating)}
@@ -133,9 +130,10 @@ const Ratings = ({
                 ":hover": {
                   backgroundColor: "#fafafa",
                 },
-              }}
-            >
-              <Stack direction="column" key={index}>
+              }}>
+              <Stack
+                direction="column"
+                key={index}>
                 <Rating
                   readOnly={true}
                   value={rating}
@@ -182,8 +180,7 @@ const Ratings = ({
                 textColor="#25252D"
                 sx={{
                   fontWeight: "bold",
-                }}
-              >
+                }}>
                 {item[0]}
               </Typography>
               <Slider
@@ -191,31 +188,33 @@ const Ratings = ({
                 defaultValue={Number(item[1].value)}
                 max={5}
                 sx={{
-                  marginTop: '10px',
-                  '.MuiSlider-thumb': {
+                  marginTop: "10px",
+                  ".MuiSlider-thumb": {
                     height: 0,
                     width: 0,
-                    backgroundColor: 'transparent',
-                    borderLeft: '6px solid transparent',
-                    borderRight:'6px solid transparent',
-                    borderBottom: '10px solid #bdbdbd',
+                    backgroundColor: "transparent",
+                    borderLeft: "6px solid transparent",
+                    borderRight: "6px solid transparent",
+                    borderBottom: "10px solid #bdbdbd",
                     borderRadius: 0,
-                    transform: 'rotate(180deg) translateY(16px) translateX(6px)',
-                    position: 'absolute'
-                  }
+                    transform:
+                      "rotate(180deg) translateY(16px) translateX(6px)",
+                    position: "absolute",
+                  },
                 }}
-                size="small"
-              ></Slider>
+                size="small"></Slider>
               <Stack
                 key={index}
                 direction={"row"}
                 justifyContent={"space-between"}
-                sx={{ marginBottom: "8px" }}
-              >
+                sx={{ marginBottom: "8px" }}>
                 {Object.entries(characteristics[item[0]]).map(
                   (descriptor, index) => {
                     return index === 0 || index === 4 ? (
-                      <Typography key={index} textColor="#25252D" level="body4">
+                      <Typography
+                        key={index}
+                        textColor="#25252D"
+                        level="body4">
                         {descriptor[1]}
                       </Typography>
                     ) : null;
@@ -224,7 +223,7 @@ const Ratings = ({
               </Stack>
               <Divider
                 sx={{
-                  marginBottom: "12px"
+                  marginBottom: "12px",
                 }}
               />
             </Box>

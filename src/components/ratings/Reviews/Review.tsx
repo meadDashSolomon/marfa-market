@@ -4,7 +4,6 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckIcon from "@mui/icons-material/Check";
 import { format } from "date-fns";
 import requestHandler from "../RequestHandler";
-// import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import ReviewPhotos from "./ReviewPhotos";
 
 interface ReviewProps {
@@ -23,12 +22,11 @@ interface ReviewProps {
 }
 
 interface Photo {
-  id: number,
-  url: string
+  id: number;
+  url: string;
 }
 
 const Review = ({ review }: ReviewProps) => {
-
   const handleHelpfulClick = (event: MouseEvent) => {
     event.preventDefault();
     requestHandler("PUT", `/reviews/${review.review_id}/helpful`);
@@ -45,22 +43,19 @@ const Review = ({ review }: ReviewProps) => {
         variant="outlined"
         sx={{
           boxShadow: "1px 1px 6px #e8e4e4",
-          display: 'flex'
-        }}
-      >
+          display: "flex",
+        }}>
         <CardContent
           sx={{
             display: "flex",
             flex: 1,
             flexDirection: "column",
-            minWidth: "400px"
-          }}
-        >
+            minWidth: "400px",
+          }}>
           <Stack
             direction="row"
             justifyContent="space-between"
-            alignItems="center"
-          >
+            alignItems="center">
             <Rating
               value={review.rating}
               readOnly={true}
@@ -68,24 +63,24 @@ const Review = ({ review }: ReviewProps) => {
               precision={0.25}
               sx={{
                 color: "#525252",
-              }}
-            ></Rating>
-            <Stack direction="row" alignItems="center">
-                <CheckCircleIcon
-                  sx={{
-                    fontSize: "16px",
-                    color: "#525252",
-                    marginRight: "4px",
-                  }}
-                />
+              }}></Rating>
+            <Stack
+              direction="row"
+              alignItems="center">
+              <CheckCircleIcon
+                sx={{
+                  fontSize: "16px",
+                  color: "#525252",
+                  marginRight: "4px",
+                }}
+              />
               <Typography
                 level="body3"
                 textColor="#25252D"
                 sx={{
                   marginRight: "3px",
                   fontWeight: 425,
-                }}
-              >
+                }}>
                 {" "}
                 {review.reviewer_name},{" "}
               </Typography>
@@ -94,8 +89,7 @@ const Review = ({ review }: ReviewProps) => {
                 textColor="#25252D"
                 sx={{
                   fontWeight: 425,
-                }}
-              >
+                }}>
                 {" "}
                 {format(new Date(review.date), "PPP")}
               </Typography>
@@ -106,22 +100,27 @@ const Review = ({ review }: ReviewProps) => {
               level="h6"
               sx={{
                 my: "10px",
-              }}
-            >
+              }}>
               {review.summary}
             </Typography>
             <Typography
               level="body2"
               textColor="#545454"
-              sx={{ marginBottom: "10px" }}
-            >
+              sx={{ marginBottom: "10px" }}>
               {review.body}
             </Typography>
-            <Stack direction={'row'} spacing={1.5} alignItems={'center'}>
+            <Stack
+              direction={"row"}
+              spacing={1.5}
+              alignItems={"center"}>
               {review.recommend ? (
-                <Stack direction="row" spacing="8px">
+                <Stack
+                  direction="row"
+                  spacing="8px">
                   <CheckIcon fontSize="small" />
-                  <Typography level="body2" textColor="#25252D">
+                  <Typography
+                    level="body2"
+                    textColor="#25252D">
                     I recommend this product
                   </Typography>
                 </Stack>
@@ -131,8 +130,7 @@ const Review = ({ review }: ReviewProps) => {
                   <Typography
                     sx={{
                       backgroundColor: "text.secondary",
-                    }}
-                  >
+                    }}>
                     Hello
                   </Typography>
                 </Box>
@@ -142,30 +140,25 @@ const Review = ({ review }: ReviewProps) => {
             <Typography
               level="body3"
               textColor="#25252D"
-              sx={{ marginTop: "10px" }}
-            >
+              sx={{ marginTop: "10px" }}>
               Helpful?{" "}
               <Link
-                // onMouseEnter={()}
-                // onMouseExit
                 onClick={handleHelpfulClick}
                 color="#25252D"
-                fontSize={'11px'}
+                fontSize={"11px"}
                 href="#"
                 underline="always"
-                variant="body2"
-              >
+                variant="body2">
                 Yes
               </Link>{" "}
-              ({review.helpfulness}) | {" "}
+              ({review.helpfulness}) |{" "}
               <Link
                 onClick={handleReportClick}
                 color="#25252D"
-                fontSize={'11px'}
+                fontSize={"11px"}
                 href="#"
                 underline="always"
-                variant="body2"
-              >
+                variant="body2">
                 Report
               </Link>
             </Typography>
