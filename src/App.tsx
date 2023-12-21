@@ -4,7 +4,7 @@ import Questions from "./components/questions/Questions";
 import RatingsAndReviews from "./components/ratings/RatingsAndReviews";
 import Related from "./components/related/Related";
 import axios from "axios";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 type item = {
   id: number;
