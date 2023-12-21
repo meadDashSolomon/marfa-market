@@ -127,18 +127,21 @@ const ImgGallery = ({ selectedStyle }) => {
   };
 
   const handleMouseMove = (event) => {
-    if (isExpanded && zoomLevel === 1.5) {
-      requestAnimationFrame(() => {
-        const { left, top, width, height } =
-          event.target.getBoundingClientRect();
-        const x = ((event.clientX - left) / width) * 200;
-        const y = ((event.clientY - top) / height) * 200;
-        // Divide the percentage by a factor to reduce the speed of the panning effect
-        const factor = 4; // Adjust this value as needed
-        event.target.style.transform = `translate(-${x / factor}%, -${
-          y / factor
-        }%) scale(${zoomLevel})`;
-      });
+    if (isExpanded && zoomLevel > 1) {
+      // Get the bounding rectangle of the target
+      const rect = event.target.getBoundingClientRect();
+
+      // Calculate the mouse position relative to the image
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+
+      // Calculate the translate values based on the mouse position and zoom level
+      // The 0.5 factor is because the transform-origin is at the center by default (50% 50%)
+      const translateX = (x - 0.5) * (zoomLevel - 1) * rect.width;
+      const translateY = (y - 0.5) * (zoomLevel - 1) * rect.height;
+
+      // Apply the transform to the image
+      event.target.style.transform = `translate(${-translateX}px, ${-translateY}px) scale(${zoomLevel})`;
     }
   };
 
@@ -199,7 +202,7 @@ const ImgGallery = ({ selectedStyle }) => {
               className={`thumbnails ${
                 isExpanded ? "thumbnailsExpanded" : ""
               }`}>
-              {itemStylePhotos.length > 7 && (
+              {itemStylePhotos.length > 7 && firstImageIndex > 0 && (
                 <>
                   <KeyboardArrowUpIcon
                     className="thumbnailUpArrow"
@@ -238,14 +241,15 @@ const ImgGallery = ({ selectedStyle }) => {
                     />
                   );
                 })}
-              {itemStylePhotos.length > 7 && (
-                <>
-                  <KeyboardArrowDownIcon
-                    className="thumbnailDownArrow"
-                    onClick={handleDownClick}
-                  />
-                </>
-              )}
+              {itemStylePhotos.length > 7 &&
+                firstImageIndex < itemStylePhotos.length - 7 && (
+                  <>
+                    <KeyboardArrowDownIcon
+                      className="thumbnailDownArrow"
+                      onClick={handleDownClick}
+                    />
+                  </>
+                )}
             </div>
           </div>
         </>

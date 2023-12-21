@@ -2,15 +2,15 @@
   .container {
     display: flex;
     flex-direction: column;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     width: 80vw;
-    display: flex;
   }
 
   .centeringContainer {
     display: flex;
     flex-direction: column;
     margin-left: 10vw;
+    color: $color-primary;
   }
 
   .topContainer {
@@ -34,13 +34,13 @@
   .mainPicWrapper {
     display: flex;
     position: relative;
-    background-color: white;
+    background-color: $color-base;
     left: 10px;
-    width: 100%;
-    padding-bottom: 100%;
-    border: 5px solid #ffffff;
+    width: 600px; // Fixed width, adjust as needed
+    height: 600px; // Fixed height to maintain aspect ratio, adjust as needed
+    border: 5px solid $color-base;
     margin-right: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2), 2px 2px 2px 2px rgba(0,0,0,0.19);
+    box-shadow: 2px 2px 2px 2px $color-border, 2px 2px 2px 2px $color-border;
     z-index: 2;
   }
 
@@ -85,33 +85,32 @@
     position: absolute;
     right: 10%;
     top: 2%;
-    border: 10px solid black;
+    border: 5px solid rgba($color-primary, 0.6);
     border-radius: 5px;
-    box-shadow: 0px 0px 0px 13px rgba(152, 136, 68, 0.5);
+    box-shadow: 0px 0px 0px 5px rgba($color-highlight, 1);
     z-index: 4;
   }
 
   .thumbnails {
     position: absolute;
-    margin-left: 2%;
-    margin-top: 10%;
     top: 0;
     left: 0;
     display: flex;
-    flex: auto;
     flex-direction: column;
     z-index: 1;
     background-color: transparent;
-    gap: 1vh;
+    gap: 10px;
+    padding-bottom: 30px; // Add padding for the down arrow
+    padding-top: 30px; // Add padding for the down arrow
   }
 
   .thumbnail {
-    width: 3vw;
-    height: auto;
+    width: 45px;
+    height: 45px;
     object-fit: contain;
     z-index: 4;
+    border: 2px solid $color-border;
   }
-
 
   .smallIcon {
     width: 30px;
@@ -130,62 +129,68 @@
     z-index: 1;
   }
 
+  .thumbnailUpArrow,
   .thumbnailDownArrow {
     position: absolute;
-    bottom: -14%;
-    left: -4%;
-    margin-left: 10%;
-    margin-bottom: 5%;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: white;
+    left: 50%;
+    transform: translateX(-50%); // Center the arrows horizontally
+    // Increase the size for better visibility
+    width: 40px; // Adjust the size as needed
+    height: 40px; // Adjust the size as needed
+    // Use flexbox to center the icon inside the button
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Add a semi-transparent background to stand out from the thumbnail background
+    background-color: rgba($color-base, 0.7);
+    // Add a border for more visibility
+    border: 2px solid $color-highlight;
+    // Add a box shadow for a "lifted" effect
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    // Rounded corners
+    border-radius: 50%;
+    cursor: pointer; // Indicates that the arrows are clickable
+  }
+
+  .thumbnailDownArrow {
+    bottom: -5px; // Adjust the position to align with your layout
   }
 
   .thumbnailUpArrow {
-    position: absolute;
-    top: -15%;
-    left: -4%;
-    margin-left: 10%;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: white;
+    top: -5px; // Adjust the position to align with your layout
   }
 
-  .mainPicArrowLeft {
-    position: absolute;
-    top: 50%;
-    left: 11%;
-    z-index: 4;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: white;
-  }
-
+  .mainPicArrowLeft,
   .mainPicArrowRight {
     position: absolute;
     top: 50%;
-    right: 11%;
     z-index: 4;
-    border: 2px solid black;
+    border: 2px solid $color-border;
     border-radius: 5px;
-    background-color: white;
+    background-color: $color-base;
+    color: $color-primary; // Update color to ensure visibility
+    // Add padding and size to make it look better
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    // Use a flexbox to center the arrow icon inside the button
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .mainPicArrowLeftFullscreen, .mainPicArrowRightFullscreen {
+  .mainPicArrowLeft {
+    left: 13%;
+  }
+
+  .mainPicArrowRight {
+    right: 11%;
+  }
+
+  .mainPicArrowLeftFullscreen,
+  .mainPicArrowRightFullscreen {
     top: calc(100%);
   }
-
-  // .mainPicArrowLeftFullscreen {
-  //   top: 50vh;
-  //   left: 10vw;
-  //   z-index: 10;
-  // }
-
-  // .mainPicArrowRightFullscreen {
-  //   top: 50vh;
-  //   right: 0vw;
-  //   z-index: 10;
-  // }
 
   // Procuct name
   .productName {
@@ -218,25 +223,39 @@
     gap: 2%;
   }
 
-  .styleThumbnail {
+  .styleThumbnailContainer {
+    position: relative;
     width: 6.4vw;
     height: 6.4vw;
+  }
+
+  .styleThumbnail {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid black;
+    border: 3px solid $color-primary;
   }
 
   .styleThumbnails {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
+    gap: 10px;
     width: 26.6vw;
     z-index: 1;
   }
 
+  .checkmarkIcon {
+    color: $color-highlight;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-10%, -10%); // Adjust this to center the icon
+  }
+
   .styleText {
     display: flex;
-    flex: initial
+    flex: initial;
   }
 
   .styleArrow {
@@ -274,6 +293,17 @@
     margin-right: 10px;
   }
 
+  #root
+    > div
+    > div.container
+    > div
+    > div.bottomContainer
+    > div
+    > div.overviewLeft
+    > p {
+    padding-right: 5px;
+  }
+
   .overviewCenter {
     padding-right: 15px;
     padding-left: 15px;
@@ -286,8 +316,8 @@
   }
 
   .selectedThumbnail {
-    border: 3px solid black;
-    box-shadow: 0px 0px 15px 5px rgba(152, 136, 68, 0.5);
+    border: 3px solid $color-highlight;
+    box-shadow: 0px 0px 15px 5px $color-border;
   }
 
   select {
@@ -306,7 +336,7 @@
     margin: 10px;
     border: none;
     border-radius: 5px;
-    background: #007BFF;
+    background: #007bff;
     color: #fff;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -376,6 +406,7 @@
   .sizeSelector {
     display: flex;
     flex: initial;
+    padding-right: 5px;
   }
 
   .quantitySelector {
@@ -400,20 +431,20 @@
   }
 
   .icon.fb {
-    color: #4267B2;
-}
+    color: #4267b2;
+  }
 
-.icon.twitter {
-    color: #38A1F2;
+  .icon.twitter {
+    color: #38a1f2;
     border-left: 1px dotted black;
     padding-left: 5px;
     padding-right: 5px;
     border-right: 1px dotted black;
-}
+  }
 
-.icon.pinterest {
-    color: #E73E3A;
-}
+  .icon.pinterest {
+    color: #e73e3a;
+  }
 
   .fbModal,
   .twitterModal,
@@ -425,7 +456,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 
   .fbModal-content,
@@ -443,7 +474,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   .modal-overlay {

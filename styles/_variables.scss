@@ -1,5 +1,17 @@
-$text-color: black;
-$color-border: black;
-$color-1: #FBFFF1;
-$color-2: #124559;
-$color-3: #01161E;
+// Base colors
+$color-base: #f0f0f0; // Soft off-white, good for backgrounds
+$color-highlight: #5fa8d3; // Soft blue for highlights and accents
+$color-primary: #2c3e50; // Desaturated blue for primary elements like headers or important text
+$color-secondary: #95a5a6; // Grey for secondary elements or less important text
+
+// Text colors
+$text-color: $color-primary;
+$text-color-alt: #ffffff; // White for text on dark backgrounds
+
+// Border colors
+$color-border: $color-secondary;
+
+// Component specific colors (if needed)
+$color-component-background: $color-base;
+$color-component-border: $color-border;
+$color-component-text: $color-primary;
