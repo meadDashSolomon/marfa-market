@@ -4,19 +4,20 @@ import Questions from "./components/questions/Questions";
 import RatingsAndReviews from "./components/ratings/RatingsAndReviews";
 import Related from "./components/related/Related";
 import axios from "axios";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 type item = {
-  id: number,
-  name: string,
-  slogan: string,
-  description: string,
-  category: string,
-  default_price: string,
+  id: number;
+  name: string;
+  slogan: string;
+  description: string;
+  category: string;
+  default_price: string;
   features: {
     feature: string;
     value: string;
   }[];
-}
+};
 
 const defaultItem = {
   id: 0,
@@ -33,7 +34,9 @@ const App = () => {
   const [allItems, setAllItems] = useState<item[]>([]);
 
   const endpoint = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/";
-  const config = { headers: { Authorization: import.meta.env.VITE_AUTH_TOKEN } };
+  const config = {
+    headers: { Authorization: import.meta.env.VITE_AUTH_TOKEN },
+  };
 
   useEffect(() => {
     axios
@@ -47,18 +50,17 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(endpoint + 'products', config)
+    axios
+      .get(endpoint + "products", config)
       .then((results) => setCurrentItem(results.data[2]))
-      .catch((err) => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   if (Object.keys(currentItem).length < 1) {
     return (
       // could use a loading spinner
-      <div>
-        Loading...
-      </div>
-    )
+      <div>Loading...</div>
+    );
   }
 
   return (
@@ -71,10 +73,14 @@ const App = () => {
         id={currentItem.id}
         setCurrentItem={setCurrentItem}
       />
-      <Related setCurrent={setCurrentItem} current={currentItem} />
+      <Related
+        setCurrent={setCurrentItem}
+        current={currentItem}
+      />
       <Questions itemId={currentItem.id} />
 
       <RatingsAndReviews itemId={currentItem.id} />
+      <SpeedInsights />
     </div>
   );
 };
